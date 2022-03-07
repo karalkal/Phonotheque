@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block site_specific_menu %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link nav-link-1" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-2 active" aria-current="page" href="videos.html">Favourites</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-3  href=" about.html">Connect</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-4" href="contact.html">Profile</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+{% block main_content %}
+
+    <h1>WORKS</h1>
+    <div>
+        <p>{{ album.wiki_id }}</p>
+        <p>{{ album.title }} by {{ album.artist }} has been saved in your favourites</p>
+        <img src="{{ album.album_cover }}" style="max-width:350px; max-height:350px;">
+        <p>{{ album.summary }}</p>
+
+        <p>{{ album.html }}</p>
+
+    </div>
+{% endblock %}
+
