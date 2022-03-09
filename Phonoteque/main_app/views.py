@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.views.generic import ListView
 
 from Phonoteque.common_funcs.get_album_artist_data_from_db import get_all_artists_names, get_artist_object_by_name
 from Phonoteque.common_funcs.wiki_album_finder import get_wiki_info
@@ -6,8 +7,9 @@ from Phonoteque.main_app.forms import CreateAlbumForm, SearchAlbumForm
 from Phonoteque.main_app.models import Artist, Album
 
 
-def index_view(request):
-    pass
+class IndexListView(ListView):
+    model = Album
+    template_name = 'main_app/index.html'
 
 
 def search_form_view(request):

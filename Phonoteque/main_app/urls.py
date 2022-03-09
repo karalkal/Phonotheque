@@ -1,15 +1,16 @@
 from django.urls import path
 
-from Phonoteque.main_app.views import search_form_view, index_view
+from Phonoteque.main_app.views import search_form_view, IndexListView
 
 urlpatterns = [
-    path('index/', index_view, name="index_page"),
-    path('', search_form_view, name='search_form_page'),
+    path('', IndexListView.as_view(), name="index_page"),
 
     # path('profile/', profile_details, name="profile"),
     # path('profile/create/', create_profile_view, name="create profile"),
     # path('profile/edit/', edit_profile_view, name="edit profile"),
     # path('profile/delete/', delete_profile_view, name="delete profile"),
+
+    path('find_album/', search_form_view, name='search_form_page'),
 
     # path('photo/details/<int:pk>/', photo_details, name="pet photo details"),
     # path('photo/like/<int:pk>/', like_pet_photo, name="like pet photo"),
