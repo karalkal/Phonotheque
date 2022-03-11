@@ -13,7 +13,7 @@ def assign_values(page_object):
     wiki_info['wiki_title'] = wiki_title
 
     wiki_info['wiki_url'] = page_object.url
-    wiki_info['wiki_summary'] = wikipedia.summary(page_object.title, sentences=4)  # + "[... text continued]"
+    wiki_info['wiki_summary'] = wikipedia.summary(page_object.title, sentences=1)  # + "[... text continued]"
     wiki_info['wiki_image'] = [img for img in page_object.images
                                if ('jpg' in img or 'png' in img or 'gif' in img or 'jpeg' in img)
                                and 'en' in img and 'commons' not in img][0]
