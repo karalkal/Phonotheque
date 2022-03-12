@@ -20,12 +20,12 @@
 {% endblock %}
 {% block main_content %}
 
-    <h1>WORKS</h1>
     <div>
         <p>{{ album.wiki_id }}</p>
         <p>{{ album.title }} by {{ album.artist }} has been saved in your favourites</p>
-        <img src="{{ album.album_cover }}" style="max-width:350px; max-height:350px;">
-        <p>{{ album.summary }}</p>
+        <img src="{{ album.album_cover }}" style="max-width:350px; max-height:350px;"
+             alt="front cover of {{ album.title }} by {{ album.artist }}">
+        <p>{{ album.resume }}</p>
 
         <p>{{ album.html }}</p>
 

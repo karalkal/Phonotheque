@@ -30,11 +30,12 @@ def search_form_view(request):
             # first create album object, then save it
             album = Album(
                 wiki_id=album_wiki_info['wiki_id'],
-                title=album_wiki_info['wiki_title'],
-                album_cover=album_wiki_info['wiki_image'],
-                summary=album_wiki_info['wiki_summary'],
                 artist=artist_object,  # artist is an object
-                # html=album_wiki_info['wiki_html']
+                title=album_wiki_info['wiki_title'],
+                wiki_url=album_wiki_info['wiki_url'],
+                summary=album_wiki_info['wiki_summary'],
+                resume=album_wiki_info['wiki_resume'],
+                album_cover=album_wiki_info['wiki_image'],
             )
             album.save()
 
