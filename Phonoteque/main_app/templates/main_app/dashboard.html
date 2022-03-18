@@ -1,0 +1,35 @@
+{% extends 'base_main_app.html' %}
+
+{#        MENU COMES HERE - Change undelined link accordingly        #}
+
+{% block main_content %}
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+
+            {% if request.user.is_authenticated %}
+                <h2 class="col-12 tm-text-primary">
+                    Hi, {{ request.user.username }}. This is Your Dashboard
+                </h2>
+
+            {% else %}
+                <h1 class="col-6 tm-text-primary">
+                    You need to be logged in to access this page
+                </h1>
+                <div class="form-group tm-text-right">
+                    <button type="submit" class="btn btn-primary">
+                        <a href="{% url "login_page" %}">Log In</a>
+                    </button>
+                </div>
+            {% endif %}
+
+
+        </div>
+
+
+    </div> <!-- row -->
+
+    </div> <!-- container-fluid, tm-container-content -->
+
+{% endblock %}
+
+

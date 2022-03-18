@@ -1,5 +1,5 @@
 /*
-    
+
 TemplateMo 556 Catalog-Z
 
 https://templatemo.com/tm-556-catalog-z
@@ -63,7 +63,7 @@ https://templatemo.com/tm-556-catalog-z
     }
 
     @-webkit-keyframes spin {
-        0%   { 
+        0%   {
             -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
             -ms-transform: rotate(0deg);  /* IE 9 */
             transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
@@ -75,7 +75,7 @@ https://templatemo.com/tm-556-catalog-z
         }
     }
     @keyframes spin {
-        0%   { 
+        0%   {
             -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
             -ms-transform: rotate(0deg);  /* IE 9 */
             transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
@@ -113,7 +113,7 @@ https://templatemo.com/tm-556-catalog-z
             -ms-transform: translateX(-100%);  /* IE 9 */
                 transform: translateX(-100%);  /* Firefox 16+, IE 10+, Opera */
 
-        -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);  
+        -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
                 transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
     }
 
@@ -122,13 +122,13 @@ https://templatemo.com/tm-556-catalog-z
             -ms-transform: translateX(100%);  /* IE 9 */
                 transform: translateX(100%);  /* Firefox 16+, IE 10+, Opera */
 
--webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);  
+-webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
     }
-    
+
     .loaded #loader {
         opacity: 0;
-        -webkit-transition: all 0.3s ease-out;  
+        -webkit-transition: all 0.3s ease-out;
                 transition: all 0.3s ease-out;
     }
     .loaded #loader-wrapper {
@@ -138,15 +138,15 @@ https://templatemo.com/tm-556-catalog-z
             -ms-transform: translateY(-100%);  /* IE 9 */
                 transform: translateY(-100%);  /* Firefox 16+, IE 10+, Opera */
 
-        -webkit-transition: all 0.3s 1s ease-out;  
+        -webkit-transition: all 0.3s 1s ease-out;
                 transition: all 0.3s 1s ease-out;
     }
 
 p { line-height: 1.8; }
 
-a { 
+a {
     text-decoration: none;
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease;
 }
 a:hover { color:#009999; }
 .container-fluid { max-width: 1770px; }
@@ -165,7 +165,7 @@ a:hover { color:#009999; }
     background-color:#086969;
 }
 
-.btn-primary.disabled, 
+.btn-primary.disabled,
 .btn-primary:disabled {
     background-color: #009999;
     pointer-events: all;
@@ -256,7 +256,7 @@ a.tm-text-primary:hover { color:#666666; }
     color: #009999;
     opacity: 1; /* Firefox */
 }
-  
+
 .tm-search-input::-ms-input-placeholder { /* Microsoft Edge */
     color: #009999;
 }
@@ -366,7 +366,7 @@ p, .tm-text-gray { color: #999; }
 .tm-paging-link:hover,
 .tm-paging-link.active {
     background-color: #009999;
-    color: #fff; 
+    color: #fff;
 }
 
 /*---------------*/
@@ -420,7 +420,7 @@ figure.effect-ming:hover img { opacity: 0.4; }
 
 .tm-footer-links li {
     list-style: none;
-    margin-bottom: 5px;    
+    margin-bottom: 5px;
 }
 
 .tm-footer-links li a { color: #999999; }

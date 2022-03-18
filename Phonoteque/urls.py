@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Phonoteque.main_app.urls')),
+    path('accounts/', include('Phonoteque.accounts_app.urls'))
 ]
 
 if settings.DEBUG:

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView
 
@@ -12,7 +13,13 @@ class IndexListView(ListView):
     template_name = 'main_app/index.html'
 
 
-def search_form_view(request):
+@login_required
+def view_dashboard(request):
+    return render(request, 'main_app/dashboard.html',
+                  {'section': 'dashboard'})
+
+
+def search_album_view(request):
     if request.method == 'POST':
         album_name = request.POST['album_name'].title()
         artist_name = request.POST['artist_name'].title()
