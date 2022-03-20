@@ -15,8 +15,9 @@ class IndexListView(ListView):
 
 @login_required
 def view_dashboard(request):
+    context = ""
     return render(request, 'main_app/dashboard.html',
-                  {'section': 'dashboard'})
+                  {'context': context})
 
 
 def search_album_view(request):

@@ -1,6 +1,8 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
 from .models import Profile
 
 from Phonoteque.accounts_app.forms import UserRegistrationForm, UserEditForm, ProfileEditForm
@@ -42,7 +44,14 @@ def edit(request):
             return redirect('dashboard')
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
+
+        # RelatedObjectDoesNotExist at /accounts/edit/ User has no profile.
+        # It happens if user is created via admin panel, i.e. first superuser
+        try:
+            profile_form = ProfileEditForm(instance=request.user.profile)
+        except Profile.DoesNotExist:
+            profile_form = ProfileEditForm(instance=request.user)
+
     return render(request,
                   'registration/edit.html',
                   {'user_form': user_form,
@@ -50,6 +59,12 @@ def edit(request):
 
 
 class UserLoginView(auth_views.LoginView):
+    success_url = 'dashboard'
+
+    # def get_success_url(self):
+    #     user_pk = self.request.user.pk
+    #     return reverse_lazy('dashboard', kwargs={'pk': user_pk})
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for (field_name, field) in self.form_class.base_fields.items():
