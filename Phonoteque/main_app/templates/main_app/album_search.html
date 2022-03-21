@@ -8,9 +8,8 @@
         <!-- Two equal columns -->
         <div class="row">
             <div class="col">
-                <h2 class="tm-text-primary mb-5">Search for Album</h2>
-
                 {#OPTION 1 - ENTER artist and album names  #}
+                <h2 class="tm-text-primary mb-5">Search for Album</h2>
                 <form id="contact-form" action="{% url 'search_form_page' %}" method="POST"
                       class="tm-contact-form mx-auto">
                     {% csrf_token %}
@@ -21,17 +20,6 @@
                     <div class="form-group">
                         {{ form.album_name }}
                     </div>
-
-                    {#                    <div class="form-group">#}
-                    {#                        <input type="text" name="artist_name" class="form-control rounded-0"#}
-                    {#                               placeholder="Enter Artist Name"#}
-                    {#                               required/>#}
-                    {#                    </div>#}
-                    {#                    <div class="form-group">#}
-                    {#                        <input type="text" name="album_name" class="form-control rounded-0"#}
-                    {#                               placeholder="Enter Album Name"#}
-                    {#                               required/>#}
-                    {#                    </div>#}
 
                     <div class="form-group tm-text-right">
                         <button type="submit" class="btn btn-primary">Send</button>
