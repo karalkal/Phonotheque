@@ -1,17 +1,24 @@
-{% extends 'base_plus_menu_3.html' %}
-
-{#        MENU COMES HERE - Change undelined link accordingly        #}
+{% extends 'base_plus_menu_1.html' %}
 
 {% block main_content %}
 
-    <div>
-        <p>{{ album.wiki_id }}</p>
-        <p>{{ album.title }} by {{ album.artist }} has been saved in your favourites</p>
-        <img src="{{ album.album_cover }}" style="max-width:350px; max-height:350px;"
-             alt="front cover of {{ album.title }} by {{ album.artist }}">
-        <p>{{ album.resume }}</p>
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row">
+            <h2 class="tm-text-primary mb-5">'<strong>{{ album.title }}</strong>' by
+                <strong>{{ album.artist }} </strong> has been saved in your
+                favourites </h2>
 
-        <p>{{ album.html }}</p>
+            <div class="col">
+                <img class="img-thumbnail" src="{{ album.album_cover }}" style="width: 530px; height: 530px;"
+                     alt="front cover of {{ album.title }} by {{ album.artist }}">
+            </div>
+
+            <div class="col">
+                <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
+            </div>
+
+        </div>
+
 
     </div>
 {% endblock %}

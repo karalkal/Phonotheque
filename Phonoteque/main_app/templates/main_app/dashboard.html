@@ -1,36 +1,34 @@
 {% extends 'base_plus_menu_1.html' %}
 
-{#        MENU COMES HERE - Change undelined link accordingly        #}
-
 {% block main_content %}
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
+            <h2 class="col-12 tm-text-primary">
+                Hi, {{ request.user.username }}. These are some your favourite albums. To add more, fill in form below.
+            </h2>
+        </div>
 
-            {% if request.user.is_authenticated %}
-                <h2 class="col-12 tm-text-primary">
-                    Hi, {{ request.user.username }}. This is Your Dashboard
-                </h2>
-
-            {% else %}
-                <h1 class="col-6 tm-text-primary">
-                    You need to be logged in to access this page
-                </h1>
-                <div class="form-group tm-text-right">
-                    <button type="submit" class="btn btn-primary">
-                        <a href="{% url "login_page" %}">Log In</a>
-                    </button>
+        {#    GALLERY#}
+        <div class="row tm-mb-90 tm-gallery">
+            {% for album in fav_albums %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                    <img src="{{ album.album_cover }}"
+                         alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
+                         style="width: 350px; height: 350px">
+                    <h4 class="col-6 tm-text-primary" style="text-transform:capitalize;"> {{ album.artist }} </h4>
+                    <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;">  {{ album.title }} </h5>
+                    <a href="{{ album.pk }}">View more</a>
                 </div>
-            {% endif %}
-        </div> <!-- row -->
-    </div> <!-- container-fluid, tm-container-content -->
+            {% endfor %}
+        </div>
 
-    <div class="container-fluid tm-mt-60">
+        {#        FORMS#}
         <!-- Two equal columns -->
         <div class="row">
             <div class="col">
                 {#OPTION 1 - ENTER artist and album names  #}
                 <h2 class="tm-text-primary mb-5">Search for an album by artist and title...</h2>
-                <form id="contact-form" action="{% url 'search_form_page' %}" method="POST"
+                <form id="contact-form" action="{% url 'dashboard' %}" method="POST"
                       class="tm-contact-form mx-auto">
                     {% csrf_token %}
                     <div class="form-group">
@@ -48,7 +46,7 @@
             <div class="col">
                 {#OPTION 2 - ENTER wiki URL  #}
                 <h2 class="tm-text-primary mb-5">... or paste album's Wikipedia link below</h2>
-                <form id="contact-form" action="{% url 'search_form_page' %}" method="POST"
+                <form id="contact-form" action="{% url 'dashboard' %}" method="POST"
                       class="tm-contact-form mx-auto">
                     {% csrf_token %}
                     <div class="form-group">
@@ -62,12 +60,6 @@
                     </div>
                 </form>
             </div>
-{#            <div class="col">#}
-{#                <div class="tm-address-col">#}
-{#                    <h2 class="tm-text-primary mb-5">Our Address</h2>#}
-{##}
-{#                </div>#}
-{#            </div>#}
 
         </div>
 
