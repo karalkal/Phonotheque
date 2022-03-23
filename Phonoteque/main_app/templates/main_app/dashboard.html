@@ -46,7 +46,7 @@
             <div class="col">
                 {#OPTION 2 - ENTER wiki URL  #}
                 <h2 class="tm-text-primary mb-5">... or paste album's Wikipedia link below</h2>
-                <form id="contact-form" action="{% url 'dashboard' %}" method="POST"
+                <form id="contact-form" action="{% url 'find_album_by_url' %}" method="POST"
                       class="tm-contact-form mx-auto">
                     {% csrf_token %}
                     <div class="form-group">

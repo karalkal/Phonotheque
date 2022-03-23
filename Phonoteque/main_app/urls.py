@@ -1,10 +1,11 @@
 from django.urls import path
 
-from Phonoteque.main_app.views import view_dashboard, IndexListView
+from Phonoteque.main_app.views import view_dashboard, IndexListView, find_album_by_url
 
 urlpatterns = [
     path('', IndexListView.as_view(), name="index_page"),
     path('dashboard/', view_dashboard, name="dashboard"),
+    path('find_album_by_url', find_album_by_url, name='find_album_by_url')
     # path('find_album/', search_album_view, name='search_form_page'),
 
     # path('photo/details/<int:pk>/', photo_details, name="pet photo details"),
