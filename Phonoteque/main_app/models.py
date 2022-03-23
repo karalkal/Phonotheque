@@ -21,6 +21,15 @@ class Album(models.Model):
     album_cover = models.URLField()
     time_created = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def shared_by(self):
+        # get data for album from intermediary model, i.e. users linked to same album id
+        album_fans = User.objects.filter(collection__album__wiki_id=self.wiki_id)
+        return album_fans
+
+    class Meta:
+        ordering = ('-time_created',)
+
     def __str__(self):
         return f"{self.title} by \n{self.artist}"
 

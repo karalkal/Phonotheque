@@ -1,4 +1,6 @@
-from Phonoteque.main_app.models import Artist, Album
+from django.contrib.auth.models import User
+
+from Phonoteque.main_app.models import Artist, Album, Collection
 
 
 def get_all_artists_names():
