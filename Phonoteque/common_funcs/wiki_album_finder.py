@@ -51,6 +51,8 @@ def get_wiki_info(search_term):
         if 'album</a>&#32;by' in raw_html:
             cut_from = (raw_html[raw_html.index('album</a>&#32;by'):]).split('<a href="/wiki/')[1]
             artist = cut_from[:cut_from.index('"')]
+            artist = artist.replace("_",
+                                    " ")  # for some reason some artist names appear with underscore, Ten_(Pearl_Jam_album)
         if not artist:
             return None, None
         return wiki_info, artist
@@ -59,23 +61,27 @@ def get_wiki_info(search_term):
         return None, None
 
 
-def get_wiki_info_from_url(search_term):
+def get_wiki_info_from_url(album_url):
     try:
         wikipedia.set_lang('en')
-        result = wikipedia.search(search_term, results=1)
+
+        # TODO There must be an intelligent way  to get wiki object directly from url
+        # Here I just slice from https://en.wikipedia.org/wiki/
+        album_name = album_url[album_url.index("wiki/") + 5:]
+        result = wikipedia.search(album_name, results=1)
         page_object = wikipedia.page(result[0], auto_suggest=False)
-
-        # Actual result will often be further down the list of results,
-        # i.e. we get None from first result => search for word album in further results
-        if 'album' not in page_object.summary:
-            results = wikipedia.search(search_term, results=8)
-            for result in results:
-                page_object = wikipedia.page(result, auto_suggest=True)
-                if 'album' in page_object.summary:
-                    break
-
         wiki_info = assign_values(page_object)
-        return wiki_info
+
+        artist = None
+        raw_html = page_object.html()
+        if 'album</a>&#32;by' in raw_html:
+            cut_from = (raw_html[raw_html.index('album</a>&#32;by'):]).split('<a href="/wiki/')[1]
+            artist = cut_from[:cut_from.index('"')]
+            artist = artist.replace("_",
+                                    " ")  # for some reason some artist names appear with underscore, Ten_(Pearl_Jam_album)
+        if not artist:
+            return None, None
+        return wiki_info, artist
 
     except:
-        return 0
+        return None, None

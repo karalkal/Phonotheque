@@ -1,0 +1,34 @@
+{% extends 'base_plus_menu_1.html' %}
+
+{% block main_content %}
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row">
+            <h2 class="tm-text-primary mb-5">'<strong>{{ title }}</strong>' by
+                <strong>{{ artist }} </strong> found! <br>
+                You can to save it to your favourites or search again </h2>
+            <div class="col">
+                <img class="img-thumbnail" src="{{ cover_image }}" style="width: 530px; height: 530px;"
+                     alt="front cover of {{ title }} by {{ artist }}">
+            </div>
+            <div class="col">
+                <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ summary }}</p>
+            </div>
+
+            <form id="contact-form" method="POST" class="tm-contact-form mx-auto">
+                {% csrf_token %}
+                <div class="form-group tm-text-right">
+                    <button type="submit" formaction="{% url 'save_artist_album' %}" class="btn btn-primary">Confirm
+                    </button>
+                </div>
+                <div class="form-group tm-text-right">
+                    <button type="submit" formaction="{% url 'dashboard' %}" class="btn btn-primary">Back</button>
+                </div>
+            </form>
+
+        </div>
+
+
+    </div>
+{% endblock %}
+
