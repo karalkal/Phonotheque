@@ -28,7 +28,7 @@
             <div class="col">
                 {#OPTION 1 - ENTER artist and album names  #}
                 <h2 class="tm-text-primary mb-5">Search for an album by artist and title...</h2>
-                <form id="contact-form" action="{% url 'dashboard' %}" method="POST"
+                <form id="contact-form" action="{% url 'find_album_by_title_and_artist' %}" method="POST"
                       class="tm-contact-form mx-auto">
                     {% csrf_token %}
                     <div class="form-group">

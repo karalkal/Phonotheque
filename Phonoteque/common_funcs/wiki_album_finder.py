@@ -20,10 +20,23 @@ def assign_values(page_object):
                                if ('jpg' in img or 'png' in img or 'gif' in img or 'jpeg' in img)
                                and 'en' in img and 'commons' not in img][0]
 
-    return wiki_info
+    '''
+    get artist name from raw html and return it if found
+    1. find relevant element
+    2. perform some quite ridiculous slicing based on wikipedia's html
+    3. it works though (for the time being)...
+    '''
+    artist = None
+    raw_html = page_object.html()
+    if 'album</a>&#32;by' in raw_html:
+        cut_from = (raw_html[raw_html.index('album</a>&#32;by'):]).split('<a href="/wiki/')[1]
+        artist = cut_from[:cut_from.index('"')]
+        artist = artist.replace("_", " ")  # some artists' names appear with underscore, Ten_(Pearl_Jam_album)
+
+    return wiki_info, artist
 
 
-def get_wiki_info(search_term):
+def get_wiki_info_by_album_name(search_term):
     try:
         wikipedia.set_lang('en')
         result = wikipedia.search(search_term, results=1)
@@ -38,23 +51,8 @@ def get_wiki_info(search_term):
                 if 'album' in page_object.summary:
                     break
 
-        wiki_info = assign_values(page_object)  # send page object to separate function to assign values
+        wiki_info, artist = assign_values(page_object)  # send page object to separate function to assign values
 
-        '''
-        get artist name from raw html and return it if found
-        1. find relevant element
-        2. perform some quite ridiculous slicing based on wikipedia's html
-        3. it works though... for now
-        '''
-        artist = None
-        raw_html = page_object.html()
-        if 'album</a>&#32;by' in raw_html:
-            cut_from = (raw_html[raw_html.index('album</a>&#32;by'):]).split('<a href="/wiki/')[1]
-            artist = cut_from[:cut_from.index('"')]
-            artist = artist.replace("_",
-                                    " ")  # for some reason some artist names appear with underscore, Ten_(Pearl_Jam_album)
-        if not artist:
-            return None, None
         return wiki_info, artist
 
     except:
@@ -70,17 +68,9 @@ def get_wiki_info_from_url(album_url):
         album_name = album_url[album_url.index("wiki/") + 5:]
         result = wikipedia.search(album_name, results=1)
         page_object = wikipedia.page(result, auto_suggest=False)
-        wiki_info = assign_values(page_object)
 
-        artist = None
-        raw_html = page_object.html()
-        if 'album</a>&#32;by' in raw_html:
-            cut_from = (raw_html[raw_html.index('album</a>&#32;by'):]).split('<a href="/wiki/')[1]
-            artist = cut_from[:cut_from.index('"')]
-            artist = artist.replace("_",
-                                    " ")  # for some reason some artist names appear with underscore, Ten_(Pearl_Jam_album)
-        if not artist:
-            return None, None
+        wiki_info, artist = assign_values(page_object)  # send page object to separate function to assign values
+
         return wiki_info, artist
 
     except:
