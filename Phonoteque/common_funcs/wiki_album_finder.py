@@ -13,7 +13,7 @@ def assign_values(page_object):
     wiki_info['wiki_title'] = wiki_title
 
     wiki_info['wiki_url'] = page_object.url
-    wiki_info['wiki_summary'] = wikipedia.summary(page_object.title)
+    wiki_info['wiki_summary'] = page_object.summary
     # Cut only first sentence, i.e. to first full stop (including)
     wiki_info['wiki_resume'] = wiki_info['wiki_summary'][:wiki_info['wiki_summary'].index('.') + 1]
     wiki_info['wiki_image'] = [img for img in page_object.images
@@ -65,11 +65,11 @@ def get_wiki_info_from_url(album_url):
     try:
         wikipedia.set_lang('en')
 
-        # TODO There must be an intelligent way  to get wiki object directly from url
+        # TODO There must be an intelligent way to get wiki object directly from url
         # Here I just slice from https://en.wikipedia.org/wiki/
         album_name = album_url[album_url.index("wiki/") + 5:]
         result = wikipedia.search(album_name, results=1)
-        page_object = wikipedia.page(result[0], auto_suggest=False)
+        page_object = wikipedia.page(result, auto_suggest=False)
         wiki_info = assign_values(page_object)
 
         artist = None
