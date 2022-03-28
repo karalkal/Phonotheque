@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.db.models import Count
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views import generic as views
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from Phonoteque.common_funcs.db_crud_actions import get_all_artists_names, get_artist_object_by_name, \
@@ -14,7 +14,7 @@ from Phonoteque.main_app.forms import SearchAlbumForm
 from Phonoteque.main_app.models import Artist, Album, Collection
 
 
-class IndexListView(ListView):
+class IndexListView(views.ListView):
     model = Album
     template_name = 'main_app/index.html'
     paginate_by = 8
@@ -24,6 +24,11 @@ class IndexListView(ListView):
     #     if request.user.is_authenticated:
     #         return redirect('dashboard')
     #     return super().get(request, *args, **kwargs)
+
+
+class AlbumDetailView(views.DetailView):
+    model = Album
+    template_name = 'main_app/album_details.html'
 
 
 @login_required
@@ -66,8 +71,8 @@ def find_album_by_title_and_artist(request):
 
         # If album info has NOT been retrieved from Wiki by album name only, use user entry for artist too
         if not artist_name or not album_wiki_info:
-            artist_name = request.POST['artist_name'].title()
-            search_term = album_name + " " + artist_name
+            searched_artist = request.POST['artist_name'].title()
+            search_term = album_name + " " + searched_artist
             album_wiki_info, artist_name = get_wiki_info_by_album_name(search_term)
 
         # Save the data in the session - is that alright?
@@ -81,7 +86,9 @@ def find_album_by_title_and_artist(request):
                        }
             return render(request,
                           'main_app/found_album.html', context)
-        # TODO if returns None, redirect to relevant page
+        else:
+            messages.warning(request, f"We couldn't find an album called {album_name} by {searched_artist}.")
+            return redirect('dashboard')
 
 
 def find_album_by_url(request):
@@ -99,7 +106,9 @@ def find_album_by_url(request):
                        }
             return render(request,
                           'main_app/found_album.html', context)
-        # TODO if returns None, redirect to relevant page
+        else:
+            messages.warning(request, "The link you have provided does not return a valid result.")
+            return redirect('dashboard')
 
 
 def save_artist_album_data(request):
@@ -145,4 +154,3 @@ def save_artist_album_data(request):
 
     return render(request, 'main_app/album_saved.html',
                   {'album': album})
-# TODO if returns None, redirect to relevant page
