@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from Phonoteque.common_funcs.db_crud_actions import get_all_artists_names, get_artist_object_by_name, \
     create_album_object
 from Phonoteque.common_funcs.wiki_album_finder import get_wiki_info_by_album_name, get_wiki_info_from_url
-from Phonoteque.main_app.forms import CreateAlbumForm, SearchAlbumForm
+from Phonoteque.main_app.forms import SearchAlbumForm
 from Phonoteque.main_app.models import Artist, Album, Collection
 
 
@@ -14,6 +15,7 @@ class IndexListView(ListView):
     model = Album
     template_name = 'main_app/index.html'
     paginate_by = 8
+    context_object_name = 'all_albums'
 
     # def get(self, request, *args, **kwargs):
     #     if request.user.is_authenticated:
@@ -23,11 +25,26 @@ class IndexListView(ListView):
 
 @login_required
 def view_dashboard(request):
-    # just display user's favourite albums + search forms
-    fav_albums = Album.objects.filter(collection__user_id=request.user.pk)
+    # Get user's favourite albums and enable pagination
+    object_list = Album.objects.filter(collection__user_id=request.user.pk)
+    paginator = Paginator(object_list, 4)  # 4 albums in each page
+    page = request.GET.get('page')
+
+    try:
+        fav_albums = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        fav_albums = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        fav_albums = paginator.page(paginator.num_pages)
+
+    # Display search forms
     form = SearchAlbumForm()
     return render(request, 'main_app/dashboard.html',
-                  {'fav_albums': fav_albums,
+                  {'is_paginated': True,
+                   'page_obj': page,
+                   'fav_albums': fav_albums,
                    'form': form, })
 
 

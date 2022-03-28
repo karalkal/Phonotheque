@@ -23,13 +23,13 @@ class SearchAlbumForm(forms.Form):
             'required': True, }))
 
 
-class CreateArtistForm(forms.ModelForm):
-    class Meta:
-        model = Artist
-        fields = '__all__'
-
-
-class CreateAlbumForm(forms.ModelForm):
-    class Meta:
-        model = Album
-        fields = '__all__'
+# class CreateArtistForm(forms.ModelForm):
+#     class Meta:
+#         model = Artist
+#         fields = '__all__'
+#
+#
+# class CreateAlbumForm(forms.ModelForm):
+#     class Meta:
+#         model = Album
+#         fields = '__all__'

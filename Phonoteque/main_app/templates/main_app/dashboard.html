@@ -3,9 +3,11 @@
 {% block main_content %}
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
-            <h2 class="col-12 tm-text-primary">
-                Hi, {{ request.user.username }}. These are some your favourite albums. To add more, fill in form below.
-            </h2>
+            <h2 class="col-12 tm-text-primary"> Hi, {{ request.user.username }}. These are some your favourite albums.
+                To add more, fill in form below.</h2>
+
+            {% include "pagination.html" with page=fav_albums %}
+
         </div>
 
         {#    GALLERY#}
@@ -21,6 +23,7 @@
                 </div>
             {% endfor %}
         </div>
+
 
         {#        FORMS#}
         <!-- Two equal columns -->
