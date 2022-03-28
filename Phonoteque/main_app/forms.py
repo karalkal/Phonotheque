@@ -22,7 +22,6 @@ class SearchAlbumForm(forms.Form):
             'placeholder': "Enter Album Name",
             'required': True, }))
 
-
 # class CreateArtistForm(forms.ModelForm):
 #     class Meta:
 #         model = Artist

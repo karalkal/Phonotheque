@@ -1,5 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+from django.db import IntegrityError
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -26,7 +29,12 @@ class IndexListView(ListView):
 @login_required
 def view_dashboard(request):
     # Get user's favourite albums and enable pagination
-    object_list = Album.objects.filter(collection__user_id=request.user.pk)
+    object_list = Album.objects. \
+        annotate(count=Count('fans')).order_by('count'). \
+        filter(collection__user_id=request.user.pk). \
+        annotate(count=Count('fans')). \
+        order_by('-count', '-time_created', )
+
     paginator = Paginator(object_list, 4)  # 4 albums in each page
     page = request.GET.get('page')
 
@@ -108,8 +116,11 @@ def save_artist_album_data(request):
     # if album exists in DB already
     try:
         album = Album.objects.get(wiki_id=album_wiki_info['wiki_id'])
-        # TODO: If user has added album already, do nothing ==== DONE BUT CHECK
-        if Collection.objects.filter(user_id=request.user.pk):
+        this_guys_albums = Album.objects.filter(collection__user_id=request.user.pk)
+
+        # unique_together from Collection will throw an error anyway, this is level 1 verification
+        if this_guys_albums.filter(wiki_id=album.wiki_id).exists():
+            messages.warning(request, f'The Album {album.title} by {album.artist} is already in your favourites')
             return redirect('dashboard')
 
     # if not function will create album object
@@ -122,9 +133,15 @@ def save_artist_album_data(request):
     user = request.user
 
     # then save via Collection intermediary model
-    Collection.objects.create(
-        user=user,
-        album=album)
+    try:
+        Collection.objects.create(
+            user=user,
+            album=album)
+
+    # Not needed, just to see which error is coming from where, will be caught before reaching the DB, see above
+    except IntegrityError:
+        messages.warning(request, 'An user cannot save the same album twice')
+        return redirect('dashboard')
 
     return render(request, 'main_app/album_saved.html',
                   {'album': album})

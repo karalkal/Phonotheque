@@ -27,8 +27,8 @@ class Album(models.Model):
         album_fans = User.objects.filter(collection__album__wiki_id=self.wiki_id)
         return album_fans
 
-    class Meta:
-        ordering = ('-time_created',)
+    # class Meta:
+    #     ordering = ('-time_created',)
 
     def __str__(self):
         return f"{self.title} by \n{self.artist}"
@@ -37,6 +37,11 @@ class Album(models.Model):
 class Collection(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    time_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-time_created',)
+        unique_together = ('user', 'album')
 
     def __str__(self):
         return f"{self.user.username} --> {self.album.title} - {self.album.artist.name}"

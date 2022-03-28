@@ -1,80 +1,32 @@
 {% extends 'base_plus_menu_1.html' %}
 
 {% block main_content %}
-<div class="container-fluid tm-container-content tm-mt-60">
-    <div class="row mb-4">
-        <h2 class="col-6 tm-text-primary"> Favourite Albums </h2>
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary"> Favourite Albums </h2>
 
-        {% include "pagination.html" with page=page_obj %}
+            {% include "pagination.html" with page=page_obj %}
 
-{#        <form action="" class="tm-text-primary">#}
-        {##}
-        {#            <ul class="pagination justify-content-center">#}
-        {#                {% if page_obj.has_previous %}#}
-        {#                    <li class="page-item">#}
-        {#                        <a href="?page={{ page_obj.previous_page_number }}">#}
-        {#                            <i class="fa-solid fa-circle-arrow-left"#}
-        {#                               style="font-size: 2em; margin-right: .4em;"></i>#}
-        {#                        </a>#}
-        {#                    </li>#}
-        {#                {% else %}#}
-        {#                    <li class="page-item disabled">#}
-        {#                        <a class="page-link" href="#">#}
-        {#                            <i class="fa-solid fa-circle-arrow-left"#}
-        {#                               style="font-size: 2em; margin-right: .4em;"></i>#}
-        {#                        </a>#}
-        {#                    </li>#}
-        {#                {% endif %}#}
-        {##}
-        {#                {% for i in paginator.page_range %}#}
-        {#                    {% if page_obj.number ==  i %}#}
-        {#                        <li class="page-item fa-solid" style="font-size: 2em; margin: 0 .2em 0 .2em;"><a#}
-        {#                                class="page-link active">{{ i }}</a></li>#}
-        {#                    {% else %}#}
-        {#                        <li class="page-item fa-solid" style="font-size: 2em; margin: 0 .2em 0 .2em;">#}
-        {#                            <a href="?page={{ i }}">{{ i }}</a>#}
-        {#                        </li>#}
-        {#                    {% endif %}#}
-        {#                {% endfor %}#}
-        {##}
-        {#                {% if page_obj.has_next %}#}
-        {#                    <li class="page-item">#}
-        {#                        <a href="?page={{ page_obj.next_page_number }}" class="page-link">#}
-        {#                            <i class="fa-solid fa-circle-arrow-right"#}
-        {#                               style="font-size: 2em; margin-left: .4em;"></i>#}
-        {#                        </a>#}
-        {#                    </li>#}
-        {#                {% else %}#}
-        {#                    <li class="page-item disabled">#}
-        {#                        <a class="page-link">#}
-        {#                            <i class="fa-solid fa-circle-arrow-right"#}
-        {#                               style="font-size: 2em; margin-left: .4em;"></i>#}
-        {#                        </a>#}
-        {#                    </li>#}
-        {#                {% endif %}#}
-        {#            </ul>#}
-        {#            {% endif %}#}
-        {#        </form>#}
-    </div>
+        </div>
 
-    <div class="row tm-mb-90 tm-gallery">
+        <div class="row tm-mb-90 tm-gallery">
 
-        {% for album in object_list %}
+            {% for album in object_list %}
 
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <img src="{{ album.album_cover }}"
-                     alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
-                     style="width: 350px; height: 350px">
-                <h4 class="col-6 tm-text-primary" style="text-transform:capitalize;"> {{ album.artist }} </h4>
-                <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;">  {{ album.title }} </h5>
-                <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;"> Liked
-                    by {{ album.shared_by.count }} user{{ album.shared_by.count|pluralize }}</h5>
-                <a href="{{ album.pk }}">View more</a>
-            </div>
-        {% endfor %}
-    </div> <!-- row -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                    <img src="{{ album.album_cover }}"
+                         alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
+                         style="width: 350px; height: 350px">
+                    <h4 class="col-6 tm-text-primary" style="text-transform:capitalize;"> {{ album.artist }} </h4>
+                    <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;">  {{ album.title }} </h5>
+                    <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;"> Liked
+                        by {{ album.shared_by.count }} user{{ album.shared_by.count|pluralize }}</h5>
+                    <a href="{{ album.pk }}">View more</a>
+                </div>
+            {% endfor %}
+        </div> <!-- row -->
 
-</div> <!-- container-fluid, tm-container-content -->
+    </div> <!-- container-fluid, tm-container-content -->
 
 {% endblock %}
 
