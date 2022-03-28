@@ -1,7 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
 
 from .models import Profile
 
@@ -78,33 +77,3 @@ class CustomPasswordChangeView(auth_views.PasswordChangeView):
         for (field_name, field) in self.form_class.base_fields.items():
             field.widget.attrs['class'] = "form-control"
             field.widget.attrs['placeholder'] = f"Enter {field_name.title()}"
-
-
-"""  
-LogIn FBV
-
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
-
-
-def user_login_view(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request,
-                                username=cd['username'],
-                                password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponse('Authenticated successfully')
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                return HttpResponse('Invalid login')
-    else:
-        form = LoginForm()
-    return render(request, 'accounts_app/login.html', {'form': form})
-"""

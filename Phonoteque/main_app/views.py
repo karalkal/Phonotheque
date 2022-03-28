@@ -13,6 +13,12 @@ from Phonoteque.main_app.models import Artist, Album, Collection
 class IndexListView(ListView):
     model = Album
     template_name = 'main_app/index.html'
+    paginate_by = 8
+
+    # def get(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated:
+    #         return redirect('dashboard')
+    #     return super().get(request, *args, **kwargs)
 
 
 @login_required
