@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.db import IntegrityError
@@ -7,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.views import generic as views
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from Phonoteque.accounts_app.models import Profile
 from Phonoteque.common_funcs.db_crud_actions import get_all_artists_names, get_artist_object_by_name, \
     create_album_object
 from Phonoteque.common_funcs.wiki_album_finder import get_wiki_info_by_album_name, get_wiki_info_from_url
@@ -29,6 +31,14 @@ class IndexListView(views.ListView):
 class AlbumDetailView(views.DetailView):
     model = Album
     template_name = 'main_app/album_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['others_who_liked_it'] = User.objects. \
+            filter(collection__album__wiki_id=self.object.wiki_id). \
+            exclude(username=self.request.user.username). \
+            select_related('profile')  # we get the related profile data as well
+        return context
 
 
 @login_required

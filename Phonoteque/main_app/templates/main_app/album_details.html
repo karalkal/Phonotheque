@@ -4,27 +4,31 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row">
-            <h2 class="tm-text-primary mb-5">Info about <strong>'{{ album.title }}</strong>' by
+            <h2 class="tm-text-primary mb-5 col-lg-10 col-md-10 col-sm-12">Info about
+                <strong>'{{ album.title }}</strong>' by
                 <strong>{{ album.artist }} </strong></h2>
+            <h4 class="tm-text-primary mb-5 col-lg-2 col-md-2 col-sm-12"><a href="{{ album.wiki_url }}">Read more on
+                Wikipedia</a></h4>
 
-            <div class="col">
-                <img class="img-thumbnail" src="{{ album.album_cover }}" style="width: 530px; height: 530px;"
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <img class="img-thumbnail" src="{{ album.album_cover }}" style="width: 530px; height: auto;"
                      alt="front cover of {{ album.title }} by {{ album.artist }}">
             </div>
 
-            <div class="col">
+            <div class="col-lg-8 col-md-8 col-sm-12">
                 <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
+
+                {% if user.is_authenticated %}
+                    <h2 class="tm-text-primary mb-5">This album has been shared also by:</h2>
+                    {#                                        {% for fan in album.fans.all %}#}
+                    {% for fan in others_who_liked_it %}
+                        <h1>{{ fan. }} {{ fan.username }}</h1>
+                    {% endfor %}
+                {% endif %}
+
             </div>
-
-            {% if user.is_authenticated %}
-                {% for fan in album.fans.all %}
-                    <h1>{{ fan }}</h1>
-                {% endfor %}
-            {% endif %}
-
         </div>
-
-
     </div>
 {% endblock %}
 
