@@ -1,33 +1,69 @@
 {% extends 'base_plus_menu_3.html' %}
-
+{% load static %}
+{% block title %}PHONOTEQUE - Profile of {{ searched_user.username }}{% endblock %}
 {% block main_content %}
 
-    <div class="container-fluid tm-container-content tm-mt-60">
+    <div class="container-fluid tm-container-content tm-mt-60" style="background-image: url({% static 'img/red-vinyl.jpg' %}); background-size: cover;">
         <div class="row">
-            <h2 class="tm-text-primary mb-5 col-lg-10 col-md-10 col-sm-12">Profile info of</h2>
-            <h1 class="tm-text-primary mb-5 col-lg-10 col-md-10 col-sm-12">{{ searched_user.username }}</h1>
-
-
-
-            <div class=" col-lg-4 col-md-4 col-sm-12">
-            <img class="img-thumbnail" src="{{ album.album_cover }}" style="width: 530px; height: auto;"
-                 alt="front cover of {{ album.title }} by {{ album.artist }}">
-        </div>
-
-        <div class="col-lg-8 col-md-8 col-sm-12">
-            <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
-
-            {% if user.is_authenticated %}
-                <h2 class="tm-text-primary mb-5">This album has been shared also by:</h2>
-                {#                                        {% for fan in album.fans.all %}#}
-                {% for fan in others_who_liked_it %}
-                    <h1>{{ fan.username }} <a href="{% url 'profile_details' fan.pk %}">View profile</a>
-                    </h1>
+            <h2 class="tm-text-primary mb-5 ">Profile info of user&nbsp&nbsp<strong
+                    style="font-size: 1.7em">{{ searched_user.username }}</strong></h2>
+            <div class="col"
+                 >
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">First Name: &nbsp&nbsp</span> {{ searched_user.first_name }}
+                </h3>
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">Last Name: &nbsp&nbsp</span>
+                    {% if searched_user.last_name %} {{ searched_user.last_name }} {% else %} not provided {% endif %}
+                </h3>
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">Email: &nbsp&nbsp</span> {{ searched_user.email }}
+                </h3>
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">Member Since: &nbsp&nbsp</span> {{ searched_user.date_joined|date:"d M Y" }}
+                </h3>
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">Last Visited on: &nbsp&nbsp</span>
+                    {{ searched_user.last_login|date:"d M Y" }} at {{ searched_user.last_login|time:"H:i" }}
+                </h3>
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">Date of Birth: &nbsp&nbsp</span>
+                    {% if profile.date_of_birth %} {{ profile.date_of_birth|date:"d M Y" }} {% else %} not
+                        provided {% endif %}
+                </h3>
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">Gender: &nbsp&nbsp</span>
+                    {% if not profile.gender == 'Do not show' %} {{ profile.gender }} {% else %} not
+                        provided {% endif %}
+                </h3>
+                <h3 class="tm-text-primary mb-5"><span
+                        style="color: black; font-size: .7em">Description: &nbsp&nbsp</span>
+                    {% if profile.description %} {{ profile.description }} {% else %} not
+                        provided {% endif %}
+                </h3>
+                <h1 class="tm-text-primary mb-5" style="color: black">Favourite albums</h1>
+                {% for album in searched_user.album_set.all %}
+                    <h4 class="tm-text-primary mb-5"><i class="fa-solid fa-compact-disc"></i>
+                        {{ album.title }} by {{ album.artist }}
+                    </h4>
                 {% endfor %}
-            {% endif %}
+            </div>
 
+            <div class="col">
+                {% if current_profile.photo %}
+                    <img src="{{ current_profile.photo.url }}" alt="profile image{{ current_profile.user }}"
+                         class="img-thumbnail"
+                         style="object-fit: cover; width:530px;  height:530px;">
+                    <h4 class="tm-text-primary mb-5">Current profile photo</h4>
+
+                {% else %}
+                    <img src="{% static 'img/profile-anon.jpg' %}" alt="no profile image" class="img-thumbnail"
+                         style="object-fit: cover; width:530px;  height:530px;">
+                    <h4 class="tm-text-primary mb-5">No profile photo yet</h4>
+
+                {% endif %}
+            </div>
         </div>
-    </div>
     </div>
 {% endblock %}
 

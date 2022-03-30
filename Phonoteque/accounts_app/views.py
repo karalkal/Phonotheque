@@ -54,10 +54,13 @@ def edit(request):
         except Profile.DoesNotExist:
             profile_form = ProfileEditForm(instance=request.user)
 
+        current_profile = Profile.objects.get(pk=request.user.pk)
+
     return render(request,
-                  'registration/edit.html',
+                  'registration/profile_edit.html',
                   {'user_form': user_form,
-                   'profile_form': profile_form})
+                   'profile_form': profile_form,
+                   'current_profile': current_profile})
 
 
 class UserLoginView(auth_views.LoginView):

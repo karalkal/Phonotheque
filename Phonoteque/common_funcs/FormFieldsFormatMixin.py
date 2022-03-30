@@ -1,6 +1,3 @@
-from django import forms
-
-
 class FormFieldsFormatMixin:
     fields = {}
 
@@ -14,5 +11,5 @@ class FormFieldsFormatMixin:
             if 'placeholder' not in field.widget.attrs:
                 field.widget.attrs['class'] = ''
 
-            field.widget.attrs['class'] = "form-control rounded-0"
-            field.widget.attrs['placeholder'] = f"Enter {field_name.title()}"
+            field.widget.attrs['class'] = "form-control rounded"
+            field.widget.attrs['placeholder'] = f"Enter {field_name.title().replace('_', ' ')}"

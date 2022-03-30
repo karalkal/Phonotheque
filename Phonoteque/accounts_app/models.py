@@ -33,14 +33,14 @@ class Profile(models.Model):
         upload_to='profile_images/',
         validators=(MaxSizeInMbValidator,),
     )
-    date_of_birth = models.DateField(null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=max([len(x) for (x, _) in GENDER_CHOICES]),
                               null=True, blank=True,
                               choices=GENDER_CHOICES,
                               default=DO_NOT_SHOW_GENDER[1],
                               )
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

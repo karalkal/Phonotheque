@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
@@ -16,7 +18,7 @@ class UserRegistrationForm(FormFieldsFormatMixin, forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'email')
+        fields = ('username', 'first_name', 'last_name', 'email')
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -42,7 +44,10 @@ class ProfileEditForm(FormFieldsFormatMixin, forms.ModelForm):
 
     class Meta:
         model = Profile
-        # fields = ('date_of_birth', 'photo')
+        # fields = ('__all__')
         exclude = ('user', 'first_name', 'last_name', 'email')
-
-        
+        widgets = {'date_of_birth': forms.SelectDateWidget(
+                years=range(datetime.now().year, 1920, -1),
+                attrs={'class': "form-control", }
+            ),
+        }
