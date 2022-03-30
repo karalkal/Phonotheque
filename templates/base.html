@@ -55,31 +55,38 @@
     </div>
 </nav>
 
-{% block main_content %}
-{% endblock %}
+<div style="background-image: url({% static 'img/red-vinyl-bw2.jpg' %});
+        background-repeat: no-repeat;
+        background-size: cover;">
+    {% block main_content %}
+    {% endblock %}
+</div>
+
 
 <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
     <div class="container-fluid tm-container-small">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-12 px-5 mb-5">
+            <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
                 <h3 class="tm-text-primary mb-4 tm-footer-title">Disclaimer:</h3>
                 <p>
                     Phonoteque is a basic student web project made using the Django framework.
                     Please note it is not (yet) an official service and although all effort has been made
-                    to make it as secure and reliable as possible there is no guarantee this will be the case. More about the project could be found in the about section. <br>
+                    to make it as secure and reliable as possible there is no guarantee this will be the case. More
+                    about the project could be found in the about section. <br>
                     The design of this website is based on TemplateMo's beautiful and free <a
                         href="https://templatemo.com/tm-556-catalog-z" class="tm-text-gray" rel="sponsored"
-                        target="_parent"><u>Catalog-Z HTML template</u></a>. If anything does not look quite right that would be as a result of me adapting it to my relevant
+                        target="_parent"><u>Catalog-Z HTML template</u></a>. If anything does not look quite right that
+                    would be as a result of me adapting it to my relevant
                     needs... and possibly not doing that particularly well.
                 </p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
                 <h3 class="tm-text-primary mb-4 tm-footer-title">Contact me:</h3>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
                 <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
                     <li class="mb-2"><a href="https://github.com/karalkal" target="_blank"><i
                             class="fab fa-github"></i></a></li>
@@ -92,19 +99,19 @@
                 </ul>
             </div>
 
-            <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
+            <div class="col-lg-6 col-md-12 col-12 px-5 mb-2">
                 <h3 class="tm-text-primary mb-4 tm-footer-title">Thanks to:</h3>
                 <ul class="d-flex justify-content-between">
-                    <li><a href="https://templatemo.com/" target="_blank">TemplateMo        </a></li>
-                    <li><a href="https://softuni.bg/" target="_blank">SoftUni        </a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia        </a></li>
+                    <li><a href="https://templatemo.com/" target="_blank">TemplateMo </a></li>
+                    <li><a href="https://softuni.bg/" target="_blank">SoftUni </a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia </a></li>
                     <li><a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-12 px-5 mb-5">
+            <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
                 <h3 class="tm-text-primary mb-4 tm-footer-title">Visit:</h3>
                 <p>
                     Feel free to visit <a

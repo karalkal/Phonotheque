@@ -20,7 +20,7 @@
                 <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
 
                 {% if user.is_authenticated %}
-                    <h2 class="tm-text-primary mb-5">This album has been shared also by:</h2>
+                    <h2 class="tm-text-primary mb-5">This album has been shared by:</h2>
                     {#                                        {% for fan in album.fans.all %}#}
 
                     {% for fan in others_who_liked_it %}
