@@ -22,11 +22,16 @@
                 {% if user.is_authenticated %}
                     <h2 class="tm-text-primary mb-5">This album has been shared also by:</h2>
                     {#                                        {% for fan in album.fans.all %}#}
+
                     {% for fan in others_who_liked_it %}
-                        <h1>{{ fan. }} {{ fan.username }}</h1>
+                        <a href="{% url 'profile_details' fan.pk %}">
+                            <h2 class="tm-text-primary mb-5">
+                                <i class="fa-solid fa-compact-disc"></i> {{ fan.username }}
+                            </h2>
+                        </a>
+
                     {% endfor %}
                 {% endif %}
-
             </div>
         </div>
     </div>

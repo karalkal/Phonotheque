@@ -1,6 +1,9 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.views import generic as views
 
 from .models import Profile
 
@@ -69,6 +72,17 @@ class UserLoginView(auth_views.LoginView):
         for (field_name, field) in self.form_class.base_fields.items():
             field.widget.attrs['class'] = "form-control"
             field.widget.attrs['placeholder'] = f"Enter {field_name.title()}"
+
+
+class ProfileDetailView(views.DetailView, LoginRequiredMixin):
+    model = Profile
+    template_name = 'registration/profile_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileDetailView, self).get_context_data(**kwargs)
+        searched_user = User.objects.get(pk=self.object.pk)
+        context['searched_user'] = searched_user
+        return context
 
 
 class CustomPasswordChangeView(auth_views.PasswordChangeView):

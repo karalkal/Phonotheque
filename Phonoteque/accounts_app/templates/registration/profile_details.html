@@ -1,0 +1,33 @@
+{% extends 'base_plus_menu_3.html' %}
+
+{% block main_content %}
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row">
+            <h2 class="tm-text-primary mb-5 col-lg-10 col-md-10 col-sm-12">Profile info of</h2>
+            <h1 class="tm-text-primary mb-5 col-lg-10 col-md-10 col-sm-12">{{ searched_user.username }}</h1>
+
+
+
+            <div class=" col-lg-4 col-md-4 col-sm-12">
+            <img class="img-thumbnail" src="{{ album.album_cover }}" style="width: 530px; height: auto;"
+                 alt="front cover of {{ album.title }} by {{ album.artist }}">
+        </div>
+
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
+
+            {% if user.is_authenticated %}
+                <h2 class="tm-text-primary mb-5">This album has been shared also by:</h2>
+                {#                                        {% for fan in album.fans.all %}#}
+                {% for fan in others_who_liked_it %}
+                    <h1>{{ fan.username }} <a href="{% url 'profile_details' fan.pk %}">View profile</a>
+                    </h1>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
