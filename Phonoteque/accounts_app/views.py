@@ -15,23 +15,33 @@ def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-            # Save the User object
-            new_user.save()
+            try:  # If validations OK
+                # Create a new user object but avoid saving it yet
+                new_user = user_form.save(commit=False)
+                # Set the chosen password
+                new_user.set_password(user_form.cleaned_data['password'])
+                # Save the User object
+                new_user.save()
 
-            # Create the user profile as well
-            Profile.objects.create(user=new_user)
+                # Create the user profile as well
+                new_profile = Profile.objects.create(user=new_user)
 
-            return render(request, 'registration/register_done.html', {'new_user': new_user})
+                # And copy name(s) to it
+                new_profile.first_name = user_form.cleaned_data['first_name']
+                if user_form.cleaned_data['last_name']:
+                    new_profile.last_name = user_form.cleaned_data['last_name']
+                new_profile.save()
 
+                return render(request, 'registration/register_done.html', {'new_user': new_user})
+
+            except Exception as ex:  # If validation fails
+                messages.error(request, str(ex))
+                return redirect('register')
     else:
         user_form = UserRegistrationForm()
-        return render(request,
-                      'registration/register.html',
-                      {'user_form': user_form})
+    return render(request,
+                  'registration/register.html',
+                  {'user_form': user_form})
 
 
 @login_required

@@ -10,21 +10,13 @@ class Profile(models.Model):
     FEMALE_GENDER = ("Female", "Female")
     DO_NOT_SHOW_GENDER = ("Do not show", "Do not show")
     GENDER_CHOICES = [MALE_GENDER, FEMALE_GENDER, DO_NOT_SHOW_GENDER]
-    VALID_NAME_REGEX = r"^([ \u00c0-\u01ffa-zA-Z'\-])+$"  # Jérémie O'Conor-IVANOVäüïöëÿâçéèêîïôčšžñáéíóúü
-    INVALID_NAME_ERROR_MESSAGE = "This name format won't work here, buddy."
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE,
                                 primary_key=True)
 
-    first_name = models.CharField(max_length=35, validators=(
-        MinLengthValidator(2),
-        RegexValidator(regex=VALID_NAME_REGEX, message=INVALID_NAME_ERROR_MESSAGE))
-                                  )
-    last_name = models.CharField(max_length=35, validators=(
-        MinLengthValidator(2),
-        RegexValidator(regex=VALID_NAME_REGEX, message=INVALID_NAME_ERROR_MESSAGE))
-                                 )
+    first_name = models.CharField(max_length=35)
+    last_name = models.CharField(max_length=35)
 
     # The user may provide the following information in their profile:
     photo = models.ImageField(
