@@ -1,6 +1,4 @@
-from django.core.validators import MinLengthValidator, RegexValidator
 from django.db import models
-
 from django.conf import settings
 from Phonoteque.common_funcs.validators import MaxSizeInMbValidator
 

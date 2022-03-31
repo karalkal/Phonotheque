@@ -21,11 +21,6 @@ class IndexListView(views.ListView):
     paginate_by = 8
     context_object_name = 'all_albums'
 
-    # def get(self, request, *args, **kwargs):
-    #     if request.user.is_authenticated:
-    #         return redirect('dashboard')
-    #     return super().get(request, *args, **kwargs)
-
 
 class AlbumDetailView(views.DetailView):
     model = Album
@@ -45,6 +40,9 @@ class AlbumDetailView(views.DetailView):
             context['liked_by_current_user'] = True
         except User.DoesNotExist:
             context['liked_by_current_user'] = False
+
+        # TODO add album and artist data to context, so it can be passed to save_artist_album if user wants to add it to their Favourites
+
         return context
 
 

@@ -4,12 +4,14 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row">
-            <h2 class="tm-text-primary mb-5 col-lg-9 col-md-8 col-sm-12">Info about
+            <h2 class="tm-text-primary mb-5 col-lg-4 col-md-4 col-sm-12">Info about
                 <strong>'{{ album.title }}</strong>' by
                 <strong><a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a> </strong></h2>
 
+            <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
+                <a href="{% url 'save_artist_album' %}" style="color: white; ">Save to your Favourites</a></h4>
 
-            <h4 class="tm-text-primary mb-5 col-lg-3 col-md-4 col-sm-12 btn-primary" style="text-align: center">
+            <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
                 <a href="{{ album.wiki_url }}" style="color: white; ">Read more on
                     Wikipedia</a></h4>
         </div>  <!-- row -->

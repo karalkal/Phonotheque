@@ -37,8 +37,10 @@ def register(request):
             except Exception as ex:  # If validation fails
                 messages.error(request, str(ex))
                 return redirect('register')
+
     else:
         user_form = UserRegistrationForm()
+
     return render(request,
                   'registration/register.html',
                   {'user_form': user_form})
