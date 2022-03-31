@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -75,6 +76,20 @@ class UserLoginView(auth_views.LoginView):
         for (field_name, field) in self.form_class.base_fields.items():
             field.widget.attrs['class'] = "form-control"
             field.widget.attrs['placeholder'] = f"Enter {field_name.title()}"
+
+
+class UserLogoutView(auth_views.LogoutView):
+    """
+    Log out the user and display the 'You are logged out' message.
+    """
+
+    next_page = 'index_page'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.add_message(request, messages.INFO, 'You have successfully logged out from your account.')
+        messages.add_message(request, messages.INFO, 'You can either close this tab or log in again.')
+        return response
 
 
 class ProfileDetailView(views.DetailView, LoginRequiredMixin):

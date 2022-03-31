@@ -55,6 +55,19 @@
     </div>
 </nav>
 
+{#ERRORS IF ANY#}
+{% if messages %}
+    <div class="row mt-3 mb-0" style="text-align: center; background-color: #009999; ">
+        {#        <ul class="messages">#}
+        {% for message in messages %}
+            {#                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>#}
+            <h2 class="col-12" style="color: white; ">{{ message }}</h2>
+            {#                </li>#}
+        {% endfor %}
+        {#        </ul>#}
+    </div>
+{% endif %}
+
 <div style="background-image: url({% static 'img/red-vinyl-bw2.jpg' %});
         background-repeat: no-repeat;
         background-size: cover;">

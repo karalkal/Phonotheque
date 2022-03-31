@@ -3,18 +3,6 @@
 {% block main_content %}
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
-
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                            <h5 class="col-12 tm-text-primary">{{ message }}</h5>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-
-
             <h2 class="col-12 tm-text-primary"> Hi, {{ request.user.username }}. These are some your favourite albums.
                 To add more, fill in form below.</h2>
 
@@ -38,47 +26,47 @@
                 </div>
             {% endfor %}
         </div>
+    </div> <!-- row -->
 
 
-        {#        FORMS#}
-        <!-- Two equal columns -->
-        <div class="row">
-            <div class="col">
-                {#OPTION 1 - ENTER artist and album names  #}
-                <h2 class="tm-text-primary mb-5">Search for an album by artist and title...</h2>
-                <form id="contact-form" action="{% url 'find_album_by_title_and_artist' %}" method="POST"
-                      class="tm-contact-form mx-auto">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        {{ form.artist_name }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.album_name }}
-                    </div>
-                    <div class="form-group tm-text-right">
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                </form>
-            </div>
 
-            <div class="col">
-                {#OPTION 2 - ENTER wiki URL  #}
-                <h2 class="tm-text-primary mb-5">... or paste album's Wikipedia link below</h2>
-                <form id="contact-form" action="{% url 'find_album_by_url' %}" method="POST"
-                      class="tm-contact-form mx-auto">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="url" name="message" class="form-control rounded-0"
-                               placeholder="Enter Wikipedia Link"
-                               required=>
-                    </div>
+    {#        FORMS#}
+    <!-- Two equal columns -->
+    <div class="row">
+        <div class="col">
+            {#OPTION 1 - ENTER artist and album names  #}
+            <h2 class="tm-text-primary mb-5" style="text-align: center;">Search for an album by artist and title...</h2>
+            <form id="contact-form" action="{% url 'find_album_by_title_and_artist' %}" method="POST"
+                  class="tm-contact-form mx-auto">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.artist_name }}
+                </div>
+                <div class="form-group">
+                    {{ form.album_name }}
+                </div>
+                <div class="form-group tm-text-right">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
 
-                    <div class="form-group tm-text-right">
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                </form>
-            </div>
+        <div class="col">
+            {#OPTION 2 - ENTER wiki URL  #}
+            <h2 class="tm-text-primary mb-5" style="text-align: center;">... or paste album's Wikipedia link below</h2>
+            <form id="contact-form" action="{% url 'find_album_by_url' %}" method="POST"
+                  class="tm-contact-form mx-auto">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="url" name="message" class="form-control rounded-0"
+                           placeholder="Enter Wikipedia Link"
+                           required=>
+                </div>
 
+                <div class="form-group tm-text-right">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
         </div>
 
     </div> <!-- container-fluid, tm-container-content -->
