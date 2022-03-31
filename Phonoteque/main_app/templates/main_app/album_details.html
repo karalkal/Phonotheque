@@ -4,13 +4,17 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row">
-            <h2 class="tm-text-primary mb-5 col-lg-10 col-md-10 col-sm-12">Info about
+            <h2 class="tm-text-primary mb-5 col-lg-9 col-md-8 col-sm-12">Info about
                 <strong>'{{ album.title }}</strong>' by
-                <strong>{{ album.artist }} </strong></h2>
-            <h4 class="tm-text-primary mb-5 col-lg-2 col-md-2 col-sm-12"><a href="{{ album.wiki_url }}">Read more on
-                Wikipedia</a></h4>
+                <strong><a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a> </strong></h2>
 
 
+            <h4 class="tm-text-primary mb-5 col-lg-3 col-md-4 col-sm-12 btn-primary" style="text-align: center">
+                <a href="{{ album.wiki_url }}" style="color: white; ">Read more on
+                    Wikipedia</a></h4>
+        </div>  <!-- row -->
+
+        <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <img class="img-thumbnail" src="{{ album.album_cover }}" style="width: 530px; height: auto;"
                      alt="front cover of {{ album.title }} by {{ album.artist }}">
@@ -18,10 +22,29 @@
 
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
+            </div>
+        </div>  <!-- row -->
 
-                {% if user.is_authenticated %}
-                    <h2 class="tm-text-primary mb-5">This album has been shared by:</h2>
-                    {#                                        {% for fan in album.fans.all %}#}
+        {% if user.is_authenticated %}
+            {#            Show comments - LEFT and users who shared the album - RIGHT #}
+            <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h2 class="tm-text-primary mb-5">Comments:</h2>
+                <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                {% if not others_who_liked_it %}
+                    <h2 class="tm-text-primary mb-5">This album
+                        has been shared by you only.</h2>
+
+                {% else %}
+                    <h2 class="tm-text-primary mb-5">
+                        {% if liked_by_current_user %}
+                            Other users who shared this album:
+                        {% else %}
+                            This album has been shared by:
+                        {% endif %}</h2>
 
                     {% for fan in others_who_liked_it %}
                         <a href="{% url 'profile_details' fan.pk %}">
@@ -33,7 +56,10 @@
                     {% endfor %}
                 {% endif %}
             </div>
-        </div>
-    </div>
+
+        {% endif %}
+        </div> <!-- row -->
+
+    </div> <!-- container-fluid, tm-container-content -->
 {% endblock %}
 

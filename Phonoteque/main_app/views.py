@@ -8,7 +8,6 @@ from django.shortcuts import render, redirect
 from django.views import generic as views
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from Phonoteque.accounts_app.models import Profile
 from Phonoteque.common_funcs.db_crud_actions import get_all_artists_names, get_artist_object_by_name, \
     create_album_object
 from Phonoteque.common_funcs.wiki_album_finder import get_wiki_info_by_album_name, get_wiki_info_from_url
@@ -34,10 +33,34 @@ class AlbumDetailView(views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['others_who_liked_it'] = User.objects. \
+        all_fans = User.objects. \
             filter(collection__album__wiki_id=self.object.wiki_id). \
-            exclude(username=self.request.user.username). \
             select_related('profile')  # we get the related profile data as well
+        # find other users who liked it
+        context['others_who_liked_it'] = all_fans.exclude(username=self.request.user.username)
+
+        # find out is current user has shared it too
+        try:
+            all_fans.get(username=self.request.user.username)
+            context['liked_by_current_user'] = True
+        except User.DoesNotExist:
+            context['liked_by_current_user'] = False
+        return context
+
+
+class ArtistDiscographyView(views.ListView):
+    model = Album
+    template_name = 'main_app/artist_details.html'
+    paginate_by = 8
+
+    def get_queryset(self):  # get queryset/albums_list for this specific artist
+        return super(ArtistDiscographyView, self).get_queryset() \
+            .filter(artist_id=self.kwargs['pk'])
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ArtistDiscographyView, self).get_context_data()
+        artist = Artist.objects.get(pk=self.kwargs['pk'])
+        context['artist_name'] = artist.name
         return context
 
 

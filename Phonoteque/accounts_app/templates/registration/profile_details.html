@@ -68,7 +68,8 @@
                 <h1 class="tm-text-primary mb-3" style="color: black">Favourite albums</h1>
                 {% for album in searched_user.album_set.all %}
                     <h4 class="tm-text-primary mb-3"><i class="fa-solid fa-compact-disc"></i>
-                        <a href="{% url 'album_details' album.pk %}">{{ album.title }}</a> by {{ album.artist }}
+                        <a href="{% url 'album_details' album.pk %}">{{ album.title }}</a> by
+                        <a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a>
                     </h4>
                 {% endfor %}
             </div>
