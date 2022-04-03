@@ -40,9 +40,6 @@ class AlbumDetailView(views.DetailView):
             context['liked_by_current_user'] = True
         except User.DoesNotExist:
             context['liked_by_current_user'] = False
-
-        # TODO add album and artist data to context, so it can be passed to save_artist_album if user wants to add it to their Favourites
-
         return context
 
 
@@ -144,7 +141,7 @@ def find_album_by_url(request):
 
 def save_artist_album_data(request):
     artist_name, album_wiki_info = request.session['data']
-    del request.session['data']  # clear this value
+    # del request.session['data']  # clear this value
 
     # Check if artist already in DB, if not create record
     if artist_name not in get_all_artists_names():
@@ -182,6 +179,18 @@ def save_artist_album_data(request):
     except IntegrityError:
         messages.warning(request, 'An user cannot save the same album twice')
         return redirect('dashboard')
+
+    return render(request, 'main_app/album_saved.html',
+                  {'album': album})
+
+
+def add_shared_album_to_own_collection(request, album_wiki_id):
+    album = Album.objects.get(wiki_id=album_wiki_id)
+    user = request.user
+
+    Collection.objects.create(
+        user=user,
+        album=album)
 
     return render(request, 'main_app/album_saved.html',
                   {'album': album})

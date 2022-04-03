@@ -9,7 +9,8 @@
                 <strong><a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a> </strong></h2>
 
             <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
-                <a href="{% url 'save_artist_album' %}" style="color: white; ">Save to your Favourites</a></h4>
+                <a href="{% url 'save_shared_album' album.wiki_id %}" style="color: white; ">Save to your Favourites</a>
+            </h4>
 
             <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
                 <a href="{{ album.wiki_url }}" style="color: white; ">Read more on

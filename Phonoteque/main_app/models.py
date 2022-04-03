@@ -45,3 +45,18 @@ class Collection(models.Model):
 
     def __str__(self):
         return f"{self.user.username} --> {self.album.title} - {self.album.artist.name}"
+
+
+class Comment(models.Model):
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return f'Comment by {self.name} on {self.post}'
