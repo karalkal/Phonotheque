@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Phonoteque.main_app.models import Album, Artist, Collection
+from Phonoteque.main_app.models import Album, Artist, Collection, Comment
 
 
 @admin.register(Artist)
@@ -20,4 +20,9 @@ class AlbumAdmin(admin.ModelAdmin):
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('album_id', 'user_id')
-    pass
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'album', 'created', 'active',)
+    list_filter = ('active', 'created',)
