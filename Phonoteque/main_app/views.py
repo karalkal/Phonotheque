@@ -1,18 +1,20 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.db import IntegrityError
 from django.db.models import Count
 from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from Phonoteque.common_funcs.db_crud_actions import get_all_artists_names, get_artist_object_by_name, \
     create_album_object
 from Phonoteque.common_funcs.wiki_album_finder import get_wiki_info_by_album_name, get_wiki_info_from_url
-from Phonoteque.main_app.forms import SearchAlbumForm
-from Phonoteque.main_app.models import Artist, Album, Collection
+from Phonoteque.main_app.forms import SearchAlbumForm, CommentForm
+from Phonoteque.main_app.models import Artist, Album, Collection, Comment
 
 
 class IndexListView(views.ListView):
@@ -40,6 +42,10 @@ class AlbumDetailView(views.DetailView):
             context['liked_by_current_user'] = True
         except User.DoesNotExist:
             context['liked_by_current_user'] = False
+
+        # add form
+        context['form'] = CommentForm()
+
         return context
 
 
@@ -57,6 +63,21 @@ class ArtistDiscographyView(views.ListView):
         artist = Artist.objects.get(pk=self.kwargs['pk'])
         context['artist_name'] = artist.name
         return context
+
+
+class CommentCreateView(views.CreateView, PermissionRequiredMixin):
+    model = Comment
+    fields = ('body',)
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.user = self.request.user
+        comment.album = Album.objects.get(wiki_id=self.kwargs['album_wiki_id'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('album_details',
+                            kwargs={'pk': self.kwargs['album_wiki_id']})
 
 
 @login_required
@@ -113,7 +134,7 @@ def find_album_by_title_and_artist(request):
                        'cover_image': album_wiki_info['wiki_image']
                        }
             return render(request,
-                          'main_app/found_album.html', context)
+                          'main_app/album_found.html', context)
         else:
             messages.warning(request, f"We couldn't find an album called {album_name} by {searched_artist}.")
             return redirect('dashboard')
@@ -133,7 +154,7 @@ def find_album_by_url(request):
                        'cover_image': album_wiki_info['wiki_image']
                        }
             return render(request,
-                          'main_app/found_album.html', context)
+                          'main_app/album_found.html', context)
         else:
             messages.warning(request, "The link you have provided does not return a valid result.")
             return redirect('dashboard')

@@ -50,12 +50,12 @@ class Collection(models.Model):
 class Comment(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
+    body = models.CharField(max_length=620)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'

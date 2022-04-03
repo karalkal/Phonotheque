@@ -19,18 +19,8 @@
                             <p class="alert-warning">{{ error }}</p>
                         {% endfor %}
                     {% endif %}
-
                     {{ form.as_p }}
 
-
-                    {#                    <div class="form-group">#}
-                    {#                        {{ form.username }}#}
-                    {#                    </div>#}
-                    {#                    <div class="form-group">#}
-                    {#                        {{ form.password }}#}
-                    {#                    </div>#}
-
-                    {#                        !!!                    #}
                     <input type="hidden" name="next" value="{{ next }}"/>
 
                     <div class="form-group tm-text-right">
@@ -39,13 +29,7 @@
                 </form>
 
             </div>
-            <div class="col">
-                <div class="tm-address-col">
-                    <h2 class="tm-text-primary mb-5">Our Address</h2>
-
-                </div>
-            </div>
-
+            
         </div>
 
     </div> <!-- container-fluid, tm-container-content -->

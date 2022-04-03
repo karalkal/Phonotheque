@@ -1,6 +1,6 @@
 from django import forms
 
-from Phonoteque.main_app.models import Album, Artist
+from Phonoteque.main_app.models import Album, Artist, Comment
 
 
 class SearchAlbumForm(forms.Form):
@@ -22,13 +22,17 @@ class SearchAlbumForm(forms.Form):
             'placeholder': "Enter Album Name",
             'required': True, }))
 
-# class CreateArtistForm(forms.ModelForm):
-#     class Meta:
-#         model = Artist
-#         fields = '__all__'
-#
-#
-# class CreateAlbumForm(forms.ModelForm):
-#     class Meta:
-#         model = Album
-#         fields = '__all__'
+
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(
+        max_length=620,
+        label='',
+        widget=forms.Textarea(attrs={
+            'class': "form-control rounded-0",
+            'placeholder': "Share your thoughts, man",
+            'required': True,
+            'rows': 8}))
+
+    class Meta:
+        model = Comment
+        fields = ('body',)

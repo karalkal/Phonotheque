@@ -30,13 +30,48 @@
 
         {% if user.is_authenticated %}
             {#            Show comments - LEFT and users who shared the album - RIGHT #}
+
+            {#            COMMENTS#}
             <div class="row mt-4">
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <h2 class="tm-text-primary mb-5">Comments:</h2>
-                <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
-            </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-12">
+                {% if not album.comment_set.all %}
+                    <h2 class="tm-text-primary mb-5">Comments:</h2> No comments posted yet
+
+                {% else %}
+                    <h2 class="tm-text-primary mb-5">Comments:&nbsp;{{ album.comment_set.all.count }}</h2>
+                    {% for comment in album.comment_set.all %}
+                        <div style="background-color: white">
+
+                            <h2 class="tm-text-primary mb-2">
+                                <i class="fa-solid fa-circle-plus"></i>
+                                <a href="{% url 'profile_details' comment.user.pk %}">
+                                    Comment by {{ comment.user.username }}</a>
+                                <span class="tm-text-primary mb-2" style="font-size: .7em">
+                                    created on {{ comment.created }}
+                                </span>
+                            </h2>
+                                <p class=" tm-text-primary mb-4"
+                                   style="color: black;padding-left:
+                                2.8em"> {{ comment.body }} </p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form id="contact-form" action="{% url 'post_comment' album.wiki_id %}" method="POST"
+                      class="tm-contact-form mx-auto"
+                      style="max-width: 100%;">
+                    {% csrf_token %}
+                    {{ form }}
+                    <div class="form-group tm-text-right">
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                </form>
+
+            </div>  <!--col 1 -->
+
+            {#            SHARED BY#}
+            <div class="col-lg-5 col-md-5 col-sm-12 ml-auto">
                 {% if not others_who_liked_it %}
                     <h2 class="tm-text-primary mb-5">This album
                         has been shared by you only.</h2>
@@ -58,7 +93,8 @@
 
                     {% endfor %}
                 {% endif %}
-            </div>
+
+            </div>  <!--col 2 -->
 
         {% endif %}
         </div> <!-- row -->
