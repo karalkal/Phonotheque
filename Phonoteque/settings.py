@@ -90,7 +90,7 @@ DATABASES = {
         'USER': 'mpxknvpwlrupji',
         'PASSWORD': '05e134b02322e1c5d9b8d85cd1760dab39238983a96c4ccddb61f4a7626ef0d5',
         'HOST': 'ec2-99-80-170-190.eu-west-1.compute.amazonaws.com',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
