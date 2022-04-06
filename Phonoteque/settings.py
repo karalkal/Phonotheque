@@ -28,11 +28,7 @@ ALLOWED_HOSTS = ['0.0.0.0',
                  'phonoteque.herokuapp.com',
                  '127.0.0.1']
 
-
-
-                 # Application definition
-
-                 INSTALLED_APPS = [
+INSTALLED_APPS = [
     'Phonoteque.accounts_app',
     'Phonoteque.main_app',
 
