@@ -24,11 +24,15 @@ SECRET_KEY = 'django-insecure-xt%)#*dddt#_l=zin@o8^o0f0hr%6n-9eq#kn&#8@pz!5-^u=s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [phonoteque.herokuapp.com]
+ALLOWED_HOSTS = ['0.0.0.0',
+                 'phonoteque.herokuapp.com',
+                 '127.0.0.1']
 
-# Application definition
 
-INSTALLED_APPS = [
+
+                 # Application definition
+
+                 INSTALLED_APPS = [
     'Phonoteque.accounts_app',
     'Phonoteque.main_app',
 
