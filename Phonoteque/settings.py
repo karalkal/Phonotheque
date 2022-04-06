@@ -19,11 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xt%)#*dddt#_l=zin@o8^o0f0hr%6n-9eq#kn&#8@pz!5-^u=s'
+SECRET_KEY = os.getenv('SECRET_KEY', 'sk')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv('DEBUG', 'False')
+print(DEBUG)
 
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
@@ -96,7 +97,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', '5432'),  # if no env variable DB_PORT, return '5432'
     }
 }
-print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
