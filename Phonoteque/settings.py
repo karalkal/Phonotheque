@@ -24,12 +24,10 @@ SECRET_KEY = 'django-insecure-xt%)#*dddt#_l=zin@o8^o0f0hr%6n-9eq#kn&#8@pz!5-^u=s
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-print(DEBUG)
 
-ALLOWED_HOSTS = ['localhost',
-                 '127.0.0.1',
-                 'phonoteque.herokuapp.com',
-                 ]
+APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
 
 INSTALLED_APPS = [
     'Phonoteque.accounts_app',
@@ -75,27 +73,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Phonoteque.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
+# DEFAULT_DATABASE_CONFIG = {
+#     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#     'NAME': 'postgres',
+#     'USER': 'postgres',
+#     'PASSWORD': '11111111',
+#     'HOST': 'localhost',
+#     'PORT': '',
 # }
 
+# DATABASES = {
+#     'default': DEFAULT_DATABASE_CONFIG,
+# }
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd3hqc6hpkljkmu',
-        'USER': 'fcbesnhingzbsa',
-        'PASSWORD': 'dbe3be82074d883bb181b1166467dd0c043349062f8975c0198652b0bff13826',
-        'HOST': 'ec2-52-214-23-110.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'postgres'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '11111111'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),  # if no env variable DB_PORT, return '5432'
     }
 }
+print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
