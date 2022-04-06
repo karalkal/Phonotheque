@@ -24,9 +24,10 @@ SECRET_KEY = 'django-insecure-xt%)#*dddt#_l=zin@o8^o0f0hr%6n-9eq#kn&#8@pz!5-^u=s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0',
+ALLOWED_HOSTS = ['localhost',
+                 '127.0.0.1',
                  'phonoteque.herokuapp.com',
-                 '127.0.0.1']
+                 ]
 
 INSTALLED_APPS = [
     'Phonoteque.accounts_app',
@@ -86,10 +87,10 @@ WSGI_APPLICATION = 'Phonoteque.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dclckpgocdrk54',
-        'USER': 'mpxknvpwlrupji',
-        'PASSWORD': '05e134b02322e1c5d9b8d85cd1760dab39238983a96c4ccddb61f4a7626ef0d5',
-        'HOST': 'ec2-99-80-170-190.eu-west-1.compute.amazonaws.com',
+        'NAME': 'd3hqc6hpkljkmu',
+        'USER': 'fcbesnhingzbsa',
+        'PASSWORD': 'dbe3be82074d883bb181b1166467dd0c043349062f8975c0198652b0bff13826',
+        'HOST': 'ec2-52-214-23-110.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
