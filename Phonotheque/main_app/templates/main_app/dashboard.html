@@ -5,12 +5,14 @@
         <div class="row mb-4">
 
             {% if not fav_albums %}
-                <h2 class="col-12 tm-text-primary"> Hi, {{ request.user.username }}. You have not shared any of your
+                <h2 class="col-12 tm-text-primary mb-4" style="color: black; text-align: center">
+                    Hi, {{ request.user.username }}. You have not shared any of your
                     favourite albums yet.
                     To add some, fill in form below.</h2>
 
             {% else %}
-                <h2 class="col-12 tm-text-primary"> Hi, {{ request.user.username }}. These are some your favourite
+                <h2 class="col-12 tm-text-primary" style="color: black; text-align: center">
+                    Hi, {{ request.user.username }}. These are some your favourite
                     albums.
                     To add more, fill in form below.</h2>
 
