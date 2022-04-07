@@ -87,7 +87,7 @@ def view_dashboard(request):
         annotate(count=Count('fans')).order_by('count'). \
         filter(collection__user_id=request.user.pk). \
         annotate(count=Count('fans')). \
-        order_by('-count', '-time_created', )
+        order_by('-time_created', '-count')  # display most recently added first, unlike index
 
     paginator = Paginator(object_list, 4)  # 4 albums in each page
     page = request.GET.get('page')
@@ -139,6 +139,9 @@ def find_album_by_title_and_artist(request):
             messages.warning(request, f"We couldn't find an album called {album_name} by {searched_artist}.")
             return redirect('dashboard')
 
+    else:  # if not request = POST
+        return redirect('dashboard')
+
 
 def find_album_by_url(request):
     if request.method == 'POST':
@@ -176,7 +179,7 @@ def save_artist_album_data(request):
         album = Album.objects.get(wiki_id=album_wiki_info['wiki_id'])
         this_guys_albums = Album.objects.filter(collection__user_id=request.user.pk)
 
-        # unique_together from Collection will throw an error anyway, this is level 1 verification
+        # unique_together from Collection will throw an error anyway, this will check before it hits the DB
         if this_guys_albums.filter(wiki_id=album.wiki_id).exists():
             messages.warning(request, f'The Album {album.title} by {album.artist} is already in your favourites')
             return redirect('dashboard')
@@ -195,23 +198,28 @@ def save_artist_album_data(request):
         Collection.objects.create(
             user=user,
             album=album)
+        messages.success(request, f'The album {album.title} by {album.artist} has been saved in your favourites')
 
     # Not needed, just to see which error is coming from where, will be caught before reaching the DB, see above
     except IntegrityError:
         messages.warning(request, 'An user cannot save the same album twice')
-        return redirect('dashboard')
+        album_exists_already = True
 
-    return render(request, 'main_app/album_saved.html',
-                  {'album': album})
+        # return this in both cases, relevant message displayed in template
+    # return render(request, 'main_app/dashboard.html',
+    #               {'album_exists_already': album_exists_already,
+    #                'album': album})
+    return redirect('dashboard')
 
 
 def add_shared_album_to_own_collection(request, album_wiki_id):
     album = Album.objects.get(wiki_id=album_wiki_id)
     user = request.user
 
+    # Don't need verification if album already in list - if it is, save button simply won't appear (see template)
     Collection.objects.create(
         user=user,
         album=album)
 
-    return render(request, 'main_app/album_saved.html',
-                  {'album': album})
+    messages.success(request, f'The album {album.title} by {album.artist} has been saved in your favourites')
+    return redirect('dashboard')

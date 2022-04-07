@@ -1,4 +1,5 @@
 import wikipedia
+import urllib.parse  # to decode escaped chars from links
 
 
 def assign_values(page_object):
@@ -65,7 +66,9 @@ def get_wiki_info_from_url(album_url):
 
         # TODO There must be an intelligent way to get wiki object directly from url
         # Here I just slice from https://en.wikipedia.org/wiki/
-        album_name = album_url[album_url.index("wiki/") + 5:]
+        # and remove all crap like the one in this link - 'Peace_Sells..._but_Who%27s_Buying%3F'
+        album_url = urllib.parse.unquote(album_url)
+        album_name = album_url[album_url.index("wiki/") + 5:].replace("\\", " ").replace("_", " ")
         result = wikipedia.search(album_name, results=1)
         page_object = wikipedia.page(result, auto_suggest=False)
 
