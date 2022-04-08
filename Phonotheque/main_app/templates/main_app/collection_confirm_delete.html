@@ -1,0 +1,24 @@
+{% extends 'base_plus_menu_1a(active_dashboard).html' %}
+
+{% block main_content %}
+
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row">
+            <h2 class="tm-text-primary mb-5">Are you sure you wish to delete <strong>
+                '{{ object.album.title }}'</strong>' by
+                <strong>{{ object.album.artist }} </strong> from your collection?</h2>
+
+            <form method="post" action="{% url 'unlike_album' pk_to_delete %}">
+                {% csrf_token %}
+                {{ form }}
+
+                <button class="btn btn-primary" type="submit" style="width:220px">Delete</button>
+            </form>
+
+
+        </div>
+
+
+    </div>
+{% endblock %}
+

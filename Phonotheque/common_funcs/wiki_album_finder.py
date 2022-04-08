@@ -33,6 +33,7 @@ def assign_values(page_object):
         cut_from = (raw_html[raw_html.index('album</a>&#32;by'):]).split('<a href="/wiki/')[1]
         artist = cut_from[:cut_from.index('"')]
         artist = artist.replace("_", " ")  # some artists' names appear with underscore, Ten_(Pearl_Jam_album)
+    a = 5
 
     return wiki_info, artist
 

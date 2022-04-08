@@ -36,17 +36,36 @@ class AlbumDetailView(views.DetailView):
         # find other users who liked it
         context['others_who_liked_it'] = all_fans.exclude(username=self.request.user.username)
 
-        # find out is current user has shared it too
+        # find out if current user has shared it too
         try:
-            all_fans.get(username=self.request.user.username)
+            current_fan_pk = all_fans.get(username=self.request.user.username).pk  # to give them the option to delete
+            albums_pk_in_users_collection = Collection.objects.filter(user_id=current_fan_pk). \
+                get(album_id=self.object.wiki_id).pk
+            context['album_to_unlike_pk'] = albums_pk_in_users_collection
             context['liked_by_current_user'] = True
         except User.DoesNotExist:
             context['liked_by_current_user'] = False
+
+        collection_id = Collection.user.pk = self.request.user.pk
+        a = 5
 
         # add form
         context['form'] = CommentForm()
 
         return context
+
+
+class UnlikeAlbumView(views.DeleteView, PermissionRequiredMixin):
+    model = Collection
+
+    def get_context_data(self, **kwargs):
+        context = super(UnlikeAlbumView, self).get_context_data()
+        pk_to_delete = context['collection'].pk
+        context['pk_to_delete'] = pk_to_delete
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard')
 
 
 class ArtistDiscographyView(views.ListView):

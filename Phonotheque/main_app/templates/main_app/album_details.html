@@ -9,12 +9,26 @@
                 by <strong><a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a> </strong>
             </h2>
 
-            {% if not liked_by_current_user %}
-                <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
-                    style="text-align: center">
-                    <a href="{% url 'save_shared_album' album.wiki_id %}" style="color: white; ">Save to your
-                        Favourites</a>
-                </h4>
+            {# Check if user is authenticated#}
+            {% if request.user.is_authenticated %}
+
+                {# Check if user has it in their collection, if not, show Save button... #}
+                {% if not liked_by_current_user %}
+                    <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                        style="text-align: center">
+                        <a href="{% url 'save_shared_album' album.wiki_id %}" style="color: white; ">Save to your
+                            Favourites</a>
+                    </h4>
+
+                    {# ... But if album liked, show delete button#}
+                {% else %}
+                     <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                        style="text-align: center">
+                        <a href="{% url 'unlike_album' album_to_unlike_pk %}" style="color: white; ">Delete from your
+                            Favourites</a>
+                    </h4>
+
+                {% endif %}
             {% endif %}
 
             <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
