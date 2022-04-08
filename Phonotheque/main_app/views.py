@@ -80,6 +80,10 @@ class CommentCreateView(views.CreateView, PermissionRequiredMixin):
                             kwargs={'pk': self.kwargs['album_wiki_id']})
 
 
+class AboutView(views.TemplateView):
+    pass
+
+
 @login_required
 def view_dashboard(request):
     # Get user's favourite albums and enable pagination
