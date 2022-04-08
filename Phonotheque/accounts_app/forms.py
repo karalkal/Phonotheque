@@ -63,8 +63,10 @@ class ProfileEditForm(FormFieldsFormatMixin, forms.ModelForm):
         model = Profile
         # fields = ('__all__')
         exclude = ('user', 'first_name', 'last_name', 'email')
-        widgets = {'date_of_birth': forms.SelectDateWidget(
-            years=range(datetime.now().year, 1920, -1),
-            attrs={'class': "form-control", }
-        ),
+
+        widgets = {
+            'date_of_birth': forms.SelectDateWidget(
+                years=range(datetime.now().year, 1920, -1),
+                attrs={'class': "form-control", }
+            )
         }

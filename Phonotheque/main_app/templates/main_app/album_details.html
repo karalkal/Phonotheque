@@ -5,13 +5,16 @@
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row">
             <h2 class="tm-text-primary mb-5 col-lg-4 col-md-4 col-sm-12">Info about
-                <strong>'{{ album.title }}</strong>' by
-                <strong><a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a> </strong></h2>
+                <strong>'{{ album.title }}</strong>' <br>
+                by <strong><a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a> </strong>
+            </h2>
 
             {% if not liked_by_current_user %}
-            <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
-                <a href="{% url 'save_shared_album' album.wiki_id %}" style="color: white; ">Save to your Favourites</a>
-            </h4>
+                <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                    style="text-align: center">
+                    <a href="{% url 'save_shared_album' album.wiki_id %}" style="color: white; ">Save to your
+                        Favourites</a>
+                </h4>
             {% endif %}
 
             <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
@@ -53,8 +56,8 @@
                                     created on {{ comment.created }}
                                 </span>
                             </h2>
-                                <p class=" tm-text-primary mb-4"
-                                   style="color: black;padding-left:
+                            <p class=" tm-text-primary mb-4"
+                               style="color: black;padding-left:
                                 2.8em"> {{ comment.body }} </p>
                         </div>
                     {% endfor %}

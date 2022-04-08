@@ -9,8 +9,8 @@
                     style="font-size: 1.7em">{{ searched_user.username }}</strong></h2>
 
             <div class="col-lg-5 col-md-5 col-sm-12">
-                {% if current_profile.photo %}
-                    <img src="{{ current_profile.photo.url }}" alt="profile image{{ current_profile.user }}"
+                {% if searched_user.profile.photo_URL %}
+                    <img src="{{ searched_user.profile.photo_URL }}" alt="profile image{{ current_profile.user }}"
                          class="img-thumbnail"
                          style="object-fit: cover; width:530px;  height:530px;">
                     <h4 class="tm-text-primary mb-5">Current profile photo</h4>

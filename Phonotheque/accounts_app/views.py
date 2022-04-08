@@ -112,6 +112,7 @@ class ProfileDetailView(views.DetailView, LoginRequiredMixin):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         searched_user = User.objects.get(pk=self.object.pk)
         context['searched_user'] = searched_user
+        a=5
         return context
 
 

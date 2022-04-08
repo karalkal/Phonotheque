@@ -7,6 +7,7 @@ bs4==0.0.1
 certifi==2021.10.8
 cffi==1.15.0
 charset-normalizer==2.0.12
+cloudinary==1.29.0
 cryptography==36.0.1
 distlib==0.3.4
 Django==4.0.3

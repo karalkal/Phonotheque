@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from Phonotheque.common_funcs.validators import MaxSizeInMbValidator
 
 
 class Profile(models.Model):
@@ -17,12 +16,8 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=35)
 
     # The user may provide the following information in their profile:
-    photo = models.ImageField(
-        null=True,
-        blank=True,
-        upload_to='profile_images/',
-        validators=(MaxSizeInMbValidator,),
-    )
+    photo_URL = models.URLField(null=True, blank=True)
+    # Heroku/Cloudinary say 'add credit card for verification', I say F*** off
     email = models.EmailField(null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=max([len(x) for (x, _) in GENDER_CHOICES]),
@@ -32,5 +27,6 @@ class Profile(models.Model):
                               )
     description = models.TextField(null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+
+def __str__(self):
+    return f"{self.first_name} {self.last_name}"
