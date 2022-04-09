@@ -18,7 +18,7 @@ class Profile(models.Model):
     # The user may provide the following information in their profile:
     photo_URL = models.URLField(null=True, blank=True, max_length=1024)
     # Heroku/Cloudinary say 'add credit card for verification', I say F*** off
-    email = models.EmailField(null=True, blank=True)
+    # email = models.EmailField(null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=max([len(x) for (x, _) in GENDER_CHOICES]),
                               null=True, blank=True,
