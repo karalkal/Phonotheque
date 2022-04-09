@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1bb82b6-00a4-42f7-a8ea-e5b8d3e67978" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9b26d25d-6f87-4aa7-9546-27fbd6e85225.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9b26d25d-6f87-4aa7-9546-27fbd6e85225.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9b26d25d-6f87-4aa7-9546-27fbd6e85225/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9b26d25d-6f87-4aa7-9546-27fbd6e85225/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Phonotheque/accounts_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/accounts_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/password_change_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/password_change_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/profile_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/profile_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phonotheque/accounts_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/accounts_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +100,7 @@
       <workItem from="1649451606824" duration="352000" />
       <workItem from="1649451970732" duration="3384000" />
       <workItem from="1649455370404" duration="10460000" />
-      <workItem from="1649527262396" duration="4131000" />
+      <workItem from="1649527262396" duration="11550000" />
     </task>
     <servers />
   </component>
