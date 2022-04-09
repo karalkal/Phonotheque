@@ -46,9 +46,6 @@ class AlbumDetailView(views.DetailView):
         except User.DoesNotExist:
             context['liked_by_current_user'] = False
 
-        collection_id = Collection.user.pk = self.request.user.pk
-        a = 5
-
         # add form
         context['form'] = CommentForm()
 
@@ -57,12 +54,6 @@ class AlbumDetailView(views.DetailView):
 
 class UnlikeAlbumView(views.DeleteView, PermissionRequiredMixin):
     model = Collection
-
-    def get_context_data(self, **kwargs):
-        context = super(UnlikeAlbumView, self).get_context_data()
-        pk_to_delete = context['collection'].pk
-        context['pk_to_delete'] = pk_to_delete
-        return context
 
     def get_success_url(self):
         return reverse_lazy('dashboard')

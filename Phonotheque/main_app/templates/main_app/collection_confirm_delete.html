@@ -8,7 +8,7 @@
                 '{{ object.album.title }}'</strong>' by
                 <strong>{{ object.album.artist }} </strong> from your collection?</h2>
 
-            <form method="post" action="{% url 'unlike_album' pk_to_delete %}">
+            <form method="post" action="{% url 'unlike_album' collection.pk %}">
                 {% csrf_token %}
                 {{ form }}
 
