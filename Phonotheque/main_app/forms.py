@@ -1,6 +1,6 @@
 from django import forms
 
-from Phonotheque.main_app.models import Album, Artist, Comment
+from Phonotheque.main_app.models import Comment
 
 
 class SearchAlbumForm(forms.Form):

@@ -138,10 +138,9 @@ def find_album_by_title_and_artist(request):
             search_term = album_name + " " + searched_artist
             album_wiki_info, artist_name = get_wiki_info_by_album_name(search_term)
 
-        # Save the data in the session - is that alright?
-        request.session['data'] = artist_name, album_wiki_info
-
         if album_wiki_info and artist_name:
+            # Save the data in the session - is that alright?
+            request.session['data'] = artist_name, album_wiki_info
             context = {'artist': artist_name,
                        'title': album_wiki_info['wiki_title'],
                        'summary': album_wiki_info['wiki_summary'],
@@ -162,9 +161,9 @@ def find_album_by_url(request):
         album_url = request.POST['message']
         album_wiki_info, artist_name = get_wiki_info_from_url(album_url)
 
-        # Save the data in the session - is that alright?
-        request.session['data'] = artist_name, album_wiki_info
         if album_wiki_info and artist_name:
+            # Save the data in the session - is that alright?
+            request.session['data'] = artist_name, album_wiki_info
             context = {'artist': artist_name,
                        'title': album_wiki_info['wiki_title'],
                        'summary': album_wiki_info['wiki_summary'],

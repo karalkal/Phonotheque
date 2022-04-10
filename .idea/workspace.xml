@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f1bb82b6-00a4-42f7-a8ea-e5b8d3e67978" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/password_change_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/password_change_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/profile_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/accounts_app/templates/registration/profile_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Phonotheque/accounts_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/accounts_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phonotheque/common_funcs/wiki_album_finder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/common_funcs/wiki_album_finder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phonotheque/main_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/main_app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Phonotheque/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Phonotheque/main_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <workItem from="1649451606824" duration="352000" />
       <workItem from="1649451970732" duration="3384000" />
       <workItem from="1649455370404" duration="10460000" />
-      <workItem from="1649527262396" duration="11550000" />
+      <workItem from="1649527262396" duration="20700000" />
     </task>
     <servers />
   </component>
@@ -123,13 +122,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Phonotheque/common_funcs/wiki_album_finder.py</url>
-          <line>73</line>
+          <line>75</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Phonotheque/common_funcs/wiki_album_finder.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Phonotheque/common_funcs/wiki_album_finder.py</url>
