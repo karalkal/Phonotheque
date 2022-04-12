@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, RegexValidator
 
 from .models import Profile
-from ..common_funcs.FormFieldsFormatMixin import FormFieldsFormatMixin
+from ..common_utilities.FormFieldsFormatMixin import FormFieldsFormatMixin
 
 
 class UserRegistrationForm(FormFieldsFormatMixin, forms.ModelForm):

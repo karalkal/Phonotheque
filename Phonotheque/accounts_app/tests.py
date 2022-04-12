@@ -2,7 +2,6 @@ from datetime import date
 
 from django import test as django_test
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 from django.urls import reverse
 
 from Phonotheque.accounts_app.forms import UserRegistrationForm
@@ -53,11 +52,36 @@ class UserAndProfileCreateTests(django_test.TestCase):
         }
         form = UserRegistrationForm(invalid_first_name_data)
 
+        # form fails
         self.assertFalse(form.is_valid())
-        with self.assertRaises(ValidationError) as context:
+        # won't be saved
+        with self.assertRaises(Exception) as context:
+            form.save()
+        self.assertEqual("The User could not be created because the data didn't validate.", str(context.exception))
+        # display message
+        self.assertIn("Ensure this value has at least 2 characters (it has 1).", form.errors['first_name'])
 
-            the_exception = context.exception
-        self.assertEqual(the_exception.error_code, 3)
+    def test_user_creation_form__with_prohibited_chars_name__raises(self):
+        data = {
+            'username': "username",
+            'last_name': "good name",
+            'password': "123jgfhtehkjchj",
+        }
+
+        invalid_first_names = ['123456', 'Ivan~', 'Pes#o', '@@', '\/+-', '==', '$%£', '\"\"']
+
+        for invalid_f_name in invalid_first_names:
+            data['first_name'] = invalid_f_name
+            form = UserRegistrationForm(data)
+
+            # form fails
+            self.assertFalse(form.is_valid())
+            # won't be saved
+            with self.assertRaises(Exception) as context:
+                form.save()
+            self.assertEqual("The User could not be created because the data didn't validate.", str(context.exception))
+            # display message
+            self.assertIn("This name format won't work here, buddy.", form.errors['first_name'])
 
 
 class UserAndProfileEditTests(django_test.TestCase):
@@ -85,10 +109,11 @@ class UserAndProfileEditTests(django_test.TestCase):
                                              **self.VALID_PROFILE_DATA)
         return new_user, new_profile
 
-    def test_when_opening_existing_profile__expect_correct_template(self):
+    def test_when_editing_user_data__expect_updated_values(self):
         user, profile = self.__create_valid_user_and_profile()
-        self.assertEqual(user.first_name, 'Test')
-        self.assertEqual(profile.first_name, 'Test')
+        user.first_name = "New name"
+        profile.first_name = user.first_name
+        self.assertEqual("New name", profile.first_name)
 
 
 class ProfileDetailsViewTests(django_test.TestCase):
@@ -121,7 +146,7 @@ class ProfileDetailsViewTests(django_test.TestCase):
 
     # TESTS
 
-    def test_when_opening_not_existing_profile__expect_404(self):
+    def test_when_opening_non_existing_profile__expect_404(self):
         response = self.client.get(reverse('profile_details', kwargs={'pk': 1}))
         self.assertEqual(404, response.status_code)
 
@@ -129,3 +154,42 @@ class ProfileDetailsViewTests(django_test.TestCase):
         _, profile = self.__create_valid_user_and_profile()
         self.__get_response_for_profile(profile)
         self.assertTemplateUsed('accounts_app/profile_details.html')
+
+
+class LogInViewTests(django_test.TestCase):
+    VALID_USER_DATA = {
+        'username': "test_user",
+        'password': '11111111',
+        'email': "test@user.com",
+        'first_name': 'Test',
+        'last_name': 'User',
+    }
+
+    def test_when_user_enters__valid_credentials__user_must_log_in_successfully_and_view_dashboard(self):
+        User.objects.create_user(**self.VALID_USER_DATA)
+        credentials = {
+            'username': 'test_user',
+            'password': '11111111'}
+        response = self.client.post('/accounts/login/', credentials, follow=True)
+        self.assertTrue(response.context['user'].is_authenticated)
+        self.assertRedirects(response, '/dashboard/')
+
+    def test_when_user_enters__invalid_credentials__user_cannot_log(self):
+        User.objects.create_user(**self.VALID_USER_DATA)
+        credentials = {
+            'username': 'test_user',
+            'password': 'wrong_pw'}
+        response = self.client.post('/accounts/login/', credentials, follow=True)
+        self.assertFalse(response.context['user'].is_authenticated)
+
+    def test_when_user_logs_out__user_must_log_out_and_redirected_to_index(self):
+        User.objects.create_user(**self.VALID_USER_DATA)
+        credentials = {
+            'username': 'test_user',
+            'password': '11111111'}
+        response1 = self.client.post('/accounts/login/', credentials, follow=True)
+        self.assertTrue(response1.context['user'].is_authenticated)
+
+        response2 = self.client.post('/accounts/logout/', credentials, follow=True)
+        self.assertFalse(response2.context['user'].is_authenticated)
+        self.assertRedirects(response2, '/')  # index page

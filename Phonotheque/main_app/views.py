@@ -10,9 +10,9 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from Phonotheque.common_funcs.db_crud_actions import get_all_artists_names, get_artist_object_by_name, \
+from Phonotheque.common_utilities.db_crud_actions import get_all_artists_names, get_artist_object_by_name, \
     create_album_object
-from Phonotheque.common_funcs.wiki_album_finder import get_wiki_info_by_album_name, get_wiki_info_from_url
+from Phonotheque.common_utilities.wiki_album_finder import get_wiki_info_by_album_name, get_wiki_info_from_url
 from Phonotheque.main_app.forms import SearchAlbumForm, CommentForm
 from Phonotheque.main_app.models import Artist, Album, Collection, Comment
 

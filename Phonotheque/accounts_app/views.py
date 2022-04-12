@@ -79,10 +79,6 @@ def edit(request):
 class UserLoginView(auth_views.LoginView):
     success_url = 'dashboard'
 
-    # def get_success_url(self):
-    #     user_pk = self.request.user.pk
-    #     return reverse_lazy('dashboard', kwargs={'pk': user_pk})
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for (field_name, field) in self.form_class.base_fields.items():
