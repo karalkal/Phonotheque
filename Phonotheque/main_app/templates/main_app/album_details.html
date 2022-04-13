@@ -22,7 +22,7 @@
 
                     {# ... But if album liked, show delete button#}
                 {% else %}
-                     <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                    <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
                         style="text-align: center">
                         <a href="{% url 'unlike_album' album_to_unlike_pk %}" style="color: white; ">Delete from your
                             Favourites</a>
@@ -70,9 +70,15 @@
                                     created on {{ comment.created }}
                                 </span>
                             </h2>
-                            <p class=" tm-text-primary mb-4"
-                               style="color: black;padding-left:
-                                2.8em"> {{ comment.body }} </p>
+                            {% if comment.active %}
+                                <p class=" tm-text-primary mb-4" style="color: black;padding-left:2.8em">
+                                    {{ comment.body }}
+                                </p>
+                            {% else %}
+                                <p class=" tm-text-primary mb-4" style="color: dimgrey;padding-left:2.8em">
+                                    This comment has been disabled by the admins
+                                </p>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 {% endif %}
