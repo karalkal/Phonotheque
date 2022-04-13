@@ -27,13 +27,14 @@
                         <a href="{% url 'unlike_album' album_to_unlike_pk %}" style="color: white; ">Delete from your
                             Favourites</a>
                     </h4>
-
                 {% endif %}
+                
             {% endif %}
 
             <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
-                <a href="{{ album.wiki_url }}" style="color: white; ">Read more on
-                    Wikipedia</a></h4>
+                <a href="{{ album.wiki_url }}" target="_blank" rel="noopener noreferrer" style="color: white; ">
+                    Read more on Wikipedia</a>
+            </h4>
         </div>  <!-- row -->
 
         <div class="row">
@@ -70,7 +71,7 @@
                                 </span>
                             </h2>
 
-                            {% if comment.active or user.is_staff%}
+                            {% if comment.active or user.is_staff %}
                                 <p class=" tm-text-primary mb-4" style="color: black;padding-left:2.8em">
                                     {{ comment.body }}
                                 </p>
