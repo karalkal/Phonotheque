@@ -61,7 +61,6 @@
                     <h2 class="tm-text-primary mb-5">Comments:&nbsp;{{ album.comment_set.all.count }}</h2>
                     {% for comment in album.comment_set.all %}
                         <div style="background-color: white">
-
                             <h2 class="tm-text-primary mb-2">
                                 <i class="fa-solid fa-circle-plus"></i>
                                 <a href="{% url 'profile_details' comment.user.pk %}">
@@ -70,10 +69,34 @@
                                     created on {{ comment.created }}
                                 </span>
                             </h2>
-                            {% if comment.active %}
+
+                            {% if comment.active or user.is_staff%}
                                 <p class=" tm-text-primary mb-4" style="color: black;padding-left:2.8em">
                                     {{ comment.body }}
                                 </p>
+
+                                <!-- admins to disable albums -->
+                                {% if perms.main_app.change_comment %}
+                                    {% if comment.active %}
+                                        <button type="submit" class="btn btn-warning mt-0 mb-3"
+                                                style="border: 0; border-radius: 5px; padding: 12px 50px 14px; font-size: 1.2rem;">
+                                        <a href="{% url 'disable_comment' comment.pk album.wiki_id %}"
+                                           style="color: white; ">Disable</a>
+                                    {% endif %}
+                                </button>
+                                {% endif %}
+
+                                <!-- admins to delete albums -->
+                                {% if perms.main_app.delete_comment %}
+                                    <button type="submit" class="btn btn-danger mt-0 mb-3"
+                                            style="border: 0; border-radius: 5px; padding: 12px 50px 14px; font-size: 1.2rem;">
+                                        <a href="{% url 'delete_comment' comment.pk album.wiki_id %}"
+                                           style="color: white; ">Delete</a>
+                                    </button>
+                                    <hr>
+                                {% endif %}
+
+
                             {% else %}
                                 <p class=" tm-text-primary mb-4" style="color: dimgrey;padding-left:2.8em">
                                     This comment has been disabled by the admins

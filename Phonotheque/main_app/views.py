@@ -90,6 +90,20 @@ class CommentCreateView(views.CreateView, PermissionRequiredMixin):
                             kwargs={'pk': self.kwargs['album_wiki_id']})
 
 
+@login_required()
+def disable_comment(requst, comment_pk, album_wiki_id):
+    comment_to_edit = Comment.objects.get(pk=comment_pk)
+    comment_to_edit.active = False
+    comment_to_edit.save()
+    return redirect('album_details', album_wiki_id)
+
+
+@login_required()
+def delete_comment(request, comment_pk, album_wiki_id):
+    Comment.objects.get(pk=comment_pk).delete()
+    return redirect('album_details', album_wiki_id)
+
+
 class AboutView(views.TemplateView):
     pass
 
