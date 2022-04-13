@@ -27,8 +27,8 @@ class Album(models.Model):
         album_fans = User.objects.filter(collection__album__wiki_id=self.wiki_id)
         return album_fans
 
-    # class Meta:
-    #     ordering = ('-time_created',)
+    class Meta:
+        ordering = ('-time_created',)
 
     def __str__(self):
         return f"{self.title} by \n{self.artist}"
@@ -53,6 +53,10 @@ class Comment(models.Model):
     body = models.CharField(max_length=620)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
+    @property
+    def short_comment_body(self):
+        return self.body if len(self.body) < 35 else (self.body[:33] + '..')
 
     class Meta:
         ordering = ('-created',)

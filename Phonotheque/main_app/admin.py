@@ -24,5 +24,5 @@ class CollectionAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'album', 'created', 'active',)
+    list_display = ('user', 'album', 'short_comment_body', 'created', 'active',)
     list_filter = ('active', 'created',)
