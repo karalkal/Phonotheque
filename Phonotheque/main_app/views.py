@@ -105,7 +105,7 @@ def delete_comment(request, comment_pk, album_wiki_id):
 
 
 class AboutView(views.TemplateView):
-    pass
+    template_name = 'main_app/about.html'
 
 
 @login_required
@@ -198,9 +198,6 @@ def save_artist_album_data(request):
     if artist_name not in get_all_artists_names():
         Artist.objects.create(name=artist_name)  # create and save directly
 
-    # obtain artist from DB to create FK relation in album
-    artist_object = get_artist_object_by_name(artist_name)
-
     # if album exists in DB already
     try:
         album = Album.objects.get(wiki_id=album_wiki_info['wiki_id'])
@@ -213,6 +210,8 @@ def save_artist_album_data(request):
 
     # if not function will create album object
     except ObjectDoesNotExist:
+        # obtain artist from DB to create FK relation in album, it either existed or was just created (few lines earlier)
+        artist_object = get_artist_object_by_name(artist_name)
         album = create_album_object(album_wiki_info, artist_object, )
         # Need to save it first, so that Collection can use its wiki_id
         album.save()
