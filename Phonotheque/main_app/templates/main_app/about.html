@@ -54,17 +54,17 @@
             <h2 class="tm-text-primary mb-5 text-center">Accounts App</h2>
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
-                    Phonotheque uses the default Django User Model. Of course there are different schools of thought in
-                    this regard (creating a custom User model via AbstractBaseUser if the intention is to change the
-                    authentication procedure or via AbstractUser if additional info about the user needs to be
-                    collected/stored).<br>
-                    I decided instead to stick to the strategy of extending the default model with a One-to-One
-                    relationship to a Profile model as I am perfectly happy with the Django defaults - everything works
-                    out of the box, is compatible with all third party modules while at the same time the Profile model
-                    remains extendable and editable.</p>
+                    Phonotheque uses the default Django User Model. As we know there are different schools as to what is
+                    the best way to customize the user model (creating a custom User model via AbstractBaseUser if the
+                    intention is to change the authentication procedure or via AbstractUser if additional info about the
+                    user needs to be collected/stored being quite popular).<br>
+                    I decided instead to stick to the other recommended strategy of extending the default model with a
+                    One-to-One relationship to a Profile model as I am perfectly happy with the Django User defaults -
+                    everything works out of the box, is compatible with all third party modules while at the same time
+                    the Profile model provides extendability and flexibility.</p>
                 <h4 class="tm-text-primary mt-2 text-left"> Registration</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
-                    If an anonymous user wishes to create an account they are presented with the UserRegistrationForm.
+                    When an anonymous user wishes to create an account they are presented with the UserRegistrationForm.
                     This form takes care of the front end formatting and apart from the default Django validation
                     performs validation of the first name and second name entries – both should be with a length of
                     between 2 and 35 characters and must be satisfying the condition <code>VALID_NAME_REGEX = r"^([
@@ -82,8 +82,8 @@
                     # And copy name(s) to it<br>
                     new_profile.first_name = user_form.cleaned_data['first_name']<br>
                     if user_form.cleaned_data['last_name']:<br>
-                    new_profile.last_name = user_form.cleaned_data['last_name']<br>
-                    new_profile.save() </code>
+                    &nbsp;&nbsp;new_profile.last_name = user_form.cleaned_data['last_name']<br>
+                    &nbsp;&nbsp;new_profile.save() </code>
                 <br>
                 <h4 class="tm-text-primary mt-2 text-left"> Profile Editing</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
@@ -110,7 +110,9 @@
                     Logging in functionality relies on the default Django CBV LoginView. By overwriting its <code>def
                     __init__(self, *args, **kwargs)</code> method we ensure that the login form is displayed with the
                     required styling – this approach seems more straightforward than creating a custom
-                    AuthenticationForm. The success URL is the logged in user’s dashboard (will be explained later).
+                    AuthenticationForm. The success URL is the logged in user’s dashboard (will be explained later).<br>
+                    Once logged in the Register button in the main manu will be replaced with a Profile button where
+                    users will be able to edit their profiles.
                 </p>
                 <h4 class="tm-text-primary mt-2 text-left"> Logging Out</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
@@ -132,8 +134,7 @@
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     Logged in users can change their passwords by inheriting the PasswordChangeView CBV from
                     <code>django.contrib.auth.views</code>. Again, the relevant form is displayed with the required
-                    styling
-                    by overwriting its <code>def __init__(self, *args, **kwargs)</code> method.
+                    styling by overwriting its <code>def __init__(self, *args, **kwargs)</code> method.
                 </p>
             </div>
         </div> <!-- row -->
@@ -147,21 +148,26 @@
                     shared on the platform with other users. Obviously, an album is a very specific object (not only in
                     the programming sense of the word) – it is not comparable to sharing someone’s personal experiences
                     or ideas on a blog site or even listing items for sale on an online shop. A music album is an unique
-                    item – it is the same for everyone, anywhere and anytime.<br>
-                    Therefore, it is essential to source our data from a reliable source for this scenario to be
-                    meaningful and luckily Wikipedia (God bless everyone involved in the project!) provide great API
-                    which works perfectly with Django/Python.<br>
+                    item – it has properties which remain constant for everyone, anywhere and anytime -
+                    its cover image, date of issue or musicians involved won't change. We need to somehow ensure our
+                    website can <strong>identify the correct object</strong>> and make it available for sharing, liking
+                    or whatever else is required. <br>
+                    Therefore, for this scenario to be meaningful it is essential to gather our data from a reliable
+                    source and luckily Wikipedia (God bless everyone involved in the project!) provide great API
+                    which interacts perfectly with Django/Python.<br>
                     Basically, the general idea is to retrieve album data (I won’t call our basic searches ‘web
                     scraping’ but to some degree this is what we are doing here.) from Wikipedia’s API which has been
-                    imported in the project (alongside some other modules which seem to have mutual dependencies with
-                    it). <br>Once obtained, the album data is being displayed and if the user wishes they can add it to
-                    their personal Collection of albums (see ERD for clarification). By doing this they also create a
+                    imported in the project (alongside some other modules which seem to have mutual dependencies). <br>
+                    Once obtained, the album data is being displayed and if the user wishes they can add it to
+                    their personal <strong>Collection </strong> albums (see ERD for clarification). <br>
+                    By doing this they also create a
                     record for the Album in the DB as well as for the Artist but only if these are not already present
-                    there. <br>Then can then view their favourite albums in their personal dashboard and for each album
-                    they
-                    will have access to additional info like comments from users and which other users, if any, have
-                    liked this album (displayed in chronological order). <br>As a side note, I would say there is a huge
-                    potential and incentive to continue working on this app as there is a wide range of possibilities to
+                    there. <br>
+                    Then can then view their favourite albums in their personal dashboard and for each album they
+                    can view additional info like comments from users and which other users, if any, have
+                    liked this album (displayed in chronological order). <br> As a side note, I would say this
+                    particular part of the application provides significant
+                    potential and incentive to continue working on it as there is a wide range of possibilities to
                     add new features – for example IM system, tagging system, automatic recommendations based on custom
                     criteria, recommendations from other users, creation of interest groups, ‘friendship’ FB-style…</p>
                 <h4 class="tm-text-primary mt-2 text-left">Home Page/Index</h4>
@@ -170,8 +176,8 @@
                     former will see a short message explaining the raison d'etre of this web page. Logged-in users
                     presumably will not need this.<br>
                     The index page functionality is based on Django’s default ListView. It implements pagination and the
-                    template will display a gallery-style list of all albums shared on the platform as well as the
-                    number of users who have liked it.</p>
+                    template will display a gallery-style list of all albums shared on the platform (ordered
+                    chronologically, newest first) as well as the number of users who have liked each of them.</p>
                 <h4 class="tm-text-primary mt-2 text-left">Album Details</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     <code>AlbumDetailView(views.DetailView)</code> is also visible to anonymous and logged-in users.
@@ -179,17 +185,16 @@
                     (opens in new tab). However, logged-in users will be able to: </p>
                 <ul style="color: #001421; font-size: 1.25em; list-style-type: square;">
                     <li> delete the album from their collection if it is present there</li>
-                    <li>add the album to their collection if it is not present there</li>
-                    <li>view comments posted by users</li>
-                    <li>post a comment</li>
+                    <li> add the album to their collection if it is not present there</li>
+                    <li> view comments posted by users</li>
+                    <li> post a comment</li>
                     <li> see which users have liked the same album</li>
-                    <li>access the profile pages of these users by being redirected to the relevant URL</li>
+                    <li> access the profile pages of these users by being redirected to the relevant URL</li>
                 </ul>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
-                    To achieve all that the view performs a series of queries (which I found very complex but in reality
-                    I suspect they aren’t really) which are then added to the context (with <code>
-                    get_context_data(self, **kwargs)</code>) alongside the Comment form and sent to the template. The
-                    template then has access to variables like <code>others_who_liked_it</code>, <code>album_to_unlike_pk</code>,
+                    To achieve all that the view performs a series of queries which are then added to the context (with
+                    <code> get_context_data(self, **kwargs)</code>) alongside the Comment form and sent to the template.
+                    The template then has access to variables like <code>others_who_liked_it</code>, <code>album_to_unlike_pk</code>,
                     <code>liked_by_current_user</code>.
                 </p>
             </div>
@@ -242,7 +247,11 @@
                     link below’.<br>
                     They both redirect to the relevant URLs and, subsequently, to either
                     <code>find_album_by_title_and_artist(request)</code> or <code>
-                    find_album_by_url(request)</code></p>
+                    find_album_by_url(request)</code><br>
+                    Again, this section of the website could be extended by adding all sorts of functionalities -
+                    any sort of data a proper music lover might get from or about like-minded people could be displayed
+                    there.
+                </p>
 
                 <h4 class="tm-text-primary mt-2 text-left">Retrieving the data from Wikipedia</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
@@ -285,7 +294,7 @@
                     As mentioned before the data from Wikipedia will be returned to either
                     <code>find_album_by_title_and_artist(request) view</code> or <code>find_album_by_url(request)
                     view</code>. The first one basically prepares the search term based on the user input and invokes
-                    the above mentioned function with <code>album_wiki_info, artist_name =
+                    the above-mentioned function with <code>album_wiki_info, artist_name =
                     get_wiki_info_by_album_name(search_term)</code>.<br>
                     If None is returned the view will redirect back to dashboard with the message We couldn't find an
                     album called {album_name} by {searched_artist}.<br>
@@ -324,16 +333,18 @@
                     view privileges. <br>
                     A group of lower level moderators can de-activate comments and users (if for example an
                     inappropriate content has been detected) and another group will be able to delete these comments and
-                    users too.
+                    users if required.
                 </p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     There is also a GUI covering the Comment model where this de-activation/deletion can be made.<br>
                     If an user logs in as moderator they can perform the aforementioned activities and unlike regular
-                    users they will be able to see inactive comments as well. In other words users will be able to view
-                    only active comments unless they is_staff is True – they will then be able to view the da-activated
-                    ones too.
+                    users they will be able to see inactive comments as well. <br>
+                    In other words users will be able to view
+                    only active comments unless their permission level is_staff is True – they will then be able to view
+                    the de-activated ones too.<br>
+
                 </p>
             </div>
 

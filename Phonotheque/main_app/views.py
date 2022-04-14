@@ -91,7 +91,7 @@ class CommentCreateView(views.CreateView, PermissionRequiredMixin):
 
 
 @login_required()
-def disable_comment(requst, comment_pk, album_wiki_id):
+def disable_comment(request, comment_pk, album_wiki_id):
     comment_to_edit = Comment.objects.get(pk=comment_pk)
     comment_to_edit.active = False
     comment_to_edit.save()
