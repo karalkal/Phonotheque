@@ -23,7 +23,7 @@ def register(request):
                 # Save the User object
                 new_user.save()
 
-                # Create the user profile as well
+                # Create the user profile as well by just copying newly created user's data
                 new_profile = Profile.objects.create(user=new_user)
 
                 # And copy name(s) to it
