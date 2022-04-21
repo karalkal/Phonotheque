@@ -8,7 +8,7 @@ from django.views import generic as views
 
 from .models import Profile
 
-from Phonotheque.accounts_app.forms import UserRegistrationForm, UserEditForm, ProfileEditForm
+from Phonotheque.accounts_app.forms import UserRegistrationForm, UserEditForm, ProfileEditForm, UserAndProfileDeleteForm
 
 
 def register_user_create_profile(request):
@@ -90,7 +90,18 @@ def edit_user_and_profile(request, pk):
 
 @login_required
 def delete_user_and_profile(request, pk):
-    pass
+    instance = User.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = UserAndProfileDeleteForm(request.POST, instance=instance)
+        form.save()  # save method is overwritten in form
+        messages.add_message(request, messages.INFO, 'Profile deleted successfully.')
+        return redirect('index_page')
+
+    else:
+        form = UserAndProfileDeleteForm(instance=instance)
+    return render(request, '.html', {'form': form,
+                                               'instance': instance})
 
 
 class UserLoginView(auth_views.LoginView):

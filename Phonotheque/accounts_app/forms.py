@@ -6,6 +6,7 @@ from django.core.validators import MinLengthValidator, RegexValidator
 
 from .models import Profile
 from ..common_utilities.FormFieldsFormatMixin import FormFieldsFormatMixin
+from ..main_app.models import Collection
 
 
 class UserRegistrationForm(FormFieldsFormatMixin, forms.ModelForm):
@@ -45,6 +46,21 @@ class UserRegistrationForm(FormFieldsFormatMixin, forms.ModelForm):
 
 
 class UserEditForm(FormFieldsFormatMixin, forms.ModelForm):
+    VALID_NAME_REGEX = r"^([ \u00c0-\u01ffa-zA-Z'\-])+$"  # Jérémie O'Conor-IVANOVäüïöëÿâçéèêîïôčšžñáéíóúü
+    INVALID_NAME_ERROR_MESSAGE = "This name format won't work here, buddy."
+
+    first_name = forms.CharField(max_length=35,
+                                 validators=(
+                                     MinLengthValidator(2),
+                                     RegexValidator(regex=VALID_NAME_REGEX, message=INVALID_NAME_ERROR_MESSAGE))
+                                 )
+
+    last_name = forms.CharField(max_length=35,
+                                validators=(
+                                    MinLengthValidator(2),
+                                    RegexValidator(regex=VALID_NAME_REGEX, message=INVALID_NAME_ERROR_MESSAGE))
+                                )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._init_bootstrap_form_controls()
@@ -61,8 +77,7 @@ class ProfileEditForm(FormFieldsFormatMixin, forms.ModelForm):
 
     class Meta:
         model = Profile
-        # fields = ('__all__')
-        exclude = ('user', 'first_name', 'last_name', 'email')
+        exclude = ('user',)
 
         widgets = {
             'date_of_birth': forms.SelectDateWidget(
@@ -72,12 +87,27 @@ class ProfileEditForm(FormFieldsFormatMixin, forms.ModelForm):
         }
 
 
-class ProfileDeleteForm(FormFieldsFormatMixin, forms.ModelForm):
+class UserAndProfileDeleteForm(FormFieldsFormatMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()  # format fields
         for (_, field) in self.fields.items():
             field.widget.attrs['disabled'] = 'disabled'
-            field.widget.attrs['class'] = "form-control"
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        # exclude = ('user', 'first_name', 'last_name', 'email')
+
+    def save(self, commit=True):
+        favourite_albums = Collection.objects.filter(album__collection__user=self.instance)
+        favourite_albums.delete()
+
+        linked_profile = User.objects.get(pk=self.instance.pk)
+        linked_profile.delete()
+
+        self.instance.delete()  # to remove record from DB
+        return self.instance
 
 
 class AdminForm(FormFieldsFormatMixin, forms.ModelForm):
@@ -87,7 +117,7 @@ class AdminForm(FormFieldsFormatMixin, forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('__all__')
+        fields = '__all__'
         # exclude = ('user', 'first_name', 'last_name', 'email')
 
         widgets = {
