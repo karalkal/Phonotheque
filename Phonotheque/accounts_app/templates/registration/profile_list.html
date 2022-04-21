@@ -33,11 +33,11 @@
                     </h4>
                     <h4 class="col-6 tm-text-primary">
                         <span style="font-size:0.71em; color: black">First Name: </span><br>
-                        {{ profile.first_name }}
+                        {{ profile.user.first_name }}
                     </h4>
                     <h4 class="col-6 tm-text-primary">
                         <span style="font-size:0.71em; color: black">Last Name: </span><br>
-                        {{ profile.last_name }}
+                        {{ profile.user.last_name }}
                     </h4>
 
                     <a href="{% url 'profile-details' profile.pk %}">
