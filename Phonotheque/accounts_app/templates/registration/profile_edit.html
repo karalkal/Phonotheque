@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col">
-                <form id="contact-form" action="{% url 'edit' %}" method="POST"
+                <form id="contact-form" action="{% url 'profile-edit' current_profile.pk %}" method="POST"
                       class="tm-contact-form mx-auto" enctype="multipart/form-data">
                     {% csrf_token %}
 
@@ -31,7 +31,7 @@
 
                 <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
                     style="text-align: center; width: 100%; ">
-                    <a href="{% url 'password_change' %}" style="color: white; ">Click here if you wish to change your
+                    <a href="{% url 'password-change' %}" style="color: white; ">Click here if you wish to change your
                         password</a>
                 </h4>
                 {% if current_profile.photo_URL %}

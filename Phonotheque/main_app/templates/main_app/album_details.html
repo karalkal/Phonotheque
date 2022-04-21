@@ -64,7 +64,7 @@
                         <div style="background-color: white">
                             <h2 class="tm-text-primary mb-2">
                                 <i class="fa-solid fa-circle-plus"></i>
-                                <a href="{% url 'profile_details' comment.user.pk %}">
+                                <a href="{% url 'profile-details' comment.user.pk %}">
                                     Comment by {{ comment.user.username }}</a>
                                 <span class="tm-text-primary mb-2" style="font-size: .7em">
                                     created on {{ comment.created }}
@@ -134,7 +134,7 @@
                         {% endif %}</h2>
 
                     {% for fan in others_who_liked_it %}
-                        <a href="{% url 'profile_details' fan.pk %}">
+                        <a href="{% url 'profile-details' fan.pk %}">
                             <h2 class="tm-text-primary mb-5">
                                 <i class="fa-solid fa-compact-disc"></i> {{ fan.username }}
                             </h2>

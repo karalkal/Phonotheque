@@ -1,0 +1,79 @@
+{% extends 'base_plus_menu_1.html' %}
+{% load static %}
+
+{% block main_content %}
+    <div class="container-fluid tm-container-content tm-mt-60">
+
+
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary"> Registered Phonotheque users' profiles</h2>
+            {% include "pagination.html" with page=page_obj %}
+        </div>
+
+        {#    GALLERY#}
+        <div class="row tm-mb-90 tm-gallery">
+            {% for profile in non_staff_active_profiles %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+
+                    {% if profile.photo_URL %}
+                        <img src="{{ profile.photo_URL }}"
+                             alt="profile photo of {{ profile.first_name }} {{ album.first_name }}"
+                             class="img-thumbnail"
+                             style="object-fit: cover; width: 350px; height: 350px">
+                    {% else %}
+                        <img src="{% static 'img/profile-anon.jpg' %}"
+                             alt="no profile image"
+                             class="img-thumbnail"
+                             style="object-fit: cover; width:350px;  height:350px;">
+                    {% endif %}
+
+                    <h4 class="col-6 tm-text-primary">
+                        <span style="font-size:0.71em; color: black">Username: </span>
+                        <a href="{% url 'profile-details' profile.pk %}">{{ profile.user.username }}</a>
+                    </h4>
+                    <h4 class="col-6 tm-text-primary">
+                        <span style="font-size:0.71em; color: black">First Name: </span>
+                        {{ profile.first_name }}
+                    </h4>
+                    <h4 class="col-6 tm-text-primary">
+                        <span style="font-size:0.71em; color: black">Last Name: </span>
+                        {{ profile.last_name }}
+                    </h4>
+
+                    <a href="{% url 'profile-details' profile.pk %}">
+                        <button type="submit" class="btn btn-dark mt-0 mb-3"
+                                style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                            view
+                        </button>
+                    </a>
+
+                    {% if profile == current_profile or request.user.is_staff %}
+                        <a href="{% url 'profile-edit' profile.pk %}">
+                            <button type="submit" class="btn btn-warning mt-0 mb-3"
+                                    style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                                edit
+                            </button>
+                        </a>
+                        <a href="{% url 'profile-delete' profile.pk %}">
+                            <button type="submit" class="btn btn-danger mt-0 mb-3"
+                                    style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                                delete
+                            </button>
+                        </a>
+                    {% endif %}
+
+
+                    {#                    <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;"> Liked#}
+                    {#                        by {{ album.shared_by.count }} user{{ album.shared_by.count|pluralize }}</h5>#}
+                    {#                    <a href="{% url 'album_details' album.pk %}">View more</a>#}
+                </div>
+            {% endfor %}
+        </div> <!-- row -->
+
+    </div> <!-- container-fluid, tm-container-content --> </div> <!-- row -->
+
+    </div> <!-- container-fluid, tm-container-content -->
+
+{% endblock %}
+
+

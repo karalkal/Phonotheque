@@ -70,3 +70,21 @@ class ProfileEditForm(FormFieldsFormatMixin, forms.ModelForm):
                 attrs={'class': "form-control", }
             )
         }
+
+
+class AdminForm(FormFieldsFormatMixin, forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
+    class Meta:
+        model = Profile
+        fields = ('__all__')
+        # exclude = ('user', 'first_name', 'last_name', 'email')
+
+        widgets = {
+            'date_of_birth': forms.SelectDateWidget(
+                years=range(datetime.now().year, 1920, -1),
+                attrs={'class': "form-control", }
+            )
+        }

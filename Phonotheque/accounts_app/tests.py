@@ -142,12 +142,12 @@ class ProfileDetailsViewTests(django_test.TestCase):
         return new_user, new_profile
 
     def __get_response_for_profile(self, profile):
-        return self.client.get(reverse('profile_details', kwargs={'pk': profile.pk}))
+        return self.client.get(reverse('profile-details', kwargs={'pk': profile.pk}))
 
     # TESTS
 
     def test_when_opening_non_existing_profile__expect_404(self):
-        response = self.client.get(reverse('profile_details', kwargs={'pk': 1}))
+        response = self.client.get(reverse('profile-details', kwargs={'pk': 1}))
         self.assertEqual(404, response.status_code)
 
     def test_when_opening_existing_profile__expect_correct_template(self):
