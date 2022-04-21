@@ -89,7 +89,7 @@ def edit_user_and_profile(request, pk):
 
 
 @login_required
-def delete_user_and_profile(request):
+def delete_user_and_profile(request, pk):
     pass
 
 

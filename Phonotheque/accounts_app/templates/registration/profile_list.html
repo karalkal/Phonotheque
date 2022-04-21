@@ -28,15 +28,15 @@
                     {% endif %}
 
                     <h4 class="col-6 tm-text-primary">
-                        <span style="font-size:0.71em; color: black">Username: </span>
+                        <span style="font-size:0.71em; color: black">Username: </span><br>
                         <a href="{% url 'profile-details' profile.pk %}">{{ profile.user.username }}</a>
                     </h4>
                     <h4 class="col-6 tm-text-primary">
-                        <span style="font-size:0.71em; color: black">First Name: </span>
+                        <span style="font-size:0.71em; color: black">First Name: </span><br>
                         {{ profile.first_name }}
                     </h4>
                     <h4 class="col-6 tm-text-primary">
-                        <span style="font-size:0.71em; color: black">Last Name: </span>
+                        <span style="font-size:0.71em; color: black">Last Name: </span><br>
                         {{ profile.last_name }}
                     </h4>
 
