@@ -90,14 +90,24 @@ class ProfileEditForm(FormFieldsFormatMixin, forms.ModelForm):
 class UserAndProfileDeleteForm(FormFieldsFormatMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        related_profile = Profile.objects.get(pk=self.instance.pk)
+        date_of_birth = related_profile.date_of_birth or "Left Empty"
+        gender = related_profile.gender or "Left Empty"
+        description = related_profile.description or "Left Empty"
+        self.fields['date_of_birth'] = forms.CharField(max_length=35, initial=date_of_birth)
+        self.fields['gender'] = forms.CharField(max_length=35, initial=gender)
+        self.fields['description'] = forms.CharField(max_length=35, initial=description)
+
         self._init_bootstrap_form_controls()  # format fields
-        for (_, field) in self.fields.items():
-            field.widget.attrs['disabled'] = 'disabled'
+
+        for (field_name, field) in self.fields.items():
+            field.widget.attrs['readonly'] = True
+            field.help_text = None
 
     class Meta:
-        model = Profile
-        fields = '__all__'
-        # exclude = ('user', 'first_name', 'last_name', 'email')
+        model = User
+        exclude = ('password', 'is_staff', 'is_superuser', 'is_active', 'user_permissions', 'groups', 'last_login')
 
     def save(self, commit=True):
         favourite_albums = Collection.objects.filter(album__collection__user=self.instance)
@@ -108,21 +118,3 @@ class UserAndProfileDeleteForm(FormFieldsFormatMixin, forms.ModelForm):
 
         self.instance.delete()  # to remove record from DB
         return self.instance
-
-
-class AdminForm(FormFieldsFormatMixin, forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._init_bootstrap_form_controls()
-
-    class Meta:
-        model = Profile
-        fields = '__all__'
-        # exclude = ('user', 'first_name', 'last_name', 'email')
-
-        widgets = {
-            'date_of_birth': forms.SelectDateWidget(
-                years=range(datetime.now().year, 1920, -1),
-                attrs={'class': "form-control", }
-            )
-        }

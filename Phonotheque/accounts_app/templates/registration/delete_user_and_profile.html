@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col">
-                <form id="contact-form" action="{% url 'profile-edit' current_profile.pk %}" method="POST"
+                <form id="contact-form" action="{% url 'profile-delete' current_profile.pk %}" method="POST"
                       class="tm-contact-form mx-auto" enctype="multipart/form-data">
                     {% csrf_token %}
 
@@ -18,8 +18,7 @@
                         {% endfor %}
                     {% endif %}
 
-                    {{ user_form.as_p }}
-                    {{ profile_form.as_p }}
+                    {{ form.as_p }}
 
                     <div class="form-group tm-text-right">
                         <button type="submit" class="btn btn-primary">Confirm</button>
@@ -35,7 +34,8 @@
                         password</a>
                 </h4>
                 {% if current_profile.photo_URL %}
-                    <img src="{{ current_profile.photo_URL }}" alt="profile image{{ current_profile.user }}"
+                    <img src="{{ current_profile.photo_URL }}"
+                         alt="profile image of {{ current_profile.user.username }}"
                          style="object-fit: cover; width:530px;  height:530px; box-shadow: 26px 26px lightblue">
                     <h4 class="tm-text-primary mt-5">Current profile photo</h4>
 
