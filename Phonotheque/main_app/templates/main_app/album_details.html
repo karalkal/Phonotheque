@@ -28,7 +28,7 @@
                             Favourites</a>
                     </h4>
                 {% endif %}
-                
+
             {% endif %}
 
             <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
@@ -121,9 +121,13 @@
 
             {#            SHARED BY#}
             <div class="col-lg-5 col-md-5 col-sm-12 ml-auto">
-                {% if not others_who_liked_it %}
+                {% if not others_who_liked_it and liked_by_current_user %}
                     <h2 class="tm-text-primary mb-5">This album
                         has been shared by you only.</h2>
+                {% elif not others_who_liked_it and not liked_by_current_user %}
+                    <h2 class="tm-text-primary mb-5">This album
+                        is currently not being shared by anyone.</h2>
+
 
                 {% else %}
                     <h2 class="tm-text-primary mb-5">
