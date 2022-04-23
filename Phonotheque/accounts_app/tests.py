@@ -27,7 +27,7 @@ class UserAndProfileCreateTests(django_test.TestCase):
 
     }
 
-    def test_user_and_profile_creation_with_valid_data_expect_profile_linked_to_user_to_be_created(self):
+    def test_user_and_profile_creation__with_valid_data__expect_profile_to_be_created(self):
         new_user = User.objects.create_user(**self.VALID_USER_DATA)
         # test user
         self.assertEqual(new_user.username, "test_user")
@@ -35,53 +35,11 @@ class UserAndProfileCreateTests(django_test.TestCase):
         self.assertIs(new_user.is_superuser, False)
         self.assertIs(new_user.is_staff, False)
         # create profile
-        new_profile = Profile.objects.create(user=new_user,
-                                             first_name=new_user.first_name,
-                                             last_name=new_user.last_name, )
+        new_profile = Profile.objects.create(user=new_user)
         # test profile
-        self.assertEqual(new_profile.first_name, "Test")
-        self.assertEqual(new_profile.last_name, "User")
         self.assertEqual(new_profile.user_id, new_user.pk)
-
-    def test_user_creation_form__with_single_char_name__raises(self):
-        invalid_first_name_data = {
-            'username': "username",
-            'first_name': "a",
-            'last_name': "good name",
-            'password': "123jgfhtehkjchj",
-        }
-        form = UserRegistrationForm(invalid_first_name_data)
-
-        # form fails
-        self.assertFalse(form.is_valid())
-        # won't be saved
-        with self.assertRaises(Exception) as context:
-            form.save()
-        self.assertEqual("The User could not be created because the data didn't validate.", str(context.exception))
-        # display message
-        self.assertIn("Ensure this value has at least 2 characters (it has 1).", form.errors['first_name'])
-
-    def test_user_creation_form__with_prohibited_chars_name__raises(self):
-        data = {
-            'username': "username",
-            'last_name': "good name",
-            'password': "123jgfhtehkjchj",
-        }
-
-        invalid_first_names = ['123456', 'Ivan~', 'Pes#o', '@@', '\/+-', '==', '$%£', '\"\"']
-
-        for invalid_f_name in invalid_first_names:
-            data['first_name'] = invalid_f_name
-            form = UserRegistrationForm(data)
-
-            # form fails
-            self.assertFalse(form.is_valid())
-            # won't be saved
-            with self.assertRaises(Exception) as context:
-                form.save()
-            self.assertEqual("The User could not be created because the data didn't validate.", str(context.exception))
-            # display message
-            self.assertIn("This name format won't work here, buddy.", form.errors['first_name'])
+        # test correct url
+        self.assertTemplateUsed('/accounts/register/')
 
 
 class UserAndProfileEditTests(django_test.TestCase):
@@ -103,17 +61,16 @@ class UserAndProfileEditTests(django_test.TestCase):
 
     def __create_valid_user_and_profile(self):
         new_user = User.objects.create_user(**self.VALID_USER_DATA)
-        new_profile = Profile.objects.create(user=new_user,
-                                             first_name=new_user.first_name,
-                                             last_name=new_user.last_name,
-                                             **self.VALID_PROFILE_DATA)
+        new_profile = Profile.objects.create(
+            user=new_user,
+            **self.VALID_PROFILE_DATA
+        )
         return new_user, new_profile
 
     def test_when_editing_user_data__expect_updated_values(self):
         user, profile = self.__create_valid_user_and_profile()
         user.first_name = "New name"
-        profile.first_name = user.first_name
-        self.assertEqual("New name", profile.first_name)
+        self.assertEqual("New name", user.first_name)
 
 
 class ProfileDetailsViewTests(django_test.TestCase):
@@ -173,6 +130,7 @@ class LogInViewTests(django_test.TestCase):
         response = self.client.post('/accounts/login/', credentials, follow=True)
         self.assertTrue(response.context['user'].is_authenticated)
         self.assertRedirects(response, '/dashboard/')
+        self.assertEqual(response.status_code, 200)
 
     def test_when_user_enters__invalid_credentials__user_cannot_log(self):
         User.objects.create_user(**self.VALID_USER_DATA)

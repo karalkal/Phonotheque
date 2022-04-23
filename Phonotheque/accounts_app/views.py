@@ -27,12 +27,6 @@ def register_user_create_profile(request):
                 # Create the user profile as well by just copying newly created user's data
                 new_profile = Profile.objects.create(user=new_user)
 
-                # # And copy name(s) to it
-                # new_profile.first_name = user_form.cleaned_data['first_name']
-                # if user_form.cleaned_data['last_name']:
-                #     new_profile.last_name = user_form.cleaned_data['last_name']
-                # new_profile.save()
-
                 return render(request, 'registration/register_done.html', {'new_user': new_user})
 
             except Exception as ex:  # If validation fails
