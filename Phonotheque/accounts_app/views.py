@@ -48,7 +48,7 @@ def edit_user_and_profile(request, pk):
 
     # check if logged-in user is user whose profile will be edited OR staff
     if user_instance != request.user and not request.user.is_staff:
-        messages.add_message(request, messages.INFO, 'You stick to editing your own profile, man.')
+        messages.add_message(request, messages.INFO, 'Yo! Are you trying to edit someone else\'s profile? Tut-tut...')
         return redirect('profiles-list')
 
     if request.method == 'POST':
@@ -84,10 +84,15 @@ def edit_user_and_profile(request, pk):
 def delete_user_and_profile(request, pk):
     instance = User.objects.get(pk=pk)
 
+    if instance != request.user and not request.user.is_staff:
+        messages.add_message(request, messages.INFO,
+                             f'User {instance.username} won\'t be happy if you delete their account.\nLuckily you can\'t do it.')
+        return redirect('profiles-list')
+
     if request.method == 'POST':
         form = UserAndProfileDeleteForm(request.POST, instance=instance)
         form.save()  # save method is overwritten in form
-        messages.add_message(request, messages.INFO, 'Profile deleted successfully.')
+        messages.add_message(request, messages.INFO, 'Profile deleted successfully.\nSad to see you go by the way...')
         return redirect('index_page')
 
     else:
