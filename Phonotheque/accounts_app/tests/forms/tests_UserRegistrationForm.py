@@ -1,7 +1,4 @@
-from django.core.exceptions import ValidationError
-
 from Phonotheque.accounts_app.forms import UserRegistrationForm
-from Phonotheque.accounts_app.models import Profile
 from django import test as django_test
 
 
@@ -113,13 +110,9 @@ class UserRegistrationFormTests(django_test.TestCase):
         user_form = UserRegistrationForm(self.valid_user_data.copy())
         for k, v in user_form.fields.items():
             expected_format = 'form-control rounded'
-            actual_format=v.widget.attrs['class']
+            actual_format = v.widget.attrs['class']
             self.assertEqual(expected_format, actual_format)
 
             expected_placeholder = f"Enter {k.title().replace('_', ' ')}"
             actual_placeholder = v.widget.attrs['placeholder']
             self.assertEqual(expected_placeholder, actual_placeholder)
-
-
-            # field.widget.attrs['placeholder'] = f"Enter {field_name.title().replace('_', ' ')}"
-
