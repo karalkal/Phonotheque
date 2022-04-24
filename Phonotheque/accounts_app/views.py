@@ -115,10 +115,6 @@ class UserLoginView(auth_views.LoginView):
 
 
 class UserLogoutView(auth_views.LogoutView):
-    """
-    Log out the user and display the 'You are logged out' message.
-    """
-
     next_page = 'index_page'
 
     def dispatch(self, request, *args, **kwargs):

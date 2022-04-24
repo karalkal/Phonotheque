@@ -107,4 +107,19 @@ class UserRegistrationFormTests(django_test.TestCase):
             user_form.save()
         self.assertEqual("The User could not be created because the data didn't validate.", str(context.exception))
         # display message
-        self.assertIn("Passwords don't match.", user_form.errors['password2'])
+        self.assertIn("Passwords don\'t match.", user_form.errors['password2'])
+
+    def test_form_field_formatting__expect_to_obtain_formatting_from_mixin(self):
+        user_form = UserRegistrationForm(self.valid_user_data.copy())
+        for k, v in user_form.fields.items():
+            expected_format = 'form-control rounded'
+            actual_format=v.widget.attrs['class']
+            self.assertEqual(expected_format, actual_format)
+
+            expected_placeholder = f"Enter {k.title().replace('_', ' ')}"
+            actual_placeholder = v.widget.attrs['placeholder']
+            self.assertEqual(expected_placeholder, actual_placeholder)
+
+
+            # field.widget.attrs['placeholder'] = f"Enter {field_name.title().replace('_', ' ')}"
+

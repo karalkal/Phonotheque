@@ -22,6 +22,7 @@ class IndexListView(views.ListView):
     template_name = 'main_app/index.html'
     paginate_by = 8
     context_object_name = 'all_albums'
+    # ordering = ['collection__album_id', ]
 
 
 class AlbumDetailView(views.DetailView):

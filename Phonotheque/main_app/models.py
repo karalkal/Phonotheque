@@ -28,7 +28,7 @@ class Album(models.Model):
         return album_fans
 
     class Meta:
-        ordering = ('-time_created',)
+        ordering = ('time_created',)
 
     def __str__(self):
         return f"{self.title} by \n{self.artist}"
