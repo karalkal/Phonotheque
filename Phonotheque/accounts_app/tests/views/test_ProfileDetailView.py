@@ -3,7 +3,6 @@ from datetime import date
 from django import test as django_test
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-
 from Phonotheque.accounts_app.models import Profile
 
 User = get_user_model()

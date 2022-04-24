@@ -23,17 +23,6 @@ class ProfileCreateViewTests(TestCase):
         'description': 'some amazing description'
     }
 
-    # def test_create_user__when_all_valid__expect_to_create(self):
-    #     self.client.post(
-    #         reverse('register'),
-    #         data=self.VALID_USER_DATA,
-    #     )
-    #
-    #     test_user = User.objects.first()
-    #     self.assertIsNotNone(test_user)
-    #     self.assertEqual(self.VALID_USER_DATA['first_name'], test_user.first_name)
-    #     self.assertEqual(self.VALID_USER_DATA['last_name'], test_user.last_name)
-
     def test_user_and_profile_creation__with_valid_data__expect_both_to_be_created(self):
         new_user = User.objects.create_user(**self.VALID_USER_DATA)
         # test user
