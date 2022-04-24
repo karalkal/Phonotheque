@@ -1,23 +1,75 @@
-{% extends 'base_plus_menu_1.html' %}
+{% extends 'base_plus_menu_3.html' %}
 {% load static %}
+
 
 {% block main_content %}
     <div class="container-fluid tm-container-content tm-mt-60">
-
-
         <div class="row mb-4">
             <h2 class="col-6 tm-text-primary"> Registered Phonotheque users' profiles</h2>
-            {% include "pagination.html" with page=page_obj %}
         </div>
 
         {#    GALLERY#}
         <div class="row tm-mb-90 tm-gallery">
-            {% for profile in non_staff_active_profiles %}
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
 
+            {#            OWN PROFILE    #}
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5" style="background-color: #ACDDDD">
+
+                {% if current_profile.photo_URL %}
+                    <img src="{{ current_profile.photo_URL }}"
+                         alt="profile photo of {{ current_profile.user.username }}"
+                         class="img-thumbnail"
+                         style="object-fit: cover; width: 350px; height: 350px">
+                {% else %}
+                    <img src="{% static 'img/profile-anon.jpg' %}"
+                         alt="no profile image"
+                         class="img-thumbnail"
+                         style="object-fit: cover; width:350px;  height:350px;">
+                {% endif %}
+
+                <h4 class="col-6 tm-text-primary">
+                    <span style="font-size:0.71em; color: black">Username: </span><br>
+                    <a href="{% url 'profile-details' current_profile.pk %}">{{ current_profile.user.username }}</a>
+                </h4>
+                <h4 class="col-6 tm-text-primary">
+                    <span style="font-size:0.71em; color: black">First Name: </span><br>
+                    {{ current_profile.user.first_name }}
+                </h4>
+                <h4 class="col-6 tm-text-primary">
+                    <span style="font-size:0.71em; color: black">Last Name: </span><br>
+                    {{ current_profile.user.last_name }}
+                </h4>
+
+                <a href="{% url 'profile-details' current_profile.pk %}">
+                    <button type="submit" class="btn btn-info mt-0 mb-3"
+                            style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                        view
+                    </button>
+                </a>
+
+                <a href="{% url 'profile-edit' current_profile.pk %}">
+                    <button type="submit" class="btn btn-warning mt-0 mb-3"
+                            style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                        edit
+                    </button>
+                </a>
+                <a href="{% url 'profile-delete' current_profile.pk %}">
+                    <button type="submit" class="btn btn-danger mt-0 mb-3"
+                            style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                        delete
+                    </button>
+                </a>
+            </div>
+
+            {#          OTHER USERS' PROFILES   #}
+            {% for profile in non_staff_active_profiles %}
+
+                {#         Display all users apart from current one  #}
+                {#                {% if profile != current_profile %}#}
+
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                     {% if profile.photo_URL %}
                         <img src="{{ profile.photo_URL }}"
-                             alt="profile photo of {{ profile.first_name }} {{ album.first_name }}"
+                             alt="profile photo of {{ profile.user.username }}"
                              class="img-thumbnail"
                              style="object-fit: cover; width: 350px; height: 350px">
                     {% else %}
@@ -61,6 +113,8 @@
                             </button>
                         </a>
                     {% endif %}
+
+                    {#                {% endif %} <!-- if profile is not currently logged  user -->#}
 
                 </div>
             {% endfor %}

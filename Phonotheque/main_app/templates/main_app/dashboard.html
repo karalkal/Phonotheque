@@ -5,11 +5,11 @@
         <div class="row mb-4">
 
             {% if not fav_albums %}
-                <h2 class="col-12 tm-text-primary mb-4" style="color: black; text-align: center">
+                <h2 class="col-12 tm-text-primary mb-4" style="color: black; text-align: left">
                     Hi, {{ request.user.username }}. You have not shared any of your
                     favourite albums yet.<br>
-                    To add some, fill in form below.<br>
-                    Or you can see what other users have liked <a href="{% url 'index_page'%}">here</a> and possibly add an album to your own collection?</h2>
+                    To add some, fill in one of the forms below.<br>
+                    Or you can see what other users have liked <a href="{% url 'index_page'%}">here</a> and add it to your own collection.</h2>
 
             {% else %}
                 <h2 class="col-12 tm-text-primary" style="color: black; text-align: center">

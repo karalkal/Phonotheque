@@ -131,19 +131,24 @@ class UserLogoutView(auth_views.LogoutView):
 class ProfileListView(views.ListView, LoginRequiredMixin):
     model = Profile
     template_name = 'registration/profile_list.html'
+    paginate_by = 8
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProfileListView, self).get_context_data()
-        regular_users = User.objects.filter(is_superuser=False, is_staff=False, is_active=True)
-        context['non_staff_active_profiles'] = Profile.objects.filter(user__in=regular_users)
 
         # superuser raises DoesNotExist at /accounts/profiles/ as they are created by manage.py
-        # hence are not assigned a profile automatically
+        # hence are not assigned a profile automatically => create profile for them here
         try:
             context['current_profile'] = Profile.objects.get(pk=self.request.user.pk)
         except ObjectDoesNotExist:
-            new_profile = Profile.objects.create(user=self.request.user)
+            Profile.objects.create(user=self.request.user)
             context['current_profile'] = Profile.objects.get(pk=self.request.user.pk)
+        # get all other users' profiles apart from staff and current user
+        regular_users = User.objects \
+            .filter(is_superuser=False, is_staff=False, is_active=True) \
+            .exclude(pk=self.request.user.pk)
+        context['non_staff_active_profiles'] = Profile.objects.filter(user__in=regular_users)
+
         return context
 
 

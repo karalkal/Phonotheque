@@ -71,6 +71,8 @@
                         <a href="{% url 'album_details' album.pk %}">{{ album.title }}</a> by
                         <a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a>
                     </h4>
+                {% empty %}
+                    <h4 class="tm-text-primary mb-3">This user has no albums in their collection yet.</h4>
                 {% endfor %}
             </div>
         </div>
