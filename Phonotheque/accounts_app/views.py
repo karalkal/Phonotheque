@@ -132,13 +132,13 @@ class ProfileListView(views.ListView, LoginRequiredMixin):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProfileListView, self).get_context_data()
 
-        # superuser raises DoesNotExist at /accounts/profiles/ as they are created by manage.py
+        # superuser raises DoesNotExist at /accounts/profiles/ as they are created with createsuperuser in manage.py
         # hence are not assigned a profile automatically => create profile for them here
         try:
-            context['current_profile'] = Profile.objects.get(pk=self.request.user.pk)
+            context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
         except ObjectDoesNotExist:
             Profile.objects.create(user=self.request.user)
-            context['current_profile'] = Profile.objects.get(pk=self.request.user.pk)
+            context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
         # get all other users' profiles apart from staff and current user
         regular_users = User.objects \
             .filter(is_superuser=False, is_staff=False, is_active=True) \

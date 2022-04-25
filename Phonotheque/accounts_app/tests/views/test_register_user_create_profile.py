@@ -23,6 +23,10 @@ class ProfileCreateViewTests(TestCase):
         'description': 'some amazing description'
     }
 
+    def test_get_register_view__should_render_correct_template(self):
+        response = self.client.get('')
+        self.assertTemplateUsed(response, 'main_app/index.html')
+
     def test_user_and_profile_creation__with_valid_data__expect_both_to_be_created(self):
         new_user = User.objects.create_user(**self.VALID_USER_DATA)
         # test user
@@ -36,3 +40,12 @@ class ProfileCreateViewTests(TestCase):
         self.assertEqual(new_profile.user_id, new_user.pk)
         # test correct url
         self.assertTemplateUsed('/accounts/register/')
+
+    # def test_create_profile__when_all_valid__expect_to_create(self):
+    #     self.client.post(
+    #         reverse('register'),
+    #         data=self.VALID_USER_DATA,
+    #     )
+    #
+    #     new_user = User.objects.first()
+    #     self.assertIsNotNone(new_user)

@@ -36,15 +36,6 @@ class ProfilesListViewTests(TestCase):
 
     }
 
-    def __create_valid_user_and_profile(self):
-        new_user = User.objects.create_user(**self.VALID_USER_DATA_1)
-        new_profile = Profile.objects.create(user=new_user,
-                                             **self.VALID_PROFILE_DATA_1)
-        return new_user, new_profile
-
-    def __get_response_for_profile(self, profile):
-        return self.client.get(reverse('profile-details', kwargs={'pk': profile.pk}))
-
     # TESTS
 
     def test_get__when_two_users__expect_context_to_contain_two_profiles(self):
@@ -63,3 +54,12 @@ class ProfilesListViewTests(TestCase):
         self.assertEqual(new_profile_2.user_id, new_user_2.pk)
 
         self.assertEqual(len(Profile.objects.all()), 2)
+
+    def test_view_get_context_data__should_return_correct_context(self):
+        new_user = User.objects.create_user(**self.VALID_USER_DATA_1)
+        # create profile
+        new_profile = Profile.objects.create(user=new_user)
+        # test profile
+        self.assertEqual(new_profile.user_id, new_user.pk)
+
+        # response = self.client.post('/accounts/profiles/', data={"current_profile": new_profile})

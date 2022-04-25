@@ -32,6 +32,8 @@ class UserAndProfileEditTests(django_test.TestCase):
         )
         return new_user, new_profile
 
+    # tests
+
     def test_when_editing_user_data__expect_updated_values(self):
         user, profile = self.__create_valid_user_and_profile()
         user.first_name = "New name"

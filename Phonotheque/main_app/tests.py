@@ -85,8 +85,7 @@ class AlbumArtistCollectionCommentTests(django_test.TestCase):
         artist = Artist.objects.get(pk=album.artist.pk)
         self.assertEqual(artist, album.artist)
 
-    def test_album__when_album_is_already_created_and_another_users_adds_to_their_collection__no_error_and_both_must_have_it(
-            self):
+    def test_album__when_album_exists_and_another_users_adds_to_their_collection__both_must_have_it(self):
         album = self.__create_album(**self.VALID_ALBUM)
         user1 = self.__create_valid_user()
         user2 = User.objects.create(
@@ -103,8 +102,7 @@ class AlbumArtistCollectionCommentTests(django_test.TestCase):
 
         self.assertQuerysetEqual(user1_collection, user2_collection)
 
-    def test_artist__when_artist_exists__no_error_must_be_raised_albums_must_be_saved_and_related_to_same_artist(
-            self):
+    def test_artist__when_artist_exists__no_error_raised_albums_must_be_saved_and_related_to_same_artist(self):
         artist = self.__create_artist()
         album1 = Album.objects.create(wiki_id=11111111, title='Album1', wiki_url='https://en.album1.org',
                                       summary='studio album 1', resume='Nothing1',
@@ -151,11 +149,11 @@ class AlbumArtistCollectionCommentTests(django_test.TestCase):
         )
         artist = self.__create_artist()
         album1 = Album.objects.create(wiki_id=11111111, title='Album1',
-                                       wiki_url='https://en.album1.org',
-                                       summary='studio album 1', resume='Nothing1',
-                                       album_cover='https://upload.wikimedia.org/cover1.jpg',
-                                       time_created=datetime.now(),
-                                       artist_id=88, artist=artist)
+                                      wiki_url='https://en.album1.org',
+                                      summary='studio album 1', resume='Nothing1',
+                                      album_cover='https://upload.wikimedia.org/cover1.jpg',
+                                      time_created=datetime.now(),
+                                      artist_id=88, artist=artist)
 
         album2 = Album.objects.create(wiki_id=22222222, title='Album2', wiki_url='https://en.album2.org',
                                       summary='studio album 2', resume='Nothing1',
@@ -183,11 +181,11 @@ class AlbumArtistCollectionCommentTests(django_test.TestCase):
         )
         artist = self.__create_artist()
         album1 = Album.objects.create(wiki_id=11111111, title='Album1',
-                                       wiki_url='https://en.album1.org',
-                                       summary='studio album 1', resume='Nothing1',
-                                       album_cover='https://upload.wikimedia.org/cover1.jpg',
-                                       time_created=datetime.now(),
-                                       artist_id=88, artist=artist)
+                                      wiki_url='https://en.album1.org',
+                                      summary='studio album 1', resume='Nothing1',
+                                      album_cover='https://upload.wikimedia.org/cover1.jpg',
+                                      time_created=datetime.now(),
+                                      artist_id=88, artist=artist)
 
         album2 = Album.objects.create(wiki_id=22222222, title='Album2', wiki_url='https://en.album2.org',
                                       summary='studio album 2', resume='Nothing1',
