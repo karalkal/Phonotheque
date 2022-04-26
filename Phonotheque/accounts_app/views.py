@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic as views
 
 from .models import Profile
@@ -104,6 +105,21 @@ def delete_user_and_profile(request, pk):
                    'current_profile': Profile.objects.get(pk=instance.pk)})
 
 
+@login_required()
+def deactivate_or_reactivate_user(request, user_pk):
+    user_to_edit = User.objects.get(pk=user_pk)
+    if request.user.is_staff:
+        user_to_edit.is_active = not user_to_edit.is_active
+        user_to_edit.save()
+        messages.add_message(request, messages.INFO,
+                             f'Profile of {user_to_edit.username} disabled successfully by {request.user.username}')
+        return redirect('profiles-list')
+    else:
+        messages.add_message(request, messages.INFO,
+                             f'You have no permissions to deactivate the profile of {user_to_edit.username}')
+        return redirect('profiles-list')
+
+
 class UserLoginView(auth_views.LoginView):
     success_url = 'dashboard'
 
@@ -140,9 +156,9 @@ class ProfileListView(views.ListView, LoginRequiredMixin):
             context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
         # get all other users' profiles apart from staff and current user
         regular_users = User.objects \
-            .filter(is_superuser=False, is_staff=False, is_active=True) \
+            .filter(is_superuser=False, is_staff=False) \
             .exclude(pk=self.request.user.pk)
-        context['non_staff_active_profiles'] = Profile.objects.filter(user__in=regular_users)
+        context['non_staff_profiles'] = Profile.objects.filter(user__in=regular_users)
 
         return context
 
@@ -154,7 +170,10 @@ class ProfileDetailView(views.DetailView, LoginRequiredMixin):
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         searched_user = User.objects.get(pk=self.object.pk)
-        context['searched_user'] = searched_user
+        if searched_user.is_active:
+            context['searched_user'] = searched_user
+        else:
+            context['searched_user'] = None
         return context
 
 

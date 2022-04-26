@@ -3,8 +3,15 @@
 {% block title %}Phonotheque - Edit Profile{% endblock %}
 {% block main_content %}
     <div class="container-fluid tm-mt-60">
+
         <!-- Two equal columns -->
-        <h2 class="tm-text-primary mb-5">Use the form below to edit your Phonotheque profile.</h2>
+
+        {% if not request.user.is_staff or request.user == current_profile.user %}
+            <h2 class="tm-text-primary mb-5">Use the form below to edit your Phonotheque profile.</h2>
+        {% else %}
+            <h2 class="tm-text-primary mb-5">
+                Use the form below to edit the profile of {{ current_profile.user.username }}?</h2>
+        {% endif %}
 
         <div class="row">
             <div class="col">
@@ -16,6 +23,24 @@
                         {% for error in form.error_messages.values %}
                             <p class="alert-warning">{{ error }}</p>
                         {% endfor %}
+                    {% endif %}
+
+                    {% if request.user.is_staff %}
+                        {% if current_profile.user.is_active %}
+                            <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                                style="text-align: center; width: 100%; background-color: crimson;">
+                                <a href="{% url 'user-deactivate-reactivate' current_profile.pk %}"
+                                   style="color: white; ">De-activate Account</a>
+                            </h4>
+
+                        {% else %}
+                            <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                                style="text-align: center; width: 100%; background-color: darkblue;">
+                                <a href="{% url 'user-deactivate-reactivate' current_profile.pk %}"
+                                   style="color: white; ">Re-activate Account</a>
+                            </h4>
+
+                        {% endif %}
                     {% endif %}
 
                     {{ user_form.as_p }}
@@ -31,7 +56,7 @@
 
                 <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
                     style="text-align: center; width: 100%; ">
-                    <a href="{% url 'password-change' %}" style="color: white; ">Click here if you wish to change your
+                    <a href="{% url 'password-change' %}" style="color: white">Click here if you wish to change your
                         password</a>
                 </h4>
                 {% if current_profile.photo_URL %}

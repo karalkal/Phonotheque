@@ -12,7 +12,8 @@
         <div class="row tm-mb-90 tm-gallery">
 
             {#            OWN PROFILE    #}
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5" style="background-color: #ACDDDD">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5"
+                 style="background-color: rgba(0,153,153,0.44);">
 
                 {% if current_profile.photo_URL %}
                     <img src="{{ current_profile.photo_URL }}"
@@ -61,62 +62,112 @@
             </div>
 
             {#          OTHER USERS' PROFILES   #}
-            {% for profile in non_staff_active_profiles %}
+            {% for profile in non_staff_profiles %}
 
-                {#         Display all users apart from current one  #}
-                {#                {% if profile != current_profile %}#}
+                {#                Regular users can see only active profiles#}
+                {% if profile.user.is_active %}
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                        {% if profile.photo_URL %}
+                            <img src="{{ profile.photo_URL }}"
+                                 alt="profile photo of {{ profile.user.username }}"
+                                 class="img-thumbnail"
+                                 style="object-fit: cover; width: 350px; height: 350px">
+                        {% else %}
+                            <img src="{% static 'img/profile-anon.jpg' %}"
+                                 alt="no profile image"
+                                 class="img-thumbnail"
+                                 style="object-fit: cover; width:350px;  height:350px;">
+                        {% endif %}
 
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                    {% if profile.photo_URL %}
-                        <img src="{{ profile.photo_URL }}"
-                             alt="profile photo of {{ profile.user.username }}"
-                             class="img-thumbnail"
-                             style="object-fit: cover; width: 350px; height: 350px">
-                    {% else %}
-                        <img src="{% static 'img/profile-anon.jpg' %}"
-                             alt="no profile image"
-                             class="img-thumbnail"
-                             style="object-fit: cover; width:350px;  height:350px;">
-                    {% endif %}
+                        <h4 class="col-6 tm-text-primary">
+                            <span style="font-size:0.71em; color: black">Username: </span><br>
+                            <a href="{% url 'profile-details' profile.pk %}">{{ profile.user.username }}</a>
+                        </h4>
+                        <h4 class="col-6 tm-text-primary">
+                            <span style="font-size:0.71em; color: black">First Name: </span><br>
+                            {{ profile.user.first_name }}
+                        </h4>
+                        <h4 class="col-6 tm-text-primary">
+                            <span style="font-size:0.71em; color: black">Last Name: </span><br>
+                            {{ profile.user.last_name }}
+                        </h4>
 
-                    <h4 class="col-6 tm-text-primary">
-                        <span style="font-size:0.71em; color: black">Username: </span><br>
-                        <a href="{% url 'profile-details' profile.pk %}">{{ profile.user.username }}</a>
-                    </h4>
-                    <h4 class="col-6 tm-text-primary">
-                        <span style="font-size:0.71em; color: black">First Name: </span><br>
-                        {{ profile.user.first_name }}
-                    </h4>
-                    <h4 class="col-6 tm-text-primary">
-                        <span style="font-size:0.71em; color: black">Last Name: </span><br>
-                        {{ profile.user.last_name }}
-                    </h4>
-
-                    <a href="{% url 'profile-details' profile.pk %}">
-                        <button type="submit" class="btn btn-info mt-0 mb-3"
-                                style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
-                            view
-                        </button>
-                    </a>
-
-                    {% if profile == current_profile or request.user.is_staff %}
-                        <a href="{% url 'profile-edit' profile.pk %}">
-                            <button type="submit" class="btn btn-warning mt-0 mb-3"
+                        <a href="{% url 'profile-details' profile.pk %}">
+                            <button type="submit" class="btn btn-info mt-0 mb-3"
                                     style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
-                                edit
+                                view
                             </button>
                         </a>
-                        <a href="{% url 'profile-delete' profile.pk %}">
-                            <button type="submit" class="btn btn-danger mt-0 mb-3"
+
+                        {% if profile == current_profile or request.user.is_staff %}
+                            <a href="{% url 'profile-edit' profile.pk %}">
+                                <button type="submit" class="btn btn-warning mt-0 mb-3"
+                                        style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                                    edit
+                                </button>
+                            </a>
+                            <a href="{% url 'profile-delete' profile.pk %}">
+                                <button type="submit" class="btn btn-danger mt-0 mb-3"
+                                        style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                                    delete
+                                </button>
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                {% elif not profile.user.is_active and request.user.is_staff %}
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5 "
+                         style="background-color: rgba(153,0,0,0.20)">
+                        {% if profile.photo_URL %}
+                            <img src="{{ profile.photo_URL }}"
+                                 alt="profile photo of {{ profile.user.username }}"
+                                 class="img-thumbnail"
+                                 style="object-fit: cover; width: 350px; height: 350px">
+                        {% else %}
+                            <img src="{% static 'img/profile-anon.jpg' %}"
+                                 alt="no profile image"
+                                 class="img-thumbnail"
+                                 style="object-fit: cover; width:350px;  height:350px;">
+                        {% endif %}
+
+                        <h4 class="col-6 tm-text-primary">
+                            <span style="font-size:0.71em; color: black">Username: </span><br>
+                            <a href="{% url 'profile-details' profile.pk %}">{{ profile.user.username }}</a>
+                        </h4>
+                        <h4 class="col-6 tm-text-primary">
+                            <span style="font-size:0.71em; color: black">First Name: </span><br>
+                            {{ profile.user.first_name }}
+                        </h4>
+                        <h4 class="col-6 tm-text-primary">
+                            <span style="font-size:0.71em; color: black">Last Name: </span><br>
+                            {{ profile.user.last_name }}
+                        </h4>
+
+                        <a href="{% url 'profile-details' profile.pk %}">
+                            <button type="submit" class="btn btn-info mt-0 mb-3"
                                     style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
-                                delete
+                                view
                             </button>
                         </a>
-                    {% endif %}
 
-                    {#                {% endif %} <!-- if profile is not currently logged  user -->#}
+                        {% if profile == current_profile or request.user.is_staff %}
+                            <a href="{% url 'profile-edit' profile.pk %}">
+                                <button type="submit" class="btn btn-warning mt-0 mb-3"
+                                        style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                                    edit
+                                </button>
+                            </a>
+                            <a href="{% url 'profile-delete' profile.pk %}">
+                                <button type="submit" class="btn btn-danger mt-0 mb-3"
+                                        style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">
+                                    delete
+                                </button>
+                            </a>
+                        {% endif %}
 
-                </div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div> <!-- row -->
 

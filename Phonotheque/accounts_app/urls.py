@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from .views import register_user_create_profile, edit_user_and_profile, delete_user_and_profile, \
+from .views import register_user_create_profile, edit_user_and_profile, delete_user_and_profile, deactivate_or_reactivate_user, \
     UserLoginView, UserLogoutView, CustomPasswordChangeView, ProfileDetailView, ProfileListView
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('register/', register_user_create_profile, name='register'),
     path('edit/<int:pk>/', edit_user_and_profile, name='profile-edit'),
     path('delete-profile/<int:pk>/', delete_user_and_profile, name='profile-delete'),
+    path('disable/<int:user_pk>/', deactivate_or_reactivate_user, name='user-deactivate-reactivate'),
 
     path('profiles/', ProfileListView.as_view(), name='profiles-list'),
     path('profile/<int:pk>', ProfileDetailView.as_view(), name='profile-details'),

@@ -3,8 +3,15 @@
 {% block title %}Phonotheque - Edit Profile{% endblock %}
 {% block main_content %}
     <div class="container-fluid tm-mt-60">
+
         <!-- Two equal columns -->
-        <h2 class="tm-text-primary mb-5">Are you sure you want to delete your Phonotheque profile?</h2>
+
+        {% if not request.user.is_staff or request.user == current_profile.user %}
+            <h2 class="tm-text-primary mb-5">Are you sure you want to delete your Phonotheque profile?</h2>
+        {% else %}
+            <h2 class="tm-text-primary mb-5">
+                Are you sure you want to delete the profile of {{ current_profile.user.username }}?</h2>
+        {% endif %}
 
         <div class="row">
             <div class="col">
