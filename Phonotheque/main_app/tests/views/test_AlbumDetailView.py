@@ -5,8 +5,7 @@ from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
 from Phonotheque.main_app.forms import CommentForm
-from Phonotheque.main_app.models import Artist, Album, Collection
-from Phonotheque.main_app.views import AlbumDetailView
+from Phonotheque.main_app.models import Artist, Album
 
 
 class AlbumDetailViewTests(TestCase):
@@ -75,12 +74,3 @@ class AlbumDetailViewTests(TestCase):
         self.assertFalse(response.context_data['liked_by_current_user'])
         self.assertEqual(str(album), str(response.context_data['album']))
         self.assertEqual(type(CommentForm()), type(response.context_data['form']))
-
-    # def test_environment_set_in_context(self):
-    #     request = RequestFactory().get('main_app/album_details.html')
-    #     view = AlbumDetailView()
-    #     view.setup(request)
-    #     a=5
-    #
-    #     context = view.get_context_data()
-    #     self.assertIn('environment', context)
