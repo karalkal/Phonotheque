@@ -1,9 +1,10 @@
 from datetime import date
 
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
+from Phonotheque.accounts_app.forms import UserRegistrationForm
 from Phonotheque.accounts_app.models import Profile
 
 
@@ -41,11 +42,23 @@ class ProfileCreateViewTests(TestCase):
         # test correct url
         self.assertTemplateUsed('/accounts/register/')
 
-    # def test_create_profile__when_all_valid__expect_to_create(self):
-    #     self.client.post(
-    #         reverse('register'),
-    #         data=self.VALID_USER_DATA,
-    #     )
-    #
-    #     new_user = User.objects.first()
-    #     self.assertIsNotNone(new_user)
+    def test_create_user__with_one_char_first_name__raises(self):
+        INVALID_FIRST_NAME_DATA = {
+            'username': "username",
+            'email': "baba@baba.com",
+            'first_name': "A",
+            'last_name': "good Lastname",
+            'password': "123jgfhtehkjchj!!!!!!JHAJHSJHJHS",
+            'password2': "123jgfhtehkjchj!!!!!!JHAJHSJHJHS",
+        }
+
+        user_form = UserRegistrationForm(INVALID_FIRST_NAME_DATA)
+        try:
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+        except ValueError as ex:
+            self.assertIsNotNone(ex)
+            self.assertEqual("The User could not be created because the data didn't validate.", str(ex))

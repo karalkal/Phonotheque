@@ -127,7 +127,6 @@ class UserLogoutView(auth_views.LogoutView):
 class ProfileListView(views.ListView, LoginRequiredMixin):
     model = Profile
     template_name = 'registration/profile_list.html'
-    paginate_by = 8
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProfileListView, self).get_context_data()

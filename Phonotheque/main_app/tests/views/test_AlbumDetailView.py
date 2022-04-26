@@ -1,11 +1,12 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
 from Phonotheque.main_app.forms import CommentForm
 from Phonotheque.main_app.models import Artist, Album, Collection
+from Phonotheque.main_app.views import AlbumDetailView
 
 
 class AlbumDetailViewTests(TestCase):
@@ -45,6 +46,8 @@ class AlbumDetailViewTests(TestCase):
                              'time_created': datetime.now()
                              }
 
+    # TESTS
+
     def test_album_details_view__when_searching_non_existing_album__redirect_to_404(self):
         artist = Artist.objects.create(**self.VALID_ARTIST)
         album = Album.objects.create(**self.VALID_ALBUM)
@@ -73,10 +76,11 @@ class AlbumDetailViewTests(TestCase):
         self.assertEqual(str(album), str(response.context_data['album']))
         self.assertEqual(type(CommentForm()), type(response.context_data['form']))
 
-        # collection_item = Collection.objects.create(**self.VALID_COLLECTION_ITEM, user=user)
-        # album.collection_set.add(collection_item)
-        # response = self.client.get(reverse('album_details', kwargs={'pk': 11111111}))
-        # self.assertTrue(response.context_data['liked_by_current_user'])
-
-        # collection_item2 = Collection.objects.create(**self.VALID_COLLECTION_ITEM, user=user_2)
-        # self.assertEqual(2, len(response.context_data['others_who_liked_it']))
+    # def test_environment_set_in_context(self):
+    #     request = RequestFactory().get('main_app/album_details.html')
+    #     view = AlbumDetailView()
+    #     view.setup(request)
+    #     a=5
+    #
+    #     context = view.get_context_data()
+    #     self.assertIn('environment', context)
