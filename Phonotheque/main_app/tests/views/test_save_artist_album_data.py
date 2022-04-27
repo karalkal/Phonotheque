@@ -20,13 +20,7 @@ class ArtistAndAlbumDataSaveTests(django_test.TestCase):
     VALID_COLLECTION_ITEM = {'album_id': '11111111',
                              'time_created': datetime.now()
                              }
-    VALID_COMMENT = {
-        'body': 'The best comment ever',
-        'created': datetime.now(),
-        'active': True
-        # album_id
-        # user_id
-    }
+
     VALID_ALBUM = {
         'wiki_id': 11111111,
         'title': 'Album1',
@@ -84,23 +78,6 @@ class ArtistAndAlbumDataSaveTests(django_test.TestCase):
         artist = Artist.objects.get(pk=album.artist.pk)
         self.assertEqual(artist, album.artist)
 
-    def test_album__when_album_exists_and_another_users_adds_to_their_collection__both_must_have_it(self):
-        album = self.__create_album(**self.VALID_ALBUM)
-        user1 = self.__create_valid_user()
-        user2 = User.objects.create(
-            username="another_user",
-            password='11111111',
-            email="test2@user.com",
-            first_name='Testis',
-            last_name='Useless',
-        )
-        self.__create_collection_item_for_user(user1, album)
-        self.__create_collection_item_for_user(user2, album)
-        user1_collection = Collection.objects.all()
-        user2_collection = Collection.objects.all()
-
-        self.assertQuerysetEqual(user1_collection, user2_collection)
-
     def test_artist__when_artist_exists__no_error_raised_albums_must_be_saved_and_related_to_same_artist(self):
         artist = self.__create_artist()
         album1 = Album.objects.create(wiki_id=11111111, title='Album1', wiki_url='https://en.album1.org',
@@ -119,5 +96,3 @@ class ArtistAndAlbumDataSaveTests(django_test.TestCase):
         albums_by_this_artist_retrieved = Album.objects.filter(artist_id=artist.pk)
         artists_album_set = artist.album_set.all()
         self.assertQuerysetEqual(albums_by_this_artist_retrieved, artists_album_set, ordered=False)
-
-

@@ -68,7 +68,7 @@ class ProfilesListViewTests(TestCase):
 
         self.assertEqual(
             user_data['username'],
-            response.context_data['current_profile'].user.username, )
+            response.context_data['current_profile'].user_1.username, )
 
         self.assertEqual(
             new_profile, response.context_data['current_profile'])

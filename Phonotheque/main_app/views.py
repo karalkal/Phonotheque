@@ -82,7 +82,7 @@ class CommentCreateView(views.CreateView, PermissionRequiredMixin):
 
     def form_valid(self, form):
         comment = form.save(commit=False)
-        comment.user = self.request.user
+        comment.user_1 = self.request.user
         comment.album = Album.objects.get(wiki_id=self.kwargs['album_wiki_id'])
         return super().form_valid(form)
 
