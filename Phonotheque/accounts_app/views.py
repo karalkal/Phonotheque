@@ -86,7 +86,7 @@ def delete_user_and_profile(request, pk):
     instance = User.objects.get(pk=pk)
 
     if instance != request.user \
-            or not request.user.has_perm('accounts_app.delete_profile'):  # accounts_app|profile|Can delete profile
+            and not request.user.has_perm('accounts_app.delete_profile'):  # accounts_app|profile|Can delete profile
         # Verification if staff user has permission to delete users will be carried out in the template, button won't show if not
         messages.add_message(request, messages.INFO,
                              f'Ooopsy! User {instance.username} won\'t be happy if you delete their account.\n'
@@ -190,7 +190,7 @@ class ProfileDetailView(views.DetailView, LoginRequiredMixin):
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         searched_user = User.objects.get(pk=self.object.pk)
-        if searched_user.is_active:
+        if searched_user.is_active or self.request.user.is_staff:
             context['searched_user'] = searched_user
         else:
             context['searched_user'] = None
