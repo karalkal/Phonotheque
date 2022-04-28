@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
 from .models import Profile
@@ -86,7 +86,7 @@ def delete_user_and_profile(request, pk):
     instance = User.objects.get(pk=pk)
 
     if instance != request.user \
-            and not request.user.has_perm('accounts_app.delete_profile'):  # accounts_app|profile|Can delete profile
+            or not request.user.has_perm('accounts_app.delete_profile'):  # accounts_app|profile|Can delete profile
         # Verification if staff user has permission to delete users will be carried out in the template, button won't show if not
         messages.add_message(request, messages.INFO,
                              f'Ooopsy! User {instance.username} won\'t be happy if you delete their account.\n'
@@ -147,22 +147,30 @@ class ProfileListView(views.ListView, LoginRequiredMixin):
     model = Profile
     template_name = 'registration/profile_list.html'
 
-    # TODO     # We can have this scenario if an admin user disables their own account
-    # if not self.request.user.is_active:
-    #     return reverse_lazy('index_page')
+    '''
+    We can have a scenario if an admin disables their own account, then
+    context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
+    (see get_context_data() below)
+    will raise an Exception because apparently profile cannot be created from an inactive user
+    '''
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_active:
+            return redirect(reverse_lazy('index_page'))
+
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
         context = super(ProfileListView, self).get_context_data()
 
-        # superuser raises DoesNotExist at /accounts/profiles/ as they are created with createsuperuser in manage.py
-        # hence are not assigned a profile automatically => create profile for them here
+        '''
+        superuser raises DoesNotExist at /accounts/profiles/ as they are created with createsuperuser in manage.py
+        hence are not assigned a profile automatically => if ObjectDoesNotExist exception, create profile for them here
+        '''
         try:
             context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
         except ObjectDoesNotExist:
-
-            # We can have this scenario if an admin user disables their own account
-            if not self.request.user.is_active:
-                return reverse_lazy('index_page')
 
             Profile.objects.create(user=self.request.user)
             context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
