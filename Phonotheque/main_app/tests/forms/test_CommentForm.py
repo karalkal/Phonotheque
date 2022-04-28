@@ -1,5 +1,4 @@
 from django import test as django_test
-from django.urls import reverse
 
 from Phonotheque.main_app.forms import CommentForm
 
@@ -12,10 +11,6 @@ class CommentFormTest(django_test.TestCase):
     def test_comment_form__with_below_max_chars__expect_valid_(self):
         comment_form = CommentForm(self.VALID_COMMENT)
         self.assertTrue(comment_form.is_valid())
-
-        # 'placeholder': "Share your thoughts if you have any",
-        # 'required': True,
-        # 'rows': 8}))
 
         for k, v in comment_form.fields.items():
             expected_format = 'form-control rounded-0'

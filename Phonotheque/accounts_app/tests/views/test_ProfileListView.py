@@ -67,8 +67,8 @@ class ProfilesListViewTests(TestCase):
         response = self.client.get(reverse('profiles-list'))
 
         self.assertEqual(
-            user_data['username'],
-            response.context_data['current_profile'].user_1.username, )
+            new_profile,
+            response.context_data['current_profile'])
 
         self.assertEqual(
             new_profile, response.context_data['current_profile'])
