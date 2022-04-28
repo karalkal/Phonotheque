@@ -3,8 +3,10 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
+from django.contrib.messages.storage.fallback import FallbackStorage
 
 from Phonotheque.accounts_app.models import Profile
+from Phonotheque.accounts_app.views import delete_user_and_profile
 
 
 class DeleteUserAndProfileTests(TestCase):
@@ -14,7 +16,7 @@ class DeleteUserAndProfileTests(TestCase):
         'email': "admin@user.com",
         'first_name': 'Big',
         'last_name': 'Boss',
-        'is_staff': True,
+        'is_superuser': True,
     }
 
     VALID_USER_DATA = {
@@ -30,35 +32,69 @@ class DeleteUserAndProfileTests(TestCase):
         'date_of_birth': date(1988, 4, 13),
         'photo_URL': 'https://cdn.pixabay.com/photo/2017/05/11/08/48/woman-2303361_960_720.jpg',
         'gender': 'Male',
-        'description': 'some amazing description',
+        'description': 'some amazing description'
+
     }
 
     def setUp(self) -> None:
-        self.admin = User.objects.create(**self.VALID_STAFF_DATA)
-        self.admin_profile = Profile.objects.create(**self.VALID_PROFILE_DATA, user=self.admin)
-
         self.factory = RequestFactory()
+
+        self.admin = User.objects.create(**self.VALID_STAFF_DATA)
+        self.regular_user = User.objects.create(**self.VALID_USER_DATA)
+
+        self.admin_profile = Profile.objects.create(user=self.admin, **self.VALID_PROFILE_DATA)
+        self.regular_profile = Profile.objects.create(user=self.regular_user, **self.VALID_PROFILE_DATA)
 
         # TESTS
 
     def test_delete_user_view__redirects_to_correct_template(self):
         response = self.client.post(reverse('profile-delete', kwargs={'pk': 4444}))
-        self.assertTrue(User.objects.count() == 1)
+
         self.assertTrue(response.status_code, 302)
+        self.assertTemplateUsed(reverse('profiles-list'))
 
-    def test_logged_in_user__when_deletes_account__should_be_deleted(self):
-        admin_login_data = {'username': 'bigboss', 'password': '11111111', }
-        regular_user_login_data = {'username': 'Ivancho', 'password': '11111111', }
+    def test_delete_user_view__if_logged_in_user_is_staff__should_delete_selected_user(self):
+        # Create an instance of a GET request.
+        request = self.factory.post(reverse('user-deactivate-reactivate', kwargs={'user_pk': self.regular_user.pk}))
 
-        # create regular user
-        self.regular_user = User.objects.create(**self.VALID_USER_DATA)
-        self.regular_profile = Profile.objects.create(**self.VALID_PROFILE_DATA, user=self.regular_user)
-
+        # 2 Users exist - admin and regular
         self.assertTrue(User.objects.count() == 2)
 
-        request = self.factory.get(reverse('profile-delete', kwargs={'pk': self.regular_user.pk}))
+        # Use this workaround to avoid error:
+        # MessageFailure: You cannot add messages without installing django.contrib.messages.middleware.MessageMiddleware
 
-        # response = self.client.post(reverse('profile-delete', kwargs={'pk': self.regular_user.pk}))
+        setattr(request, 'session', 'session')
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
 
-        # TODO does not work, need a form
-        # self.assertTrue(User.objects.count() == 1)
+        # admin logs in
+        request.user = self.admin
+
+        # Test func-based view
+        response = delete_user_and_profile(request, self.regular_user.pk)
+
+        # regular user must be deleted now
+        self.assertTrue(User.objects.count() == 1)
+
+    def test_delete_user_view__if_logged_in_user_is_staff__should_delete_own_account(self):
+        # Create an instance of a GET request.
+        request = self.factory.post(reverse('user-deactivate-reactivate', kwargs={'user_pk': self.regular_user.pk}))
+
+        # 2 Users exist - admin and regular
+        self.assertTrue(User.objects.count() == 2)
+
+        # Use this workaround to avoid error:
+        # MessageFailure: You cannot add messages without installing django.contrib.messages.middleware.MessageMiddleware
+
+        setattr(request, 'session', 'session')
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+
+        # user logs in
+        request.user = self.regular_user
+
+        # Test func-based view
+        response = delete_user_and_profile(request, self.regular_user.pk)
+
+        # regular user must have deleted their account now
+        self.assertTrue(User.objects.count() == 1)
