@@ -34,10 +34,18 @@ class ProfilesListViewTests(TestCase):
         'photo_URL': 'https://cdn.pixabay.com/photo/2017/05/11/08/48/woman-2303361_960_720.jpg',
         'gender': 'Male',
         'description': 'some amazing description'
-
     }
 
     # TESTS
+
+    def test_dispatch__if_not_logged_in_user_is_active_redirect_to_index_page(self):
+        # this scenario happens if an admin disables their own account
+        new_user = User.objects.create_user(**self.VALID_USER_DATA_1)
+        Profile.objects.create(user=new_user)
+        new_user.is_active = False
+
+        response = self.client.get(reverse('profiles-list'))
+        self.assertRedirects(response, reverse('index_page'))
 
     def test_get__when_two_users__expect_context_to_contain_two_profiles(self):
         new_user = User.objects.create_user(**self.VALID_USER_DATA_1)
@@ -87,6 +95,5 @@ class ProfilesListViewTests(TestCase):
         print(Profile.objects.get(pk=new_user.pk))
         try:
             new_profile = Profile.objects.get(pk=new_user.pk)
-            a = 5
         except ObjectDoesNotExist:
             new_profile = Profile.objects.create(user=new_user)

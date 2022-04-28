@@ -17,6 +17,15 @@ class ProfileDetailsViewTests(django_test.TestCase):
         'last_name': 'User',
     }
 
+    VALID_USER_DATA_INACTIVE = {
+        'username': "inactive_user",
+        'password': '11111111',
+        'email': "test@user.com",
+        'first_name': 'Inactive',
+        'last_name': 'User',
+        'is_active': False,
+    }
+
     VALID_PROFILE_DATA = {
         'date_of_birth': date(1988, 4, 13),
         'photo_URL': 'https://cdn.pixabay.com/photo/2017/05/11/08/48/woman-2303361_960_720.jpg',
@@ -44,3 +53,16 @@ class ProfileDetailsViewTests(django_test.TestCase):
         _, profile = self.__create_valid_user_and_profile()
         self.__get_response_for_profile(profile)
         self.assertTemplateUsed('accounts_app/profile_details.html')
+
+    def test_when_opening_non_existing_profile__expect_searched_user_in_context_None(self):
+        user, profile = self.__create_valid_user_and_profile()
+        response = self.__get_response_for_profile(profile)
+        self.assertIsNotNone(response.context_data['searched_user'])
+
+
+        inactive_user = User.objects.create_user(**self.VALID_USER_DATA_INACTIVE)
+        inactive_profile = Profile.objects.create(user=inactive_user,
+                                                  **self.VALID_PROFILE_DATA)
+
+        response = self.__get_response_for_profile(inactive_profile)
+        self.assertIsNone(response.context_data['searched_user'])
