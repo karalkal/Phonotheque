@@ -85,9 +85,12 @@ def edit_user_and_profile(request, pk):
 def delete_user_and_profile(request, pk):
     instance = User.objects.get(pk=pk)
 
-    if instance != request.user and not request.user.is_staff:
+    if instance != request.user \
+            and not request.user.has_perm('accounts_app.delete_profile'):  # accounts_app|profile|Can delete profile
+        # Verification if staff user has permission to delete users will be carried out in the template, button won't show if not
         messages.add_message(request, messages.INFO,
-                             f'User {instance.username} won\'t be happy if you delete their account.\nLuckily you can\'t do it.')
+                             f'Ooopsy! User {instance.username} won\'t be happy if you delete their account.\n'
+                             f'Luckily you can\'t do it.')
         return redirect('profiles-list')
 
     if request.method == 'POST':
@@ -144,6 +147,10 @@ class ProfileListView(views.ListView, LoginRequiredMixin):
     model = Profile
     template_name = 'registration/profile_list.html'
 
+    # TODO     # We can have this scenario if an admin user disables their own account
+    # if not self.request.user.is_active:
+    #     return reverse_lazy('index_page')
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProfileListView, self).get_context_data()
 
@@ -152,6 +159,11 @@ class ProfileListView(views.ListView, LoginRequiredMixin):
         try:
             context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
         except ObjectDoesNotExist:
+
+            # We can have this scenario if an admin user disables their own account
+            if not self.request.user.is_active:
+                return reverse_lazy('index_page')
+
             Profile.objects.create(user=self.request.user)
             context['current_profile'] = Profile.objects.get(user_id=self.request.user.pk)
         # get all other users' profiles apart from staff and current user
