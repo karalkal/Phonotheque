@@ -2,9 +2,6 @@
 {% load static %}
 {% block title %}Phonotheque - Profile of {{ searched_user.username }}{% endblock %}
 <style>
-    .text-black-90 {
-        color: rgba(0, 0, 0, .9)
-    }
 
     h1 {
         color: blue;
@@ -38,9 +35,10 @@
                     Artists' names (one-to-many relationship) will also be retrieved and stored. <br>
                     Logged in users will be able to view the profiles of other users, their shared albums and, if they
                     wish, add someone else's shared album to their own favourites. <br>
-                    They can also post comments relate to album (one-to-many relationship). <br>
-                    Inappropriate content can be disabled or deleted by the admins, while the superuser will have full
-                    privileges to manipulate the DB.</p>
+                    They can also post comments related to any album from the DB (one-to-many relationship). <br>
+                    Inappropriate content can be disabled or deleted by the admins, who also have privileges to disable
+                    or delete profiles, either by accessing the admin panel or via the website's own GUI. The superusers
+                    will have full privileges to manipulate the DB.</p>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <h2 class="tm-text-primary mb-5">Entity Relationship Diagram</h2>
@@ -54,14 +52,14 @@
             <h2 class="tm-text-primary mb-5 text-center">Accounts App</h2>
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
-                    Phonotheque uses the default Django User Model. As we know there are different schools as to what is
-                    the best way to customize the user model (creating a custom User model via AbstractBaseUser if the
-                    intention is to change the authentication procedure or via AbstractUser if additional info about the
-                    user needs to be collected/stored being quite popular).<br>
-                    I decided instead to stick to the other recommended strategy of extending the default model with a
-                    One-to-One relationship to a Profile model as I am perfectly happy with the Django User defaults -
-                    everything works out of the box, is compatible with all third party modules while at the same time
-                    the Profile model provides extendability and flexibility.</p>
+                    Phonotheque uses the default Django User Model. As we know there are different schools of thought
+                    about what is the best way to customize the user model (creating a custom User model via
+                    AbstractBaseUser if the intention is to change the authentication procedure or via AbstractUser if
+                    additional info about the user needs to be collected/stored being popular choices).<br>
+                    I decided instead to stick to the other recommended strategy of extending the default Django User
+                    model with a One-to-One relationship to a Profile model as I am perfectly happy with the Django User
+                    defaults - everything works out of the box, is compatible with all third party modules while at the
+                    same time the Profile model provides extendability and flexibility.</p>
                 <h4 class="tm-text-primary mt-2 text-left"> Registration</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     When an anonymous user wishes to create an account they are presented with the UserRegistrationForm.
@@ -71,20 +69,24 @@
                     \u00c0-\u01ffa-zA-Z'\-])+$" </code>which is a complicated way to say that our user can have a name
                     like <strong>Jérémie O'Conor-IVANOVäüïöëÿâçéèêîïôčšžñáéíóúü</strong> but cannot be named R2D2,
                     number1, st*r or f### #ff. <br>
-                    Once an user is created with the default Django fields , their id, first
-                    name and last name will be saved automatically in the <strong>Profile</strong> table by using the
-                    following code in the<code> register</code> view:
+                    Once an user is created with the default Django fields, a corresponding entry will be created in the
+                    <strong>Profile</strong> table as well (with null values for photo_URL, date_of_birth, gender,
+                    description) by just linking the newly created user to their profile. <br>
+                    In other words, since in our Profile model we have the corresponding user as a primary key: <br>
+                    <code>
+                        class Profile(models.Model):<br>
+                        &nbsp user = models.OneToOneField<br>
+                        (settings.AUTH_USER_MODEL,<br>
+                        &nbsp on_delete=models.CASCADE,<br>
+                        &nbsp primary_key=True)
+                    </code><br>
+                    in <code> register_user_create_profile</code> view we just create a profile with relevant pk: <br>
+                    <code>
+                        new_profile = Profile.objects.create(user=new_user) </code>
                 </p>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
-                <code># Create the user profile as well<br>
-                    new_profile = Profile.objects.create(user=new_user)<br>
-                    # And copy name(s) to it<br>
-                    new_profile.first_name = user_form.cleaned_data['first_name']<br>
-                    if user_form.cleaned_data['last_name']:<br>
-                    &nbsp;&nbsp;new_profile.last_name = user_form.cleaned_data['last_name']<br>
-                    &nbsp;&nbsp;new_profile.save() </code>
-                <br>
+
                 <h4 class="tm-text-primary mt-2 text-left"> Profile Editing</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     The profile is editable (names and email can be changed, username cannot) and additional data
