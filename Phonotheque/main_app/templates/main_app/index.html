@@ -51,9 +51,12 @@
             {% for album in object_list %}
 
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                    <img src="{{ album.album_cover }}"
-                         alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
-                         style="width: 350px; height: 350px">
+
+                    <a href="{% url 'album_details' album.pk %}">
+                        <img src="{{ album.album_cover }}"
+                             alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
+                             style="width: 350px; height: 350px">
+                    </a>
                     <h4 class="col-6 tm-text-primary" style="text-transform:capitalize;">
                         <a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a>
                     </h4>

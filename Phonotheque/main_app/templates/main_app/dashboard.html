@@ -9,13 +9,15 @@
                     Hi, {{ request.user.username }}. You have not shared any of your
                     favourite albums yet.<br>
                     To add some, fill in one of the forms below.<br>
-                    Or you can see what other users have liked <a href="{% url 'index_page'%}">here</a> and add it to your own collection.</h2>
+                    Or you can see what other users have liked <a href="{% url 'index_page' %}">here</a> and add it to
+                    your own collection.</h2>
 
             {% else %}
                 <h2 class="col-12 tm-text-primary mb-4" style="color: black; text-align: left">
                     Hi, {{ request.user.username }}. These are some of your favourite albums.<br>
                     Fill in one of the forms below to add more.<br>
-                    Or you can see what other users have liked <a href="{% url 'index_page'%}">here</a> and add it to your own collection.</h2>
+                    Or you can see what other users have liked <a href="{% url 'index_page' %}">here</a> and add it to
+                    your own collection.</h2>
 
 
                 {% include "pagination.html" with page=fav_albums %}
@@ -26,9 +28,11 @@
                 <div class="row tm-mb-90 tm-gallery">
                     {% for album in fav_albums %}
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                            <img src="{{ album.album_cover }}"
-                                 alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
-                                 style="width: 350px; height: 350px">
+                            <a href="{% url 'album_details' album.pk %}">
+                                <img src="{{ album.album_cover }}"
+                                     alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
+                                     style="width: 350px; height: 350px">
+                            </a>
                             <h4 class="col-6 tm-text-primary"
                                 style="text-transform:capitalize;">
                                 <a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a>
