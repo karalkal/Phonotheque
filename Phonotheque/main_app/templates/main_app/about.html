@@ -69,10 +69,10 @@
                     \u00c0-\u01ffa-zA-Z'\-])+$" </code>which is a complicated way to say that our user can have a name
                     like <strong>Jérémie O'Conor-IVANOVäüïöëÿâçéèêîïôčšžñáéíóúü</strong> but cannot be named R2D2,
                     number1, st*r or f### #ff. <br>
-                    Once an user is created with the default Django fields, a corresponding entry will be created in the
+                    Once an user is created with the Django-default fields, a corresponding entry will be created in the
                     <strong>Profile</strong> table as well (with null values for photo_URL, date_of_birth, gender,
                     description) by just linking the newly created user to their profile. <br>
-                    In other words, since in our Profile model we have the corresponding user as a primary key: <br>
+                    In other words, since in our Profile model we have the corresponding user as a primary key:<br>
                     <code>
                         class Profile(models.Model):<br>
                         &nbsp user = models.OneToOneField<br>
@@ -81,31 +81,44 @@
                         &nbsp primary_key=True)
                     </code><br>
                     in <code> register_user_create_profile</code> view we just create a profile with relevant pk: <br>
-                    <code>
-                        new_profile = Profile.objects.create(user=new_user) </code>
+                    <code> new_profile = Profile.objects.create(user=new_user) </code><br>
                 </p>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
 
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <h4 class="tm-text-primary mt-2 text-left"> Profile Editing</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     The profile is editable (names and email can be changed, username cannot) and additional data
-                    can be added if the user wishes to do so – gender (select from pre-defined options), description,
+                    can be added if the user wishes to do so – gender (selecting from pre-defined options), description,
                     date of birth (must be in range between today and 1920) and photo (the development version was based
-                    on uploading actual image files but deploying it is a bit too much hassle and requires submitting
-                    credit card details for verification which is not really desirable for the purpose of this
-                    project, therefore for development I switched to providing an URL to a profile photo instead).<br>
-                    The edit view (name could could have been more appropriate, I guess…) presents the user with a
-                    form to fill which actually consists of 2 forms - <code>user_form = UserEditForm </code> and <code>profile_form
-                    = ProfileEditForm</code>. By using the <code>@login_required</code> decorator the view makes sure
-                    only the logged-in user can edit their profile. <br>
-                    Once these have been filled and verified the data is
-                    being saved in the relevant columns in the <strong>User</strong> and <strong>Profile</strong>
-                    models. <br>
+                    on uploading actual image files but deploying it with media files seemed a bit too much hassle, e.g.
+                    submitting credit card details for verification, therefore the live version expects an URL for a
+                    profile photo instead).<br>
+                    Essentially, at this point the user can actually create a meaningful profile as upto this point
+                    their profile data contains nothing apart from reference to the relevant user entry.<br>
+                    The profile editing functionality is accessible from the <strong>Profiles</strong> link in the main
+                    menu. Clicking it redirects to a gallery-style list of all non-staff users. The logged-in
+                    user's profile will be displayed first, with turquoise background and with 'view', 'edit' and
+                    'delete' buttons.<br>
+                    The edit_user_and_profile (name could have been more appropriate, I guess…) presents the user with
+                    one visible form to fill which actually consists of 2 forms - <code>user_form = UserEditForm </code>
+                    and <code>profile_form = ProfileEditForm</code>. By using the <code>@login_required</code> decorator
+                    the view makes sure only the logged-in user can access this page. At the same time the verification
+                    <code> if user_instance != request.user and not request.user.is_staff:</code> ensures anyone who is
+                    not the logged-in user or isn't member of staff cannot access the page even if they try to
+                    manipulate the url - they will be redirected to the profiles-list page and a message "Yo! Are you
+                    trying to edit someone else's profile? Tut-tut..." will be displayed.
+                    <br>
+                    If the validation is passed successfully , the verified data is being saved in the relevant columns
+                    in the <strong>User</strong> and <strong>Profile</strong> models. <br>
                     The user is then redirected to their own profile details page where they can view the
-                    updated data and a confirmation message is being displayed.
+                    updated data and a confirmation message is being displayed.<br>
+                </p>
+                <h4 class="tm-text-primary mt-2 text-left"> Profile Deletion</h4>
+                <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                 </p>
             </div>
+
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <h4 class="tm-text-primary mt-0 text-left"> Logging In</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
