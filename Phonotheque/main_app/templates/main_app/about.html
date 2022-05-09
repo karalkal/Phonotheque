@@ -52,8 +52,8 @@
             <h2 class="tm-text-primary mb-5 text-center">Accounts App</h2>
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
-                    Phonotheque uses the default Django User Model. As we know there are different schools of thought
-                    about what is the best way to customize the user model (creating a custom User model via
+                    Phonotheque uses the default Django User Model. There are different schools of thought
+                    on what is the best way to customize the user model (creating a custom User model via
                     AbstractBaseUser if the intention is to change the authentication procedure or via AbstractUser if
                     additional info about the user needs to be collected/stored being popular choices).<br>
                     I decided instead to stick to the other recommended strategy of extending the default Django User
@@ -71,7 +71,7 @@
                     number1, st*r or f### #ff. <br>
                     Once an user is created with the Django-default fields, a corresponding entry will be created in the
                     <strong>Profile</strong> table as well (with null values for photo_URL, date_of_birth, gender,
-                    description) by just linking the newly created user to their profile. <br>
+                    description) by just linking (via the Primary key) the newly created user to their profile. <br>
                     In other words, since in our Profile model we have the corresponding user as a primary key:<br>
                     <code>
                         class Profile(models.Model):<br>
@@ -82,6 +82,17 @@
                     </code><br>
                     in <code> register_user_create_profile</code> view we just create a profile with relevant pk: <br>
                     <code> new_profile = Profile.objects.create(user=new_user) </code><br>
+                </p>
+                <h4 class="tm-text-primary mt-2 text-left">View other users' profiles</h4>
+                <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+                    Logged in users can view profiles of other registered user. It is debatable whether this
+                    functionality is better suited for accounts app or the main app, but I concluded this was the more
+                    appropriate place for it. The relevant DetailView is named ProfileDetailView and by using
+                    <code>LoginRequiredMixin</code> we make sure only logged-in users can view the profile info of
+                    others. By overriding <code>def get_context_data(self, **kwargs)</code> method data for the
+                    searched_user is added to the context variable and can then be passed to the relevant template. The
+                    logged-in user's profile will be listed first in turquoise background, so that it could be
+                    distinguishable from the rest.)
                 </p>
             </div>
 
@@ -94,38 +105,53 @@
                     on uploading actual image files but deploying it with media files seemed a bit too much hassle, e.g.
                     submitting credit card details for verification, therefore the live version expects an URL for a
                     profile photo instead).<br>
-                    Essentially, at this point the user can actually create a meaningful profile as upto this point
-                    their profile data contains nothing apart from reference to the relevant user entry.<br>
+                    Essentially, at this point the newly created user can actually create a meaningful profile as upto
+                    this point their profile data contains nothing (apart from reference to the relevant user
+                    entry).<br>
                     The profile editing functionality is accessible from the <strong>Profiles</strong> link in the main
                     menu. Clicking it redirects to a gallery-style list of all non-staff users. The logged-in
                     user's profile will be displayed first, with turquoise background and with 'view', 'edit' and
                     'delete' buttons.<br>
                     The edit_user_and_profile (name could have been more appropriate, I guess…) presents the user with
-                    one visible form to fill which actually consists of 2 forms - <code>user_form = UserEditForm </code>
-                    and <code>profile_form = ProfileEditForm</code>. By using the <code>@login_required</code> decorator
-                    the view makes sure only the logged-in user can access this page. At the same time the verification
-                    <code> if user_instance != request.user and not request.user.is_staff:</code> ensures anyone who is
-                    not the logged-in user or isn't member of staff cannot access the page even if they try to
-                    manipulate the url - they will be redirected to the profiles-list page and a message "Yo! Are you
-                    trying to edit someone else's profile? Tut-tut..." will be displayed.
-                    <br>
+                    one visible form to fill which actually consists of 2 model forms - <code>user_form =
+                    UserEditForm </code> and <code>profile_form = ProfileEditForm</code>. By using the <code>@login_required</code>
+                    decorator the view makes sure only the logged-in user can access this page. At the same time the
+                    verification <code> if user_instance != request.user and not request.user.is_staff:</code> ensures
+                    anyone who is not the logged-in user or isn't member of staff cannot access the page even if they
+                    try to manipulate the url - they will be redirected to the profiles-list page and a message "Yo! Are
+                    you trying to edit someone else's profile? Tut-tut..." will be displayed. <br>
                     If the validation is passed successfully , the verified data is being saved in the relevant columns
-                    in the <strong>User</strong> and <strong>Profile</strong> models. <br>
+                    in the <strong>User</strong> and <strong>Profile</strong> tables. <br>
                     The user is then redirected to their own profile details page where they can view the
-                    updated data and a confirmation message is being displayed.<br>
+                    updated data; a confirmation message is being displayed too.<br>
+                    Staff users can edit regular users' profiles and have an additional button appearing above the
+                    currently viewed user's data - if the users is <code> if request.user.is_staff:</code> they can
+                    switch between DE-activating or RE-activating the relevant profile with <code>
+                    user_to_edit.is_active = not user_to_edit.is_active </code> (This functionality is implemented in a
+                    dedicated <code>deactivate_or_reactivate_user</code> view). Deactivated users will no longer be able
+                    to log in to the system and their profiles will be visible to staff (displayed with reddish
+                    background) but will remain invisible to regular users.<br>
                 </p>
-                <h4 class="tm-text-primary mt-2 text-left"> Profile Deletion</h4>
-                <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
-                    Profile deletion is being accessed in pretty much the same way (via <strong>Profiles</strong> link.
-                    Logged-in user's own profile is first in list and has a <strong>Delete</strong> button below the
-                    Profile Editing section.<br>
-                    Staff users with the appropriate permissions will have the ability to not only edit but also delete
-                    regular users' profiles. A second category separation of duties applies also to staff permissions to
-                    edit or edit AND delete comments (see the relevant section below.)<br>
-
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
+
+                <h4 class="tm-text-primary mt-2 text-left"> Profile Deletion</h4>
+                <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+                    Profile deletion functionality is being accessed in pretty much the same way (via
+                    <strong>Profiles</strong> link). Logged-in user's own profile (first in list and with turquoise
+                    background) has a <strong>Delete</strong> button displayed. If they click it they will view their
+                    profile data and be asked if they wanted to proceed with the deletion.<br>
+                    Staff users with the appropriate permissions have the ability to not only edit but also delete
+                    regular users' profiles. (A two-category separation of duties applies also to staff permissions
+                    to edit or edit AND delete comments - see the Admin section below.)<br>
+                    Again, if an unauthorised user attempts to delete another user's profile by messing up with the url,
+                    they will be prevented from doing so and will get a message "Ooopsy! User {instance.username} won't
+                    be happy if you delete their account. Luckily you can't do it.)"<br>
+                    If authorised the user will see the <code>UserAndProfileDeleteForm</code>ModelForm which will
+                    display relevant data about the profile (username and date joined amongst others) and ask if the
+                    user is sure they wish to proceed with the deletion.<br>
+                </p>
                 <h4 class="tm-text-primary mt-0 text-left"> Logging In</h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     Logging in functionality relies on the default Django CBV LoginView. By overwriting its <code>def
@@ -143,14 +169,6 @@
                     successfully logged out from your account.” and “You can either close this tab or log in again”) to
                     be displayed as well
                 </p>
-                <h4 class="tm-text-primary mt-2 text-left">View other users profiles</h4>
-                <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
-                    Logged in users can view profiles of other registered user. It is debatable whether this
-                    functionality is better suited for accounts app or the main app, but I concluded this was the more
-                    appropriate place for it. The relevant view DetailView is named ProfileDetailView and by using
-                    <code>LoginRequiredMixin</code> we make sure only logged-in users can view the profile info of
-                    others. By overriding <code>def get_context_data(self, **kwargs)</code> method data for the
-                    searched_user is added to the context variable and can then be passed to the relevant template.</p>
                 <h4 class="tm-text-primary mt-2 text-left"> Password change </h4>
                 <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
                     Logged in users can change their passwords by inheriting the PasswordChangeView CBV from
