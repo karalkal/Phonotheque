@@ -13,6 +13,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 # DEBUG = False
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
+# ALLOWED_HOSTS=['*']
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
 
 INSTALLED_APPS = [
