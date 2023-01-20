@@ -8,8 +8,8 @@
 
 ##### To run the app locally - [VSCode Instructions] (https://code.visualstudio.com/docs/python/tutorial-django):
 NB: Won't run with the VPN on!
-
-	```sudo apt-get install python3-venv    # If needed
+	``` 
+	sudo apt-get install python3-venv    # If needed
 	python3 -m venv .venv
 	```
 Each time activate venv first: 
