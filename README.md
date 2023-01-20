@@ -17,24 +17,21 @@ Command Palette (View > Command Palette), select the Python: Select Interpreter 
 `python -m pip install --upgrade pip`  
 `pip install -r requirements.txt`  
 NB Avoid installing backports.zoneinfo when using python >= 3.9 
-see [this article](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)
-		
+see [this article](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)  		
 `sudo docker-compose up`  
-might need to install it first, if error "address in use", see section below.
-
+Might need to install it first.  
+If error "address in use", see section below.
 At each reopening of the app:  
 `python manage.py migrate`  
 `python manage.py runserver`
----
+***
 #### To stop/kill postgress container:
 Stop all volumes:  
-```
-sudo docker-compose down -v
-```  
+`sudo docker-compose down -v`  
 or
-if ```lsof -i :5432``` doesn't show you any output, you can use 
-```sudo ss -lptn 'sport = :5432'``` to see what process is bound to the port.  
-Proceed further with ```kill <pid>```
+if `lsof -i :5432` doesn't show you any output, you can use 
+`sudo ss -lptn 'sport = :5432'` to see what process is bound to the port.  
+Proceed further with `kill <pid>`
 
 	
 
