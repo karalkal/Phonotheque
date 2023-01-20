@@ -19,7 +19,6 @@ APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
 # ALLOWED_HOSTS=['localhost', '127.0.0.1']
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
-print(ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     'Phonotheque.accounts_app',
@@ -75,6 +74,7 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', '5432'),  # if no env variable DB_PORT, return '5432'
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
