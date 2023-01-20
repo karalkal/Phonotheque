@@ -7,21 +7,16 @@
 ---
 
 ##### To run the app locally - [VSCode Instructions] (https://code.visualstudio.com/docs/python/tutorial-django):
-NB: Won't run with the VPN on
-
+NB: Won't run with the VPN on!
 	```
 	sudo apt-get install python3-venv    # If needed
 	python3 -m venv .venv
 	```
-Each time activate venv first:
-	```
-	source .venv/bin/activate
-	```
+Each time activate venv first: 
+```source .venv/bin/activate```
 Command Palette (View > Command Palette), select the Python: Select Interpreter command: select /.venv or .\.venv
-
-	```
-	python -m pip install --upgrade pip
-	pip install -r requirements.txt```
+```python -m pip install --upgrade pip
+pip install -r requirements.txt```
 NB Avoid installing backports.zoneinfo when using python >= 3.9 
 see https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta
 		
