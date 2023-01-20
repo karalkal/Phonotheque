@@ -13,12 +13,14 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'sk')
 
-# DEBUG = os.getenv('DEBUG', 'False') == 'True'
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+# DEBUG = False
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
 # ALLOWED_HOSTS=['localhost', '127.0.0.1']
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
+
+CSRF_TRUSTED_ORIGINS = ['https://phonotheque.up.railway.app/']
 
 INSTALLED_APPS = [
     'Phonotheque.accounts_app',
