@@ -22,9 +22,19 @@ To run app locally:
 		# see https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta
 		
 	sudo docker-compose up # might need to install it first
+
 	python manage.py migrate
 	python manage.py runserver 
 	# default 8000 - otherwise python manage.py runserver 5000
 	# Might have to jiggle with the allowed hosts a bit too
+
+
+To stop postgress container:
+Stop all volumes - sudo docker-compose down -v
+OR
+If lsof -i :5432 doesn't show you any output, you can use sudo ss -lptn 'sport = :5432' to see what process is bound to the port.
+
+Proceed further with kill <pid>
+
 	
 

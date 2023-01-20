@@ -1,7 +1,6 @@
 asgiref==3.5.0
 async-generator==1.10
 attrs==21.4.0
-backports.zoneinfo;python_version<"3.9"
 beautifulsoup4==4.10.0
 bs4==0.0.1
 certifi==2021.10.8
@@ -29,6 +28,7 @@ pycparser==2.21
 pyOpenSSL==22.0.0
 pyparsing==3.0.8
 PySocks==1.7.1
+python-dotenv==0.21.0
 PyYAML==6.0
 requests==2.27.1
 six==1.16.0

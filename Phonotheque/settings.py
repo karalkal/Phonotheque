@@ -1,6 +1,10 @@
 import os
 from pathlib import Path
 
+# To read vars from .env
+from dotenv import load_dotenv
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,11 +14,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'sk')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-# DEBUG = False
+# DEBUG = True
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
-# ALLOWED_HOSTS=['*']
+# ALLOWED_HOSTS=['localhost', '127.0.0.1']
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
+print(ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     'Phonotheque.accounts_app',
