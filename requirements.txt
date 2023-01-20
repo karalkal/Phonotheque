@@ -22,7 +22,7 @@ packaging==21.3
 Pillow==9.0.1
 platformdirs==2.5.1
 pluggy==1.0.0
-psycopg2-binary==2.9.3
+psycopg2-binary==2.9.5
 py==1.11.0
 pycparser==2.21
 pyOpenSSL==22.0.0
