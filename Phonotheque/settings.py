@@ -14,13 +14,15 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv('SECRET_KEY', 'sk')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-# DEBUG = False
+
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
-# ALLOWED_HOSTS=['localhost', '127.0.0.1']
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
 
-CSRF_TRUSTED_ORIGINS = ['https://*.phonotheque.up.railway.app/','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.phonotheque.up.railway.app/',
+    'https://*.127.0.0.1'
+]
 
 INSTALLED_APPS = [
     'Phonotheque.accounts_app',
@@ -50,8 +52,7 @@ ROOT_URLCONF = 'Phonotheque.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,7 +74,8 @@ DATABASES = {
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', '11111111'),
         'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432'),  # if no env variable DB_PORT, return '5432'
+        # if no env variable DB_PORT, return '5432'
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
