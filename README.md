@@ -17,7 +17,7 @@ Command Palette (View > Command Palette), select the Python: Select Interpreter 
 `python -m pip install --upgrade pip`  
 `pip install -r requirements.txt`  
 NB Avoid installing backports.zoneinfo when using python >= 3.9 
-see [this article](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)  		
+see [this article](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)  
 `sudo docker-compose up`  
 Might need to install it first.  
 If error "address in use", see section below.
