@@ -1,7 +1,7 @@
 # Phonotheque
 ### Student project in Django - social media/forum website based on users' favourite music albums
 
-##### The web application has been deployed [HERE](https://web-production-b677.up.railway.app/)
+### The web application has been deployed [HERE](https://web-production-b677.up.railway.app/)
 ##### The project is still under development... so am I, hence many things will not look right. Up-to-date information about its purpose, structure, operation and progress can be found [HERE](https://web-production-b677.up.railway.app/about/)
 ---
 
@@ -15,7 +15,7 @@ Each time activate venv first:
 
 Command Palette (View > Command Palette), select the Python: Select Interpreter command: select /.venv or .\.venv  
 `python -m pip install --upgrade pip`
-`pip install -r requirements.txt`
+`pip install -r requirements.txt`  
 NB Avoid installing backports.zoneinfo when using python >= 3.9 
 see [this article](https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta)
 		
@@ -29,8 +29,8 @@ At each reopening of the app:
 Stop all volumes:
 	```
 	sudo docker-compose down -v
-	```
-OR
+	```  
+	OR  
 If ```lsof -i :5432``` doesn't show you any output, you can use 
 ```sudo ss -lptn 'sport = :5432'``` to see what process is bound to the port.
 Proceed further with ```kill <pid>```
