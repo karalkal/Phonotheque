@@ -20,7 +20,7 @@ APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 # ALLOWED_HOSTS=['localhost', '127.0.0.1']
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
 
-CSRF_TRUSTED_ORIGINS = ['https://phonotheque.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://*.phonotheque.up.railway.app/','https://*.127.0.0.1']
 
 INSTALLED_APPS = [
     'Phonotheque.accounts_app',
