@@ -75,6 +75,8 @@ DATABASES = {
     }
 }
 
+print(DATABASES)
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
