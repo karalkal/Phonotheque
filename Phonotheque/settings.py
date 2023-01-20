@@ -13,8 +13,8 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'sk')
 
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
-# DEBUG = True
+# DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = False
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
 # ALLOWED_HOSTS=['localhost', '127.0.0.1']
@@ -74,8 +74,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', '5432'),  # if no env variable DB_PORT, return '5432'
     }
 }
-
-print(DATABASES)
 
 
 AUTH_PASSWORD_VALIDATORS = [

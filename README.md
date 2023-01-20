@@ -1,40 +1,40 @@
 # Phonotheque
 Student project in Django - social media/forum website based on users' favourite music albums
+***
 
-The web application has been deployed at:
-*********
+## The web application has been deployed [HERE]: (https://web-production-b677.up.railway.app/)
 
-The project is under development now, up-to-date information about its current progress and state can be found in its About section at:
-*********
+## The project is still under development... so am I, hence many things will not look right.
+## Up-to-date information about its purpose, structure, operation and progress can be found [HERE]: (https://web-production-b677.up.railway.app/about/)
+---
 
+### To run the app locally - [VSCode Instructions] (https://code.visualstudio.com/docs/python/tutorial-django):
+NB: Won't run with the VPN on
 
-To run app locally:
-	# Won't run with the VPN on
-	# Instructions at: https://code.visualstudio.com/docs/python/tutorial-django
-	sudo apt-get install python3-venv    # If needed
-	python3 -m venv .venv
-	source .venv/bin/activate
-	# Command Palette (View > Command Palette), select the Python: Select Interpreter command: select /.venv or .\.venv
+	```sudo apt-get install python3-venv    # If needed
+	python3 -m venv .venv```
+Each time activate venv first:
+	```source .venv/bin/activate```
+Command Palette (View > Command Palette), select the Python: Select Interpreter command: select /.venv or .\.venv
 
-	python -m pip install --upgrade pip
-	pip install -r requirements.txt 
-		# NB Avoid installing backports.zoneinfo when using python >= 3.9 
-		# see https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta
+	```python -m pip install --upgrade pip
+	pip install -r requirements.txt```
+NB Avoid installing backports.zoneinfo when using python >= 3.9 
+see https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta
 		
-	sudo docker-compose up # might need to install it first
+	```sudo docker-compose up # might need to install it first, if error "address in use", see section below```
 
-	python manage.py migrate
+At each reopening of the app:
+	```python manage.py migrate
 	python manage.py runserver 
-	# default 8000 - otherwise python manage.py runserver 5000
-	# Might have to jiggle with the allowed hosts a bit too
+	# default post is 8000, otherwise python manage.py runserver 5000
 
-
-To stop postgress container:
-Stop all volumes - sudo docker-compose down -v
+##### To stop/kill postgress container:
+Stop all volumes:
+	```sudo docker-compose down -v```
 OR
-If lsof -i :5432 doesn't show you any output, you can use sudo ss -lptn 'sport = :5432' to see what process is bound to the port.
-
-Proceed further with kill <pid>
+If ```lsof -i :5432``` doesn't show you any output, you can use ```sudo ss -lptn 'sport = :5432'``` to see what process is bound to the port.
+Proceed further with ```kill <pid>```
 
 	
 
