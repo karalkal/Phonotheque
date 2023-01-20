@@ -6,7 +6,7 @@ certifi==2020.6.20
 chardet==4.0.0
 classicmenu-indicator==0.11
 click==8.0.3
-colorama==0.4.4
+# colorama==0.4.4
 command-not-found==0.3
 cryptography==3.4.8
 cupshelpers==1.0
