@@ -1,43 +1,44 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Phonotheque - What's your favourite music?
+Phonotheque - What's your favourite music?
 {% endblock %}
 
 {{% block site_specific_menu %}
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 
-            <li class="nav-item">
-                <a class="nav-link nav-link-4" href="{% url 'index_page' %}">Home</a>
-            </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-1" href="{% url 'index_page' %}">Home</a>
+        </li>
 
-            {% if not request.user.is_authenticated %}
+        {% if not request.user.is_authenticated %}
 
-                <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="{% url 'login-page' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="{% url 'register' %}">Register</a>
-                </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-2" href="{% url 'login-page' %}">Log In</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-3" href="{% url 'register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-4 active" aria-current="page" href="{% url 'about_page' %}">About</a>
+        </li>
 
-            {% else %}
+        {% else %}
 
-                <li class="nav-item">
-                    <a class="nav-link nav-link-1" href="{% url 'dashboard' %}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="{% url 'logout-page' %}">Log Out</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="{% url 'profiles-list' %}">Profiles</a>
-                </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-2" href="{% url 'logout-page' %}">Log Out</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-3" href="{% url 'profiles-list' %}">Profiles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-4 active" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
+        </li>
 
-            {% endif %}
+        {% endif %}
 
-            <li class="nav-item">
-                <a class="nav-link nav-link-4 active" aria-current="page" href="{% url 'about_page' %}">About</a>
-            </li>
-        </ul>
-    </div>
+
+    </ul>
+</div>
 {% endblock %}
