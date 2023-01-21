@@ -103,6 +103,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+# for STATIC_ROOT vs. STATICFILES_DIRS see following topic:
+# https://stackoverflow.com/questions/24022558/differences-between-staticfiles-dir-static-root-and-media-root
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 

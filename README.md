@@ -32,6 +32,8 @@ or
 if `lsof -i :5432` doesn't show you any output, you can use 
 `sudo ss -lptn 'sport = :5432'` to see what process is bound to the port.  
 Proceed further with `kill <pid>`
+#### To compile staticfiles (required for deployment):
+python manage.py collectstatic
 
 	
 
