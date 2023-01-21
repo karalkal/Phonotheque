@@ -27,8 +27,10 @@ https://templatemo.com/tm-556-catalog-z
     border: 3px solid transparent;
     border-top-color: #3498db;
 
-    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spin 2s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
 
     z-index: 1002;
 }
@@ -44,8 +46,10 @@ https://templatemo.com/tm-556-catalog-z
     border: 3px solid transparent;
     border-top-color: #e74c3c;
 
-    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spin 3s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 3s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
 #loader:after {
@@ -59,33 +63,49 @@ https://templatemo.com/tm-556-catalog-z
     border: 3px solid transparent;
     border-top-color: #f9c922;
 
-    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spin 1.5s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 1.5s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
 @-webkit-keyframes spin {
     0% {
-        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg); /* IE 9 */
-        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
+
     100% {
-        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg); /* IE 9 */
-        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
 }
 
 @keyframes spin {
     0% {
-        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg); /* IE 9 */
-        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
+
     100% {
-        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg); /* IE 9 */
-        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
 }
 
@@ -96,9 +116,12 @@ https://templatemo.com/tm-556-catalog-z
     height: 100%;
     background: #222222;
     z-index: 1001;
-    -webkit-transform: translateX(0); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(0); /* IE 9 */
-    transform: translateX(0); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(0);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(0);
+    /* IE 9 */
+    transform: translateX(0);
+    /* Firefox 16+, IE 10+, Opera */
 }
 
 #loader-wrapper .loader-section.section-left {
@@ -111,18 +134,24 @@ https://templatemo.com/tm-556-catalog-z
 
 /* Loaded */
 .loaded #loader-wrapper .loader-section.section-left {
-    -webkit-transform: translateX(-100%); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(-100%); /* IE 9 */
-    transform: translateX(-100%); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(-100%);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(-100%);
+    /* IE 9 */
+    transform: translateX(-100%);
+    /* Firefox 16+, IE 10+, Opera */
 
     -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
     transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
 }
 
 .loaded #loader-wrapper .loader-section.section-right {
-    -webkit-transform: translateX(100%); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(100%); /* IE 9 */
-    transform: translateX(100%); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(100%);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(100%);
+    /* IE 9 */
+    transform: translateX(100%);
+    /* Firefox 16+, IE 10+, Opera */
 
     -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
     transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
@@ -137,9 +166,12 @@ https://templatemo.com/tm-556-catalog-z
 .loaded #loader-wrapper {
     visibility: hidden;
 
-    -webkit-transform: translateY(-100%); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateY(-100%); /* IE 9 */
-    transform: translateY(-100%); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateY(-100%);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateY(-100%);
+    /* IE 9 */
+    transform: translateY(-100%);
+    /* Firefox 16+, IE 10+, Opera */
 
     -webkit-transition: all 0.3s 1s ease-out;
     transition: all 0.3s 1s ease-out;
@@ -198,10 +230,6 @@ a:hover {
 
 .form-group {
     margin-bottom: 25px;
-}
-
-.tm-btn-big {
-    padding: 12px 90px 14px;
 }
 
 .navbar-toggler:focus {
@@ -296,44 +324,8 @@ a.tm-text-primary:hover {
     border-color: #CC66CC;
 }
 
-/*added for dashboard menu item*/
-.nav-link-5.active,
-.nav-link-5:hover {
-    border-color: black;
-}
-
-.tm-search-input {
-    width: 360px;
-    border-radius: 0;
-    padding: 12px 15px;
-    color: #009999;
-    border: none;
-}
-
-.tm-search-input:focus {
-    border-color: #009999;
-    box-shadow: 0 0 0 0.25rem rgb(0 153 153 / 0.25);
-}
-
-.tm-search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #009999;
-    opacity: 1; /* Firefox */
-}
-
-.tm-search-input::-ms-input-placeholder { /* Microsoft Edge */
-    color: #009999;
-}
-
-.tm-search-btn {
-    color: white;
-    background-color: #009999;
-    border: none;
-    width: 100px;
-    height: 50px;
-    margin-left: -1px;
-}
-
-p, .tm-text-gray {
+p,
+.tm-text-gray {
     color: #999;
 }
 
@@ -345,67 +337,6 @@ p, .tm-text-gray {
     color: #666;
 }
 
-.tm-video-item {
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    cursor: pointer;
-}
-
-.tm-video-item img {
-    position: relative;
-    display: block;
-    min-height: 100%;
-    max-width: 100%;
-    opacity: 0.8;
-}
-
-.tm-video-item figcaption {
-    padding: 2em;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 1.25em;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.tm-video-item figcaption::before,
-.tm-video-item figcaption::after {
-    pointer-events: none;
-}
-
-.tm-video-item figcaption,
-.tm-video-item figcaption > a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.tm-video-item figcaption > a {
-    z-index: 1000;
-    text-indent: 200%;
-    white-space: nowrap;
-    font-size: 0;
-    opacity: 0;
-}
-
-.tm-video-item h2 {
-    word-spacing: -0.15em;
-    font-weight: 300;
-}
-
-.tm-video-item h2,
-.tm-video-item p {
-    margin: 0;
-}
-
-.tm-video-item p {
-    letter-spacing: 1px;
-    font-size: 68.5%;
-}
-
 .tm-gallery div.d-block {
     animation: show .5s ease;
 }
@@ -415,85 +346,11 @@ p, .tm-text-gray {
         opacity: 0;
         transform: scale(0.9);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.tm-paging-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 60px;
-    font-size: 1.1rem;
-    color: #999;
-    background-color: #EEEEEE;
-    margin: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.tm-paging-link:hover,
-.tm-paging-link.active {
-    background-color: #009999;
-    color: #fff;
-}
-
-/*---------------*/
-/***** Ming *****/
-/*---------------*/
-
-figure.effect-ming {
-    background: #030c17;
-}
-
-figure.effect-ming img {
-    opacity: 0.9;
-    -webkit-transition: opacity 0.35s;
-    transition: opacity 0.35s;
-}
-
-figure.effect-ming figcaption::before {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    bottom: 30px;
-    left: 30px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.2);
-    content: '';
-    opacity: 0;
-    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-    transition: opacity 0.35s, transform 0.35s;
-    -webkit-transform: scale3d(1.4, 1.4, 1);
-    transform: scale3d(1.4, 1.4, 1);
-}
-
-figure.effect-ming h2 {
-    font-size: 1.3em;
-    opacity: 0;
-    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-    transition: opacity 0.35s, transform 0.35s;
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5);
-}
-
-figure.effect-ming:hover figcaption::before,
-figure.effect-ming:hover h2 {
-    opacity: 1;
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-}
-
-figure.effect-ming:hover figcaption {
-    background-color: rgba(58, 52, 42, 0);
-}
-
-figure.effect-ming:hover img {
-    opacity: 0.4;
 }
 
 .tm-footer-links li {
@@ -541,65 +398,6 @@ figure.effect-ming:hover img {
     font-size: 1.4rem;
 }
 
-/* Videos */
-#tm-video-container {
-    max-height: 400px;
-    overflow: hidden;
-    background-color: #333;
-    margin-bottom: 90px;
-    position: relative;
-}
-
-#tm-video {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-#tm-video-control-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    color: #e1e1e1;
-}
-
-.tm-video-details {
-    height: 100%;
-    padding: 40px;
-}
-
-/* About */
-.tm-row-1640 {
-    max-width: 1640px;
-}
-
-.tm-about-2-col {
-    max-width: 716px;
-}
-
-.tm-about-3-col {
-    max-width: 540px;
-}
-
-.tm-about-2-col,
-.tm-about-3-col {
-    margin-bottom: 50px;
-}
-
-.tm-about-icon-container {
-    width: 150px;
-    height: 150px;
-    border: 1px solid #009999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tm-about-img-text {
-    max-width: 940px;
-}
-
 /* Contact */
 select.form-control {
     border-radius: 0;
@@ -617,20 +415,6 @@ select:not([multiple]) {
     padding: 14px 20px;
     padding-right: 20px;
     color: #666;
-}
-
-.mapouter {
-    position: relative;
-    height: 480px;
-    width: 100%;
-    max-width: 480px;
-}
-
-.gmap-canvas {
-    overflow: hidden;
-    background: none !important;
-    height: 480px;
-    width: 100%;
 }
 
 .tm-contact-form {
@@ -686,9 +470,11 @@ select:not([multiple]) {
     color: #009999 !important;
 }
 
-.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.form-control::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #009999;
-    opacity: 1; /* Firefox */
+    opacity: 1;
+    /* Firefox */
 }
 
 @media (max-width: 991px) {
@@ -705,60 +491,20 @@ select:not([multiple]) {
         max-width: 870px;
     }
 
-    .tm-contact-form, .tm-address-col, .mapouter {
+    .tm-contact-form,
+    .tm-address-col {
         max-width: 100%;
     }
-
-    .tm-people-row {
-        max-width: 900px;
-    }
 }
 
-@media (max-width: 767px) {
-    .tm-paging-col {
-        flex-direction: column;
-    }
-
-    .tm-paging {
-        flex-wrap: wrap;
-    }
-
-    .tm-about-img-text {
-        max-width: 640px;
-    }
-
-    .tm-about-2-col, .tm-about-3-col {
-        margin-bottom: 50px;
-    }
-}
+@media (max-width: 767px) {}
 
 @media (max-width: 575px) {
     .tm-container-content {
         max-width: 420px;
     }
-
-    .tm-search-form {
-        padding-left: 15px;
-        padding-right: 15px;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .tm-search-input {
-        width: 100%;
-        max-width: 360px;
-    }
-
-    .tm-people-row {
-        max-width: 420px;
-    }
 }
 
-@media (max-width: 400px) {
-    .tm-btn-big {
-        padding: 12px 50px 14px;
-    }
-}
 
 @media (max-width: 334px) {
     .tm-social-links {

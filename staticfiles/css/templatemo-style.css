@@ -27,8 +27,10 @@ https://templatemo.com/tm-556-catalog-z
     border: 3px solid transparent;
     border-top-color: #3498db;
 
-    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spin 2s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
 
     z-index: 1002;
 }
@@ -44,8 +46,10 @@ https://templatemo.com/tm-556-catalog-z
     border: 3px solid transparent;
     border-top-color: #e74c3c;
 
-    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spin 3s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 3s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
 #loader:after {
@@ -59,33 +63,49 @@ https://templatemo.com/tm-556-catalog-z
     border: 3px solid transparent;
     border-top-color: #f9c922;
 
-    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    -webkit-animation: spin 1.5s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 1.5s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
 }
 
 @-webkit-keyframes spin {
     0% {
-        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg); /* IE 9 */
-        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
+
     100% {
-        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg); /* IE 9 */
-        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
 }
 
 @keyframes spin {
     0% {
-        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg); /* IE 9 */
-        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
+
     100% {
-        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg); /* IE 9 */
-        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
     }
 }
 
@@ -96,9 +116,12 @@ https://templatemo.com/tm-556-catalog-z
     height: 100%;
     background: #222222;
     z-index: 1001;
-    -webkit-transform: translateX(0); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(0); /* IE 9 */
-    transform: translateX(0); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(0);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(0);
+    /* IE 9 */
+    transform: translateX(0);
+    /* Firefox 16+, IE 10+, Opera */
 }
 
 #loader-wrapper .loader-section.section-left {
@@ -111,18 +134,24 @@ https://templatemo.com/tm-556-catalog-z
 
 /* Loaded */
 .loaded #loader-wrapper .loader-section.section-left {
-    -webkit-transform: translateX(-100%); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(-100%); /* IE 9 */
-    transform: translateX(-100%); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(-100%);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(-100%);
+    /* IE 9 */
+    transform: translateX(-100%);
+    /* Firefox 16+, IE 10+, Opera */
 
     -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
     transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
 }
 
 .loaded #loader-wrapper .loader-section.section-right {
-    -webkit-transform: translateX(100%); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateX(100%); /* IE 9 */
-    transform: translateX(100%); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateX(100%);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(100%);
+    /* IE 9 */
+    transform: translateX(100%);
+    /* Firefox 16+, IE 10+, Opera */
 
     -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
     transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
@@ -137,9 +166,12 @@ https://templatemo.com/tm-556-catalog-z
 .loaded #loader-wrapper {
     visibility: hidden;
 
-    -webkit-transform: translateY(-100%); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform: translateY(-100%); /* IE 9 */
-    transform: translateY(-100%); /* Firefox 16+, IE 10+, Opera */
+    -webkit-transform: translateY(-100%);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateY(-100%);
+    /* IE 9 */
+    transform: translateY(-100%);
+    /* Firefox 16+, IE 10+, Opera */
 
     -webkit-transition: all 0.3s 1s ease-out;
     transition: all 0.3s 1s ease-out;
@@ -200,10 +232,6 @@ a:hover {
     margin-bottom: 25px;
 }
 
-.tm-btn-big {
-    padding: 12px 90px 14px;
-}
-
 .navbar-toggler:focus {
     box-shadow: none;
 }
@@ -215,11 +243,6 @@ a:hover {
 
 .navbar-brand i {
     font-size: 2rem;
-}
-
-.tm-hero {
-    min-height: 200px;
-    background: transparent;
 }
 
 .tm-mt-60 {
@@ -302,38 +325,8 @@ a.tm-text-primary:hover {
     border-color: black;
 }
 
-.tm-search-input {
-    width: 360px;
-    border-radius: 0;
-    padding: 12px 15px;
-    color: #009999;
-    border: none;
-}
-
-.tm-search-input:focus {
-    border-color: #009999;
-    box-shadow: 0 0 0 0.25rem rgb(0 153 153 / 0.25);
-}
-
-.tm-search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #009999;
-    opacity: 1; /* Firefox */
-}
-
-.tm-search-input::-ms-input-placeholder { /* Microsoft Edge */
-    color: #009999;
-}
-
-.tm-search-btn {
-    color: white;
-    background-color: #009999;
-    border: none;
-    width: 100px;
-    height: 50px;
-    margin-left: -1px;
-}
-
-p, .tm-text-gray {
+p,
+.tm-text-gray {
     color: #999;
 }
 
@@ -375,7 +368,7 @@ p, .tm-text-gray {
 }
 
 .tm-video-item figcaption,
-.tm-video-item figcaption > a {
+.tm-video-item figcaption>a {
     position: absolute;
     top: 0;
     left: 0;
@@ -383,7 +376,7 @@ p, .tm-text-gray {
     height: 100%;
 }
 
-.tm-video-item figcaption > a {
+.tm-video-item figcaption>a {
     z-index: 1000;
     text-indent: 200%;
     white-space: nowrap;
@@ -415,6 +408,7 @@ p, .tm-text-gray {
         opacity: 0;
         transform: scale(0.9);
     }
+
     100% {
         opacity: 1;
         transform: scale(1);
@@ -619,13 +613,6 @@ select:not([multiple]) {
     color: #666;
 }
 
-.mapouter {
-    position: relative;
-    height: 480px;
-    width: 100%;
-    max-width: 480px;
-}
-
 .gmap-canvas {
     overflow: hidden;
     background: none !important;
@@ -686,9 +673,11 @@ select:not([multiple]) {
     color: #009999 !important;
 }
 
-.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.form-control::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #009999;
-    opacity: 1; /* Firefox */
+    opacity: 1;
+    /* Firefox */
 }
 
 @media (max-width: 991px) {
@@ -705,7 +694,9 @@ select:not([multiple]) {
         max-width: 870px;
     }
 
-    .tm-contact-form, .tm-address-col, .mapouter {
+    .tm-contact-form,
+    .tm-address-col,
+    .mapouter {
         max-width: 100%;
     }
 
@@ -727,7 +718,8 @@ select:not([multiple]) {
         max-width: 640px;
     }
 
-    .tm-about-2-col, .tm-about-3-col {
+    .tm-about-2-col,
+    .tm-about-3-col {
         margin-bottom: 50px;
     }
 }
@@ -735,18 +727,6 @@ select:not([multiple]) {
 @media (max-width: 575px) {
     .tm-container-content {
         max-width: 420px;
-    }
-
-    .tm-search-form {
-        padding-left: 15px;
-        padding-right: 15px;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .tm-search-input {
-        width: 100%;
-        max-width: 360px;
     }
 
     .tm-people-row {
