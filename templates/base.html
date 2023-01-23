@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,138 +12,141 @@
         {% endblock %}
     </title>
     <link rel="icon" type="image/x-icon" href="{% static 'img/icons8-vinyl-64.png' %}">
-    {#    <link rel="stylesheet" href="css/bootstrap.min.css">#}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/http_kit.fontawesome.com_ee9b1c6087.js' %}" crossorigin="anonymous"></script>
-    {#    <script src="{[https://kit.fontawesome.com/ee9b1c6087.js]}" crossorigin="anonymous"></script>#}
     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
-
-
 </head>
-<body>
-<!-- Page Loader -->
-<div id="loader-wrapper">
-    <div id="loader"></div>
 
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
-
-</div>
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-
-        {% if not request.user.is_authenticated %}
-            <a class="navbar-brand" href="{% url 'index_page' %}">
-        {% else %}
-            <a class="navbar-brand" href="{% url 'dashboard' %}">
-        {% endif %}
-        <i class="fa-solid fa-music"></i>
-        <strong>
-            Phonotheque
-        </strong>
-        {#            <i class="fa-solid fa-music" style="transform: rotateZ(180deg)"></i>#}
-
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        {#        ****  MENU  ****         #}
-        {% block site_specific_menu %}
-        {% endblock %}
-
-    </div>
-</nav>
-
-{#ERRORS IF ANY#}
-{% if messages %}
-    <div class="row mt-3 mb-0" style="text-align: center; background-color: #009999; ">
-        {#        <ul class="messages">#}
-        {% for message in messages %}
-            {#                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>#}
-            <h2 class="col-12" style="color: white; ">{{ message }}</h2>
-            {#                </li>#}
-        {% endfor %}
-        {#        </ul>#}
-    </div>
-{% endif %}
-
-<div style="background-image: url({% static 'img/red-vinyl-bw2.jpg' %});
+<body style="
+        background-image: url({% static 'img/red-vinyl-bw2.jpg' %});
         background-repeat: no-repeat;
-        background-size: cover;">
-    {% block main_content %}
-    {% endblock %}
-</div>
+        background-size: 100%;
+        background-attachment: fixed">
+    <!-- Page Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
 
-
-<footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
-    <div class="container-fluid tm-container-small">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
-                <h3 class="tm-text-primary mb-4 tm-footer-title">Disclaimer:</h3>
-                <p>
-                    Phonotheque is a basic student web project made using the Django framework.
-                    Please note it is not an official service and although all effort has been made
-                    to make it as secure and reliable as possible there is no guarantee this will be the case. <br>
-                    The front end design is loosely based on TemplateMo's beautiful and free <a
-                        href="https://templatemo.com/tm-556-catalog-z" class="tm-text-gray" rel="sponsored"
-                        target="_parent"><u>Catalog-Z HTML template</u></a>. If anything does not look quite right that
-                    would be as a result of me adapting it to my relevant needs... and possibly not doing it
-                    particularly well.
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
-                <h3 class="tm-text-primary mb-4 tm-footer-title">Contact me:</h3>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
-                <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
-                    <li class="mb-2"><a href="https://github.com/karalkal" target="_blank"><i
-                            class="fab fa-github"></i></a></li>
-                    <li class="mb-2"><a href="https://www.facebook.com/kalin.ka.52" target="_blank"><i
-                            class="fab fa-facebook"></i></a></li>
-                    <li class="mb-2"><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="mb-2"><a href="https://karaliev.com/" target="_blank"><i
-                            class="fab fa-instagram"></i></a></li>
-                </ul>
-            </div>
-
-            <div class="col-lg-6 col-md-12 col-12 px-5 mb-2">
-                <h3 class="tm-text-primary mb-4 tm-footer-title">Thanks to:</h3>
-                <ul class="d-flex justify-content-between">
-                    <li><a href="https://templatemo.com/" target="_blank">TemplateMo </a></li>
-                    <li><a href="https://softuni.bg/" target="_blank">SoftUni </a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia </a></li>
-                    <li><a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
-                <h3 class="tm-text-primary mb-4 tm-footer-title">Visit:</h3>
-                <p>
-                    Feel free to visit <a
-                        href="https://templatemo.com/tm-556-catalog-z" class="tm-text-gray" rel="sponsored"
-                        target="_parent"><u>karaliev.com</u></a> - an artist's portfolio website,
-                    created entirely by me using WordPress and a Sony α-series D SLR camera.
-                </p>
-            </div>
-        </div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
 
     </div>
-</footer>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
 
-{#<script src="js/plugins.js"></script>#}
-<script src="{% static 'js/plugins.js' %}"></script>
-<script>
-    $(window).on("load", function () {
-        $('body').addClass('loaded');
-    });
-</script>
+            {% if not request.user.is_authenticated %}
+            <a class="navbar-brand" href="{% url 'index_page' %}">
+                {% else %}
+                <a class="navbar-brand" href="{% url 'dashboard' %}">
+                    {% endif %}
+                    <i class="fa-solid fa-music"></i>
+                    <strong>
+                        Phonotheque
+                    </strong>
+                    {# <i class="fa-solid fa-music" style="transform: rotateZ(180deg)"></i>#}
+
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                {# **** MENU **** #}
+                {% block site_specific_menu %}
+                {% endblock %}
+
+        </div>
+    </nav>
+
+    {#ERRORS IF ANY#}
+    {% if messages %}
+    <div class="row mt-3 mb-0" style="text-align: center; background-color: #009999; ">
+        {# <ul class="messages">#}
+            {% for message in messages %}
+            {# <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>#}
+                <h2 class="col-12" style="color: white; ">{{ message }}</h2>
+                {# </li>#}
+                {% endfor %}
+                {# </ul>#}
+    </div>
+    {% endif %}
+
+    <div>
+        {% block main_content %}
+        {% endblock %}
+    </div>
+
+
+    <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+        <div class="container-fluid tm-container-small">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">Disclaimer:</h3>
+                    <p>
+                        Phonotheque is a basic student web project made using the Django framework.
+                        Please note it is not an official service and although all effort has been made
+                        to make it as secure and reliable as possible there is no guarantee this will be the case. <br>
+                        The front end design is loosely based on TemplateMo's beautiful and free <a
+                            href="https://templatemo.com/tm-556-catalog-z" class="tm-text-gray" rel="sponsored"
+                            target="_parent"><u>Catalog-Z HTML template</u></a>. If anything does not look quite right
+                        that
+                        would be as a result of me adapting it to my relevant needs... and possibly not doing it
+                        particularly well.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">Contact me:</h3>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
+                    <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
+                        <li class="mb-2"><a href="https://github.com/karalkal" target="_blank"><i
+                                    class="fab fa-github"></i></a></li>
+                        <li class="mb-2"><a href="https://www.facebook.com/kalin.ka.52" target="_blank"><i
+                                    class="fab fa-facebook"></i></a></li>
+                        <li class="mb-2"><a href="https://twitter.com" target="_blank"><i
+                                    class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="mb-2"><a href="https://karaliev.com/" target="_blank"><i
+                                    class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-12 px-5 mb-2">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">Thanks to:</h3>
+                    <ul class="d-flex justify-content-between">
+                        <li><a href="https://templatemo.com/" target="_blank">TemplateMo </a></li>
+                        <li><a href="https://softuni.bg/" target="_blank">SoftUni </a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia </a></li>
+                        <li><a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">Visit:</h3>
+                    <p>
+                        Feel free to visit <a href="https://templatemo.com/tm-556-catalog-z" class="tm-text-gray"
+                            rel="sponsored" target="_parent"><u>karaliev.com</u></a> - an artist's portfolio website,
+                        created entirely by me using WordPress and a Sony α-series D SLR camera.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    
+    <!-- <script src="js/plugins.js"></script> -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script>
+        $(window).on("load", function () {
+            $('body').addClass('loaded');
+        });
+    </script>
 </body>
+
 </html>
