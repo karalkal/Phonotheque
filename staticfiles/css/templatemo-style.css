@@ -1,10 +1,15 @@
 /*
-
 TemplateMo 556 Catalog-Z
-
 https://templatemo.com/tm-556-catalog-z
-
 */
+
+body { 
+    background: url(../img/red-vinyl-bw2.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
 
 #loader-wrapper {
     position: fixed;
