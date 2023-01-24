@@ -17,11 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
 </head>
 
-<body style="
-        background-image: url({% static 'img/red-vinyl-bw2.jpg' %});
-        background-repeat: no-repeat;
-        background-size: 100%;
-        background-attachment: fixed">
+<body>
     <!-- Page Loader -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -77,7 +73,8 @@
     </div>
 
 
-    <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+    <footer class="pt-5 pb-3 tm-text-gray tm-footer">
+    {% comment %} <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer"> {% endcomment %}
         <div class="container-fluid tm-container-small">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
