@@ -14,7 +14,7 @@ class Album(models.Model):
     artist = models.ForeignKey(to=Artist,
                                on_delete=models.CASCADE)  # Foreign Key - probably won't be needed unless admin deletes Artist from DB
     fans = models.ManyToManyField(User, through='Collection')
-    title = models.CharField(max_length=35)
+    title = models.CharField(max_length=62)
     wiki_url = models.URLField()
     summary = models.TextField(null=True, blank=True, )
     resume = models.TextField(null=True, blank=True, )
