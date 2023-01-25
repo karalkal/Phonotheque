@@ -68,17 +68,24 @@ a:hover {
     margin-bottom: 25px;
 }
 
+.navbar {
+    background-color: hsla(137, 59%, 89%, .4);
+    flex-wrap: nowrap;
+    /* to avoid when resized menu appears underneath logo*/
+}
+
 .navbar-toggler:focus {
     box-shadow: none;
 }
 
 .navbar-brand {
-    color: var(--teal);
+    color: var(--tiffany-blue);
     font-size: 1.6rem;
 }
 
-.navbar-brand i {
-    font-size: 2rem;
+#logo-img {
+    width: 17%;
+    margin-right: 2%;
 }
 
 .tm-mt-60 {
@@ -112,6 +119,7 @@ a.tm-text-primary:hover {
 .tm-bg-gray {
     background-color: #EEEEEE;
 }
+
 
 .nav-item {
     margin-right: 30px;
@@ -222,24 +230,6 @@ p,
 }
 
 /* Contact */
-select.form-control {
-    border-radius: 0;
-}
-
-select.form-control option {
-    height: 30px;
-}
-
-select:not([multiple]) {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-position: right 15px center;
-    background-repeat: no-repeat;
-    padding: 14px 20px;
-    padding-right: 20px;
-    color: #666;
-}
-
 .tm-contact-form {
     max-width: 420px;
 }
