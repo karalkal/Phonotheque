@@ -1,28 +1,29 @@
-/*
-TemplateMo 556 Catalog-Z
-https://templatemo.com/tm-556-catalog-z
-*/
+:root {
+    /* CSS HSL */
+    /* CSS HSL */
+    --teal: hsla(179, 80%, 27%, 1);
+    --tiffany-blue: hsla(179, 78%, 42%, 1);
+    --aero-blue: hsla(137, 59%, 89%, 1);
+    --carmine-m-p: hsla(348, 73%, 49%, 1);
+    --dark-purple: hsla(316, 44%, 20%, 1);
+}
 
-body { 
-    background: url(../img/red-vinyl-bw2.jpg) no-repeat center center fixed; 
+body {
+    background: url(../img/vinyl_record.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  }
-
-
-p {
-    line-height: 1.8;
 }
 
 a {
     text-decoration: none;
     transition: all 0.3s ease;
+    color: var(--dark-purple);
 }
 
 a:hover {
-    color: #009999;
+    color: var(--carmine-m-p);
 }
 
 .container-fluid {
@@ -38,7 +39,7 @@ a:hover {
 }
 
 .btn-primary {
-    background-color: #009999;
+    background-color: var(--teal);
     border: 0;
     border-radius: 5px;
     padding: 12px 50px 14px;
@@ -52,7 +53,7 @@ a:hover {
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-    background-color: #009999;
+    background-color: var(--teal);
     pointer-events: all;
     cursor: not-allowed;
 }
@@ -72,7 +73,7 @@ a:hover {
 }
 
 .navbar-brand {
-    color: #3399CC;
+    color: var(--teal);
     font-size: 1.6rem;
 }
 
@@ -97,7 +98,7 @@ a:hover {
 }
 
 .tm-text-primary {
-    color: #009999;
+    color: var(--teal);
 }
 
 .tm-text-secondary {
@@ -112,14 +113,6 @@ a.tm-text-primary:hover {
     background-color: #EEEEEE;
 }
 
-.tm-input-paging {
-    width: 40px;
-    border-radius: 0;
-    border: 1px solid #CCCCCC;
-    background: #f4f4f4;
-    text-align: center;
-}
-
 .nav-item {
     margin-right: 30px;
 }
@@ -129,7 +122,7 @@ a.tm-text-primary:hover {
 }
 
 .nav-link {
-    color: #666666;
+    color: var(--dark-purple);
     border-bottom: 4px solid transparent;
     font-size: 1.2rem;
 }
@@ -193,7 +186,7 @@ p,
 }
 
 .tm-footer-links li a:hover {
-    color: #009999;
+    color: var(--teal);
 }
 
 .tm-social-links li {
@@ -217,7 +210,7 @@ p,
 
 .tm-social-links li a:hover {
     color: #fff;
-    background-color: #009999;
+    background-color: var(--teal);
 }
 
 .tm-footer {
@@ -291,18 +284,18 @@ select:not([multiple]) {
 
 .tm-social li a:hover i {
     color: #fff;
-    background-color: #009999;
+    background-color: var(--teal);
 }
 
 .form-control,
 input:-internal-autofill-selected,
 select:not([multiple]) {
-    color: #009999 !important;
+    color: var(--teal) !important;
 }
 
 .form-control::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #009999;
+    color: var(--teal);
     opacity: 1;
     /* Firefox */
 }
