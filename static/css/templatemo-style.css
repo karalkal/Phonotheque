@@ -52,7 +52,7 @@ a:hover {
 
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: #086969;
+  background-color: var(--carmine-m-p);
 }
 
 .btn-primary.disabled,
@@ -142,7 +142,7 @@ a.tm-text-primary:hover {
   border-bottom: 4px solid transparent;
   font-size: 1.2rem;
 }
-
+/*
 .nav-link-1.active,
 .nav-link-1:hover {
   border-color: #33ccff;
@@ -161,6 +161,21 @@ a.tm-text-primary:hover {
 .nav-link-4.active,
 .nav-link-4:hover {
   border-color: #cc66cc;
+}
+*/
+
+.nav-link-1.active,
+.nav-link-2.active,
+.nav-link-3.active,
+.nav-link-4.active {
+  border-color: var(--teal);
+}
+
+.nav-link-1:hover,
+.nav-link-2:hover,
+.nav-link-3:hover,
+.nav-link-4:hover {
+  border-color: var(--carmine-m-p);
 }
 
 p,
