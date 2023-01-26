@@ -15,10 +15,10 @@
 <div class="container-fluid tm-container-content tm-mt-60">
 
     {# ROW 1#}
-    <div class="row p-5">
+    <div class="row p-5 pt-0">
         <div class="col-lg-4 col-md-4 col-sm-12">
             <h2 class="tm-text-primary mb-5">Introduction</h2>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Phonotheque is a basic student project created using the Python-based framework Django. <br>
                 It is intended to combine social media, online forum, data scraping and storage features. All these
                 are implemented at a very rudimentary level and Phonotheque should not be seen as anything but an
@@ -48,10 +48,10 @@
     </div> <!-- row -->
 
     {# ROW 2#}
-    <div class="row p-5">
+    <div class="row p-5 pt-0">
         <h2 class="tm-text-primary mb-5 text-center">Accounts App</h2>
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Phonotheque uses the default Django User Model. There are different schools of thought
                 on what is the best way to customize the user model (creating a custom User model via
                 AbstractBaseUser if the intention is to change the authentication procedure or via AbstractUser if
@@ -61,7 +61,7 @@
                 defaults - everything works out of the box, is compatible with all third party modules while at the
                 same time the Profile model provides extendability and flexibility.</p>
             <h4 class="tm-text-primary mt-2 text-left"> Registration</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 When an anonymous user wishes to create an account they are presented with the UserRegistrationForm.
                 This form takes care of the front end formatting and apart from the default Django validation
                 performs validation of the first name and second name entries – both should be with a length of
@@ -84,7 +84,7 @@
                 <code> new_profile = Profile.objects.create(user=new_user) </code><br>
             </p>
             <h4 class="tm-text-primary mt-2 text-left">View other users' profiles</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Logged in users can view profiles of other registered user. It is debatable whether this
                 functionality is better suited for accounts app or the main app, but I concluded this was the more
                 appropriate place for it. The relevant DetailView is named ProfileDetailView and by using
@@ -98,7 +98,7 @@
 
         <div class="col-lg-4 col-md-4 col-sm-12">
             <h4 class="tm-text-primary mt-2 text-left"> Profile Editing</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 The profile is editable (names and email can be changed, username cannot) and additional data
                 can be added if the user wishes to do so – gender (selecting from pre-defined options), description,
                 date of birth (must be in range between today and 1920) and photo (the development version was based
@@ -138,7 +138,7 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
 
             <h4 class="tm-text-primary mt-2 text-left"> Profile Deletion</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Profile deletion functionality is being accessed in pretty much the same way (via
                 <strong>Profiles</strong> link). Logged-in user's own profile (first in list and with turquoise
                 background) has a <strong>Delete</strong> button displayed. If they click it they will view their
@@ -154,7 +154,7 @@
                 user is sure they wish to proceed with the deletion.<br>
             </p>
             <h4 class="tm-text-primary mt-0 text-left"> Logging In</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Logging in functionality relies on the default Django CBV LoginView. By overwriting its <code>def
                     __init__(self, *args, **kwargs)</code> method we ensure that the login form is displayed with the
                 required styling – this approach seems more straightforward than creating a custom
@@ -163,7 +163,7 @@
                 users will be able to edit their profiles.
             </p>
             <h4 class="tm-text-primary mt-2 text-left"> Logging Out</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Logging out also relies on the default LogoutView. Once logged out, the user will be redirected to
                 the index page by using <code>next_page = 'index_page'</code> while overriding its <code> def
                     dispatch(self, request, *args, **kwargs) </code>method will add appropriate messages (“You have
@@ -171,7 +171,7 @@
                 be displayed as well
             </p>
             <h4 class="tm-text-primary mt-2 text-left"> Password change </h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Logged in users can change their passwords by inheriting the PasswordChangeView CBV from
                 <code>django.contrib.auth.views</code>. Again, the relevant form is displayed with the required
                 styling by overwriting its <code>def __init__(self, *args, **kwargs)</code> method.
@@ -180,10 +180,10 @@
     </div> <!-- row -->
 
     {# ROW 3#}
-    <div class="row p-5">
+    <div class="row p-5 pt-0">
         <h2 class="tm-text-primary mb-5 text-center">Main App</h2>
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 The main app allows users to share their favourite albums as well as to discuss albums already
                 shared on the platform with other users. Obviously, an album is a very specific object (not only in
                 the programming sense of the word) – it is not comparable to sharing someone’s personal experiences
@@ -211,7 +211,7 @@
                 add new features – for example IM system, tagging system, automatic recommendations based on custom
                 criteria, recommendations from other users, creation of interest groups, ‘friendship’ FB-style…</p>
             <h4 class="tm-text-primary mt-2 text-left">Home Page/Index</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 The index page is accessible for both anonymous and logged-in users. The difference is that the
                 former will see a short message explaining the raison d'etre of this web page. Logged-in users
                 presumably will not need this.<br>
@@ -219,7 +219,7 @@
                 template will display a gallery-style list of all albums shared on the platform (ordered
                 chronologically, newest first) as well as the number of users who have liked each of them.</p>
             <h4 class="tm-text-primary mt-2 text-left">Album Details</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 <code>AlbumDetailView(views.DetailView)</code> is also visible to anonymous and logged-in users.
                 Anonymous users can view the stored album information and click a link to the full Wikipedia article
                 (opens in new tab). However, logged-in users will be able to:
@@ -232,7 +232,7 @@
                 <li> see which users have liked the same album</li>
                 <li> access the profile pages of these users by being redirected to the relevant URL</li>
             </ul>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 To achieve all that the view performs a series of queries which are then added to the context (with
                 <code> get_context_data(self, **kwargs)</code>) alongside the Comment form and sent to the template.
                 The template then has access to variables like <code>others_who_liked_it</code>,
@@ -243,7 +243,7 @@
 
         <div class="col-lg-4 col-md-4 col-sm-12">
             <h4 class="tm-text-primary mt-2 text-left"> Artist Album List </h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 The artist name will be clickable in the album details template and will redirect to another
                 <code>ListView</code> whose template will display a page which looks visually very similar to the
                 index one but with albums related to the selected artist only. This is being achieved by overriding
@@ -263,7 +263,7 @@
             </p>
 
             <h4 class="tm-text-primary mt-2 text-left"> Comments </h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 The <code>class CommentCreateView</code> inherits from <code>views.CreateView</code> and
                 <code>PermissionRequiredMixin</code>,
                 i.e. only logged-in users will be able to view comments and post new ones. If an user crates a new
@@ -282,7 +282,7 @@
             </p>
 
             <h4 class="tm-text-primary mt-2 text-left">Dashboard</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Logged-in users have access to their personalized dashboard. Actually this is the page they are
                 being redirected to as soon as they are logged in. <br>It lists, again gallery-style and with
                 pagination (4 items on a page) their favourite albums while the two forms below initiate the
@@ -298,7 +298,7 @@
             </p>
 
             <h4 class="tm-text-primary mt-2 text-left">Retrieving the data from Wikipedia</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 Each of these views calls a separate function which does the Wikipedia search for us.<br>
                 1) <code>def get_wiki_info_by_album_name(search_term)</code> will initially retrieve a
                 <strong>wikipedia.page
@@ -314,7 +314,7 @@
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 2) <code>def get_wiki_info_from_url(album_url)</code> works in a similar and maybe not the optimal
                 manner - there might be a more intelligent method to get wikipedia info from a wikipedia link rather
                 than obtain a string from the link itself and then use it to search the website. It will strip
@@ -335,7 +335,7 @@
                 views. </p>
 
             <h4 class="tm-text-primary mt-2 text-left">Saving the data from Wikipedia</h4>
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 As mentioned before the data from Wikipedia will be returned to either
                 <code>find_album_by_title_and_artist(request) view</code> or <code>find_album_by_url(request)
                     view</code>. The first one basically prepares the search term based on the user input and invokes
@@ -369,10 +369,10 @@
         </div>
     </div> <!-- row -->
 
-    <div class="row p-5">
+    <div class="row p-5 pt-0">
         <h2 class="tm-text-primary mb-5 text-center">Admin Panel/Functionalities</h2>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 The permissions system of Phonotheque is based on 3 staff groups with different level of
                 authorisation to manage the DB. Obviously, the Super Users group will have full add, delete, change,
                 view privileges. <br>
@@ -382,7 +382,7 @@
             </p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <p class="col-12 tm-text-primary" style="color: #001421; font-size: 1.25em">
+            <p class="col-12 p--about--text">
                 There is also a GUI covering the Comment model where this de-activation/deletion can be made.<br>
                 If an user logs in as moderator they can perform the aforementioned activities and unlike regular
                 users they will be able to see inactive comments as well. <br>
