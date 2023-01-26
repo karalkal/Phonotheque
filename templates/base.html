@@ -35,7 +35,8 @@
                 {% else %}
                 <a class="navbar-brand" href="{% url 'dashboard' %}">
                     {% endif %}
-                    <i class="fa-solid fa-music"></i>
+                    {% comment %} <i class="fa-solid fa-music"></i> {% endcomment %}
+                    <img src="{% static 'img/logo.svg' %}" alt="abstract logo notes and keyboard" id="logo-img">
                     <strong>
                         Phonotheque
                     </strong>
