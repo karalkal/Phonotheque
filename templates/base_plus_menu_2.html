@@ -15,7 +15,7 @@ Phonotheque - What's your favourite music?
         {% if not request.user.is_authenticated %}
 
         <li class="nav-item">
-            <a class="nav-link nav-link-2 active" aria-current="page" href="{% url 'login-page' %}">Log In</a>
+            <a class="nav-link nav-link-2 active" aria-current="page" href="{% url 'login-page' %}">Sign In</a>
         </li>
         <li class="nav-item">
             <a class="nav-link nav-link-3" href="{% url 'register' %}">Register</a>

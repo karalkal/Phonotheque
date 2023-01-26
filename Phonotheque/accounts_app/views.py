@@ -139,7 +139,7 @@ class UserLogoutView(auth_views.LogoutView):
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
         messages.add_message(request, messages.INFO, 'You have successfully logged out from your account.')
-        messages.add_message(request, messages.INFO, 'You can either close this tab or log in again.')
+        messages.add_message(request, messages.INFO, 'You can either close this tab or Sign In again.')
         return response
 
 

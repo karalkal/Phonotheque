@@ -130,7 +130,7 @@
                 switch between DE-activating or RE-activating the relevant profile with <code>
                     user_to_edit.is_active = not user_to_edit.is_active </code> (This functionality is implemented in a
                 dedicated <code>deactivate_or_reactivate_user</code> view). Deactivated users will no longer be able
-                to log in to the system and their profiles will be visible to staff (displayed with reddish
+                to Sign In to the system and their profiles will be visible to staff (displayed with reddish
                 background) but will remain invisible to regular users.<br>
             </p>
         </div>
@@ -167,7 +167,7 @@
                 Logging out also relies on the default LogoutView. Once logged out, the user will be redirected to
                 the index page by using <code>next_page = 'index_page'</code> while overriding its <code> def
                     dispatch(self, request, *args, **kwargs) </code>method will add appropriate messages (“You have
-                successfully logged out from your account.” and “You can either close this tab or log in again”) to
+                successfully logged out from your account.” and “You can either close this tab or Sign In again”) to
                 be displayed as well
             </p>
             <h4 class="tm-text-primary mt-2 text-left"> Password change </h4>
