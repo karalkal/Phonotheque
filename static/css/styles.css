@@ -190,6 +190,11 @@ p,
   font-size: 1.25em;
 }
 
+code {
+  color: var(--carmine-m-p);
+  font-weight: bold;
+}
+
 .tm-text-gray-light {
   color: #ccc;
 }
