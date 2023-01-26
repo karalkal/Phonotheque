@@ -138,7 +138,7 @@ a.tm-text-primary:hover {
 
 .nav-link {
   font-family: var(--font-audiowave), cursive;
-  color: var(--dark-purple);
+  color: var(--teal);
   border-bottom: 4px solid transparent;
   font-size: 1.2rem;
 }
@@ -168,13 +168,15 @@ a.tm-text-primary:hover {
 .nav-link-2.active,
 .nav-link-3.active,
 .nav-link-4.active {
-  border-color: var(--teal);
+  color: var(--dark-purple);
+  border-color: var(--dark-purple);
 }
 
 .nav-link-1:hover,
 .nav-link-2:hover,
 .nav-link-3:hover,
 .nav-link-4:hover {
+  color: var(--carmine-m-p);
   border-color: var(--carmine-m-p);
 }
 
