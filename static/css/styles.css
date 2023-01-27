@@ -294,11 +294,17 @@ select:not([multiple]) {
 }
 
 @media (max-width: 575px) {
-  /* .tm-container-content {
-    max-width: 420px;
-  } */
+  .h2--about {
+    font-size: 1.3rem;
+  }
 
-  .p--about--text {
+  .h4--about,
+  .tm-footer-title {
+    font-size: 1rem;
+  }
+
+  .p--about--text,
+  footer p {
     font-size: 0.8rem;
   }
 }
