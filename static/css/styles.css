@@ -168,22 +168,14 @@ a:hover {
   border-color: var(--carmine-m-p);
 }
 
-p,
-.tm-text-gray {
-  color: #999;
+.p--about--text {
+  color: var(--dark-purple);
+  font-size: 1.25rem;
 }
 
 code {
   color: var(--carmine-m-p);
   font-weight: bold;
-}
-
-.tm-text-gray-light {
-  color: #ccc;
-}
-
-.tm-text-gray-dark {
-  color: #666;
 }
 
 .tm-gallery div.d-block {

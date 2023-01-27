@@ -16,25 +16,24 @@
 
     {# ROW 1#}
     <div class="row p-5 pt-0">
-        <h2 class="tm-text-primary mb-4 text-center">Disclaimer</h2>
-        <div class="col-12">
-            <p class="col-12 p--about--text">
-            Phonotheque is a web app built using the framework Django and other technologies.
-            The front end design is loosely based on TemplateMo's beautiful and free 
-            <a href="https://templatemo.com/tm-556-catalog-z" rel="sponsored"
-                target="_parent"><u>Catalog-Z HTML template</u></a> as well as on Bootstrap 5. 
-            Please note, the project is still under development and although all effort has been made
-            to deliver an aesthetically pleasing, functional and reliable product there is no guarantee this will be the case.             
-            If anything does not look/work quite right I would love to hear from you.
-            </p>
-        </div>
-    </div> <!-- row end -->
-
-
-    {# ROW 2#}
-    <div class="row p-5 pt-0">
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <h2 class="tm-text-primary mb-4">Introduction</h2>
+
+
+            <h2 class="tm-text-primary mb-4 text-center">Disclaimer</h2>
+            <div class="col-12">
+                <p class="col-12 p--about--text">
+                Phonotheque is a web app built using the framework Django and other technologies.
+                The front end design is loosely based on TemplateMo's beautiful and free 
+                <a href="https://templatemo.com/tm-556-catalog-z" rel="sponsored"
+                    target="_parent"><u>Catalog-Z HTML template</u></a> as well as on Bootstrap 5. 
+                Please note, the project is still under development and although all effort has been made
+                to deliver an aesthetically pleasing, functional and reliable product there is no guarantee this will be the case.             
+                If anything does not look/work quite right I would love to hear from you.
+                </p>
+            </div>
+
+
+            <h2 class="tm-text-primary mb-4 text-center">Introduction</h2>
             <p class="col-12 p--about--text">
                 Phonotheque is a basic student project created using the Python-based framework Django. <br>
                 It is intended to combine social media, online forum, data scraping and storage features. All these
@@ -56,15 +55,18 @@
                 or delete profiles, either by accessing the admin panel or via the website's own GUI. The superusers
                 will have full privileges to manipulate the DB.</p>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-12">
-            <h2 class="tm-text-primary mb-4 text-right">Entity Relationship Diagram</h2>
+
+        <div class="col-lg-1 col-md-1"></div>
+
+        <div class="col-lg-7 col-md-7 col-sm-12">
+            <h2 class="tm-text-primary mb-4 text-center">Entity Relationship Diagram</h2>
             <!-- <img src="../../../../static/img/ERD phonotheque.svg" alt="ERD-phonotheque" width="100%"> -->
-            <img src="{% static 'img/ERD phonotheque.svg' %}" alt="ERD-phonotheque" width="100%">
+            <img src="{% static 'img/ERD phonotheque-cropped.svg' %}" alt="ERD-phonotheque" width="100%">
 
         </div>
     </div> <!-- row end -->
 
-    {# ROW 3#}
+    {# ROW 2#}
     <div class="row p-5 pt-0">
         <h2 class="tm-text-primary mb-4 text-center">Accounts App</h2>
         <div class="col-lg-4 col-md-4 col-sm-12">
@@ -196,7 +198,7 @@
         </div>
     </div> <!-- row end -->
 
-    {# ROW 4#}
+    {# ROW 3#}
     <div class="row p-5 pt-0">
         <h2 class="tm-text-primary mb-4 text-center">Main App</h2>
         <div class="col-lg-4 col-md-4 col-sm-12">
@@ -241,7 +243,7 @@
                 Anonymous users can view the stored album information and click a link to the full Wikipedia article
                 (opens in new tab). However, logged-in users will be able to:
             </p>
-            <ul style="color: #001421; font-size: 1.25em; list-style-type: square;">
+            <ul class="p--about--text" style="list-style-type: square;">
                 <li> delete the album from their collection if it is present there</li>
                 <li> add the album to their collection if it is not present there</li>
                 <li> view comments posted by users</li>
@@ -384,8 +386,9 @@
                 favourites'<br>
             </p>
         </div>
-    </div> <!-- row -->
+    </div> <!-- row end-->
 
+    {# ROW 4#}
     <div class="row p-5 pt-0">
         <h2 class="tm-text-primary mb-4 text-center">Admin Panel/Functionalities</h2>
         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -408,9 +411,7 @@
                 the de-activated ones too.
             </p>
         </div>
+    </div> <!-- row end-->
 
-    </div>
-
-
-</div> <!-- container-fluid, tm-container-content -->
+</div> <!-- main container end -->
 {% endblock %}
