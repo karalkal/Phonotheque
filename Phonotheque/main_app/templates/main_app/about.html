@@ -12,28 +12,26 @@
 </style>
 
 {% block main_content %}
-<div class="container-fluid tm-container-content tm-mt-60">
+<div class="container-fluid tm-container-content mt-md-4">
 
     {# ROW 1#}
-    <div class="row p-5 pt-0">
-        <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="row px-lg-4 mb-2">
+        <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
 
-
-            <h2 class="tm-text-primary mb-4 text-center">Disclaimer</h2>
+            <h2 class="tm-text-primary mb-3 text-center h3--about">Disclaimer</h2>
             <div class="col-12">
                 <p class="col-12 p--about--text">
                 Phonotheque is a web app built using the framework Django and other technologies.
                 The front end design is loosely based on TemplateMo's beautiful and free 
                 <a href="https://templatemo.com/tm-556-catalog-z" rel="sponsored"
-                    target="_parent"><u>Catalog-Z HTML template</u></a> as well as on Bootstrap 5. 
+                    target="_parent"><u>Catalog-Z HTML template</u></a>as well as on Bootstrap 5. 
                 Please note, the project is still under development and although all effort has been made
                 to deliver an aesthetically pleasing, functional and reliable product there is no guarantee this will be the case.             
                 If anything does not look/work quite right I would love to hear from you.
                 </p>
             </div>
 
-
-            <h2 class="tm-text-primary mb-4 text-center">Introduction</h2>
+            <h2 class="tm-text-primary mb-3 text-center h3--about">Introduction</h2>
             <p class="col-12 p--about--text">
                 Phonotheque is a basic student project created using the Python-based framework Django. <br>
                 It is intended to combine social media, online forum, data scraping and storage features. All these
@@ -56,19 +54,18 @@
                 will have full privileges to manipulate the DB.</p>
         </div>
 
-        <div class="col-lg-1 col-md-1"></div>
 
-        <div class="col-lg-7 col-md-7 col-sm-12">
-            <h2 class="tm-text-primary mb-4 text-center">Entity Relationship Diagram</h2>
-            <!-- <img src="../../../../static/img/ERD phonotheque.svg" alt="ERD-phonotheque" width="100%"> -->
-            <img src="{% static 'img/ERD phonotheque-cropped.svg' %}" alt="ERD-phonotheque" width="100%">
+        <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12">
+            <h2 class="tm-text-primary mb-3 text-center h3--about">Entity Relationship Diagram</h2>
+            <!-- <img src="../../../../static/img/ERD phonotheque.svg" alt="ERD-phonotheque" width="100%">-->
+            <img src="{% static 'img/ERD phonotheque.svg' %}" alt="ERD-phonotheque" width="100%">
 
         </div>
-    </div> <!-- row end -->
+    </div><!-- row end -->
 
     {# ROW 2#}
-    <div class="row p-5 pt-0">
-        <h2 class="tm-text-primary mb-4 text-center">Accounts App</h2>
+    <div class="row px-lg-4 mb-2">
+        <h2 class="tm-text-primary mb-3 text-center h3--about">Accounts App</h2>
         <div class="col-lg-4 col-md-4 col-sm-12">
             <p class="col-12 p--about--text">
                 Phonotheque uses the default Django User Model. There are different schools of thought
@@ -79,17 +76,17 @@
                 model with a One-to-One relationship to a Profile model as I am perfectly happy with the Django User
                 defaults - everything works out of the box, is compatible with all third party modules while at the
                 same time the Profile model provides extendability and flexibility.</p>
-            <h4 class="tm-text-primary mt-2 text-left"> Registration</h4>
+            <h4 class="tm-text-primary text-left h4--about">Registration</h4>
             <p class="col-12 p--about--text">
                 When an anonymous user wishes to create an account they are presented with the UserRegistrationForm.
                 This form takes care of the front end formatting and apart from the default Django validation
                 performs validation of the first name and second name entries – both should be with a length of
                 between 2 and 35 characters and must be satisfying the condition <code>VALID_NAME_REGEX = r"^([
                     \u00c0-\u01ffa-zA-Z'\-])+$" </code>which is a complicated way to say that our user can have a name
-                like <strong>Jérémie O'Conor-IVANOVäüïöëÿâçéèêîïôčšžñáéíóúü</strong> but cannot be named R2D2,
+                like <strong>Jérémie O'Conor-IVANOVäüïöëÿâçéèêîïôčšžñáéíóúü</strong>but cannot be named R2D2,
                 number1, st*r or f### #ff. <br>
                 Once an user is created with the Django-default fields, a corresponding entry will be created in the
-                <strong>Profile</strong> table as well (with null values for photo_URL, date_of_birth, gender,
+                <strong>Profile</strong>table as well (with null values for photo_URL, date_of_birth, gender,
                 description) by just linking (via the Primary key) the newly created user to their profile. <br>
                 In other words, since in our Profile model we have the corresponding user as a primary key:<br>
                 <code>
@@ -99,16 +96,16 @@
                         &nbsp on_delete=models.CASCADE,<br>
                         &nbsp primary_key=True)
                     </code><br>
-                in <code> register_user_create_profile</code> view we just create a profile with relevant pk: <br>
-                <code> new_profile = Profile.objects.create(user=new_user) </code><br>
+                in <code>register_user_create_profile</code>view we just create a profile with relevant pk: <br>
+                <code>new_profile = Profile.objects.create(user=new_user) </code><br>
             </p>
-            <h4 class="tm-text-primary mt-2 text-left">View other users' profiles</h4>
+            <h4 class="tm-text-primary text-left h4--about">View other users' profiles</h4>
             <p class="col-12 p--about--text">
                 Logged in users can view profiles of other registered user. It is debatable whether this
                 functionality is better suited for accounts app or the main app, but I concluded this was the more
                 appropriate place for it. The relevant DetailView is named ProfileDetailView and by using
-                <code>LoginRequiredMixin</code> we make sure only logged-in users can view the profile info of
-                others. By overriding <code>def get_context_data(self, **kwargs)</code> method data for the
+                <code>LoginRequiredMixin</code>we make sure only logged-in users can view the profile info of
+                others. By overriding <code>def get_context_data(self, **kwargs)</code>method data for the
                 searched_user is added to the context variable and can then be passed to the relevant template. The
                 logged-in user's profile will be listed first in turquoise background, so that it could be
                 distinguishable from the rest.)
@@ -116,7 +113,7 @@
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <h4 class="tm-text-primary mt-2 text-left"> Profile Editing</h4>
+            <h4 class="tm-text-primary text-left h4--about">Profile Editing</h4>
             <p class="col-12 p--about--text">
                 The profile is editable (names and email can be changed, username cannot) and additional data
                 can be added if the user wishes to do so – gender (selecting from pre-defined options), description,
@@ -127,28 +124,28 @@
                 Essentially, at this point the newly created user can actually create a meaningful profile as upto
                 this point their profile data contains nothing (apart from reference to the relevant user
                 entry).<br>
-                The profile editing functionality is accessible from the <strong>Profiles</strong> link in the main
+                The profile editing functionality is accessible from the <strong>Profiles</strong>link in the main
                 menu. Clicking it redirects to a gallery-style list of all non-staff users. The logged-in
                 user's profile will be displayed first, with turquoise background and with 'view', 'edit' and
                 'delete' buttons.<br>
                 The edit_user_and_profile (name could have been more appropriate, I guess…) presents the user with
                 one visible form to fill which actually consists of 2 model forms - <code>user_form =
-                    UserEditForm </code> and <code>profile_form = ProfileEditForm</code>. By using the
+                    UserEditForm </code>and <code>profile_form = ProfileEditForm</code>. By using the
                 <code>@login_required</code>
                 decorator the view makes sure only the logged-in user can access this page. At the same time the
-                verification <code> if user_instance != request.user and not request.user.is_staff:</code> ensures
+                verification <code>if user_instance != request.user and not request.user.is_staff:</code>ensures
                 anyone who is not the logged-in user or isn't member of staff cannot access the page even if they
                 try to manipulate the url - they will be redirected to the profiles-list page and a message "Yo! Are
                 you trying to edit someone else's profile? Tut-tut..." will be displayed. <br>
                 If the validation is passed successfully , the verified data is being saved in the relevant columns
-                in the <strong>User</strong> and <strong>Profile</strong> tables. <br>
+                in the <strong>User</strong>and <strong>Profile</strong>tables. <br>
                 The user is then redirected to their own profile details page where they can view the
                 updated data; a confirmation message is being displayed too.<br>
                 Staff users can edit regular users' profiles and have an additional button appearing above the
-                currently viewed user's data - if the users is <code> if request.user.is_staff:</code> they can
+                currently viewed user's data - if the users is <code>if request.user.is_staff:</code>they can
                 switch between DE-activating or RE-activating the relevant profile with <code>
-                    user_to_edit.is_active = not user_to_edit.is_active </code> (This functionality is implemented in a
-                dedicated <code>deactivate_or_reactivate_user</code> view). Deactivated users will no longer be able
+                    user_to_edit.is_active = not user_to_edit.is_active </code>(This functionality is implemented in a
+                dedicated <code>deactivate_or_reactivate_user</code>view). Deactivated users will no longer be able
                 to Sign In to the system and their profiles will be visible to staff (displayed with reddish
                 background) but will remain invisible to regular users.<br>
             </p>
@@ -156,11 +153,11 @@
 
         <div class="col-lg-4 col-md-4 col-sm-12">
 
-            <h4 class="tm-text-primary mt-2 text-left"> Profile Deletion</h4>
+            <h4 class="tm-text-primary text-left h4--about">Profile Deletion</h4>
             <p class="col-12 p--about--text">
                 Profile deletion functionality is being accessed in pretty much the same way (via
-                <strong>Profiles</strong> link). Logged-in user's own profile (first in list and with turquoise
-                background) has a <strong>Delete</strong> button displayed. If they click it they will view their
+                <strong>Profiles</strong>link). Logged-in user's own profile (first in list and with turquoise
+                background) has a <strong>Delete</strong>button displayed. If they click it they will view their
                 profile data and be asked if they wanted to proceed with the deletion.<br>
                 Staff users with the appropriate permissions have the ability to not only edit but also delete
                 regular users' profiles. (A two-category separation of duties applies also to staff permissions
@@ -172,35 +169,35 @@
                 display relevant data about the profile (username and date joined amongst others) and ask if the
                 user is sure they wish to proceed with the deletion.<br>
             </p>
-            <h4 class="tm-text-primary mt-0 text-left"> Logging In</h4>
+            <h4 class="tm-text-primary text-left h4--about">Logging In</h4>
             <p class="col-12 p--about--text">
                 Logging in functionality relies on the default Django CBV LoginView. By overwriting its <code>def
-                    __init__(self, *args, **kwargs)</code> method we ensure that the login form is displayed with the
+                    __init__(self, *args, **kwargs)</code>method we ensure that the login form is displayed with the
                 required styling – this approach seems more straightforward than creating a custom
                 AuthenticationForm. The success URL is the logged in user’s dashboard (will be explained later).<br>
                 Once logged in the Register button in the main manu will be replaced with a Profile button where
                 users will be able to edit their profiles.
             </p>
-            <h4 class="tm-text-primary mt-2 text-left"> Logging Out</h4>
+            <h4 class="tm-text-primary text-left h4--about">Logging Out</h4>
             <p class="col-12 p--about--text">
                 Logging out also relies on the default LogoutView. Once logged out, the user will be redirected to
-                the index page by using <code>next_page = 'index_page'</code> while overriding its <code> def
+                the index page by using <code>next_page = 'index_page'</code>while overriding its <code>def
                     dispatch(self, request, *args, **kwargs) </code>method will add appropriate messages (“You have
                 successfully logged out from your account.” and “You can either close this tab or Sign In again”) to
                 be displayed as well
             </p>
-            <h4 class="tm-text-primary mt-2 text-left"> Password change </h4>
+            <h4 class="tm-text-primary text-left h4--about">Password change </h4>
             <p class="col-12 p--about--text">
                 Logged in users can change their passwords by inheriting the PasswordChangeView CBV from
                 <code>django.contrib.auth.views</code>. Again, the relevant form is displayed with the required
-                styling by overwriting its <code>def __init__(self, *args, **kwargs)</code> method.
+                styling by overwriting its <code>def __init__(self, *args, **kwargs)</code>method.
             </p>
         </div>
-    </div> <!-- row end -->
+    </div><!-- row end -->
 
     {# ROW 3#}
-    <div class="row p-5 pt-0">
-        <h2 class="tm-text-primary mb-4 text-center">Main App</h2>
+    <div class="row px-lg-4 mb-2">
+        <h2 class="tm-text-primary mb-3 text-center h3--about">Main App</h2>
         <div class="col-lg-4 col-md-4 col-sm-12">
             <p class="col-12 p--about--text">
                 The main app allows users to share their favourite albums as well as to discuss albums already
@@ -209,7 +206,7 @@
                 or ideas on a blog site or even listing items for sale on an online shop. A music album is an unique
                 item – it has properties which remain constant for everyone, anywhere and anytime -
                 its cover image, date of issue or musicians involved won't change. We need to somehow ensure our
-                website can <strong>identify the correct object</strong>> and make it available for sharing, liking
+                website can <strong>identify the correct object</strong>>and make it available for sharing, liking
                 or whatever else is required. <br>
                 Therefore, for this scenario to be meaningful it is essential to gather our data from a reliable
                 source and luckily Wikipedia (God bless everyone involved in the project!) provide great API
@@ -218,18 +215,18 @@
                 scraping’ but to some degree this is what we are doing here.) from Wikipedia’s API which has been
                 imported in the project (alongside some other modules which seem to have mutual dependencies). <br>
                 Once obtained, the album data is being displayed and if the user wishes they can add it to
-                their personal <strong>Collection </strong> albums (see ERD for clarification). <br>
+                their personal <strong>Collection </strong>albums (see ERD for clarification). <br>
                 By doing this they also create a
                 record for the Album in the DB as well as for the Artist but only if these are not already present
                 there. <br>
                 Then can then view their favourite albums in their personal dashboard and for each album they
                 can view additional info like comments from users and which other users, if any, have
-                liked this album (displayed in chronological order). <br> As a side note, I would say this
+                liked this album (displayed in chronological order). <br>As a side note, I would say this
                 particular part of the application provides significant
                 potential and incentive to continue working on it as there is a wide range of possibilities to
                 add new features – for example IM system, tagging system, automatic recommendations based on custom
                 criteria, recommendations from other users, creation of interest groups, ‘friendship’ FB-style…</p>
-            <h4 class="tm-text-primary mt-2 text-left">Home Page/Index</h4>
+            <h4 class="tm-text-primary text-left h4--about">Home Page/Index</h4>
             <p class="col-12 p--about--text">
                 The index page is accessible for both anonymous and logged-in users. The difference is that the
                 former will see a short message explaining the raison d'etre of this web page. Logged-in users
@@ -237,23 +234,23 @@
                 The index page functionality is based on Django’s default ListView. It implements pagination and the
                 template will display a gallery-style list of all albums shared on the platform (ordered
                 chronologically, newest first) as well as the number of users who have liked each of them.</p>
-            <h4 class="tm-text-primary mt-2 text-left">Album Details</h4>
+            <h4 class="tm-text-primary text-left h4--about">Album Details</h4>
             <p class="col-12 p--about--text">
-                <code>AlbumDetailView(views.DetailView)</code> is also visible to anonymous and logged-in users.
+                <code>AlbumDetailView(views.DetailView)</code>is also visible to anonymous and logged-in users.
                 Anonymous users can view the stored album information and click a link to the full Wikipedia article
                 (opens in new tab). However, logged-in users will be able to:
             </p>
             <ul class="p--about--text" style="list-style-type: square;">
-                <li> delete the album from their collection if it is present there</li>
-                <li> add the album to their collection if it is not present there</li>
-                <li> view comments posted by users</li>
-                <li> post a comment</li>
-                <li> see which users have liked the same album</li>
-                <li> access the profile pages of these users by being redirected to the relevant URL</li>
+                <li>delete the album from their collection if it is present there</li>
+                <li>add the album to their collection if it is not present there</li>
+                <li>view comments posted by users</li>
+                <li>post a comment</li>
+                <li>see which users have liked the same album</li>
+                <li>access the profile pages of these users by being redirected to the relevant URL</li>
             </ul>
             <p class="col-12 p--about--text">
                 To achieve all that the view performs a series of queries which are then added to the context (with
-                <code> get_context_data(self, **kwargs)</code>) alongside the Comment form and sent to the template.
+                <code>get_context_data(self, **kwargs)</code>) alongside the Comment form and sent to the template.
                 The template then has access to variables like <code>others_who_liked_it</code>,
                 <code>album_to_unlike_pk</code>,
                 <code>liked_by_current_user</code>.
@@ -261,13 +258,13 @@
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <h4 class="tm-text-primary mt-2 text-left"> Artist Album List </h4>
+            <h4 class="tm-text-primary text-left h4--about">Artist Album List </h4>
             <p class="col-12 p--about--text">
                 The artist name will be clickable in the album details template and will redirect to another
-                <code>ListView</code> whose template will display a page which looks visually very similar to the
+                <code>ListView</code>whose template will display a page which looks visually very similar to the
                 index one but with albums related to the selected artist only. This is being achieved by overriding
                 the methods:<br>
-                <code> def get_queryset(self): # get queryset/albums_list for this specific artist<br>
+                <code>def get_queryset(self): # get queryset/albums_list for this specific artist<br>
                         return super(ArtistDiscographyView, self).get_queryset() \<br>
                         .filter(artist_id=self.kwargs['pk'])<br>
                         <br>
@@ -281,12 +278,12 @@
                 add it to the context.
             </p>
 
-            <h4 class="tm-text-primary mt-2 text-left"> Comments </h4>
+            <h4 class="tm-text-primary text-left h4--about">Comments </h4>
             <p class="col-12 p--about--text">
-                The <code>class CommentCreateView</code> inherits from <code>views.CreateView</code> and
+                The <code>class CommentCreateView</code>inherits from <code>views.CreateView</code>and
                 <code>PermissionRequiredMixin</code>,
                 i.e. only logged-in users will be able to view comments and post new ones. If an user crates a new
-                comment via its related <code>ModelForm</code> it will be saved in the DB by creating record
+                comment via its related <code>ModelForm</code>it will be saved in the DB by creating record
                 of its text content as well as the user and album id’s it is related to via its FK.<br>
                 <code>
                         def form_valid(self, form):
@@ -300,7 +297,7 @@
                 first.
             </p>
 
-            <h4 class="tm-text-primary mt-2 text-left">Dashboard</h4>
+            <h4 class="tm-text-primary text-left h4--about">Dashboard</h4>
             <p class="col-12 p--about--text">
                 Logged-in users have access to their personalized dashboard. Actually this is the page they are
                 being redirected to as soon as they are logged in. <br>It lists, again gallery-style and with
@@ -309,20 +306,20 @@
                 ‘Search for an album by artist and title…’ (uses forms.Form) and ‘... or paste album's Wikipedia
                 link below’.<br>
                 They both redirect to the relevant URLs and, subsequently, to either
-                <code>find_album_by_title_and_artist(request)</code> or <code>
+                <code>find_album_by_title_and_artist(request)</code>or <code>
                     find_album_by_url(request)</code><br>
                 Again, this section of the website could be extended by adding all sorts of functionalities -
                 any sort of data a proper music lover might get from or about like-minded people could be displayed
                 there.
             </p>
 
-            <h4 class="tm-text-primary mt-2 text-left">Retrieving the data from Wikipedia</h4>
+            <h4 class="tm-text-primary text-left h4--about">Retrieving the data from Wikipedia</h4>
             <p class="col-12 p--about--text">
                 Each of these views calls a separate function which does the Wikipedia search for us.<br>
-                1) <code>def get_wiki_info_by_album_name(search_term)</code> will initially retrieve a
+                1) <code>def get_wiki_info_by_album_name(search_term)</code>will initially retrieve a
                 <strong>wikipedia.page
-                    object</strong> from the top result from Wikipeadia’s API with the search_term argument (please
-                note: the search term provided by <code>find_album_by_title_and_artist(request)</code> will
+                    object</strong>from the top result from Wikipeadia’s API with the search_term argument (please
+                note: the search term provided by <code>find_album_by_title_and_artist(request)</code>will
                 initially be only the <strong>album name only</strong>, if unsuccessful it will search with artist
                 name added too.)<br>If the string 'album' is not present in the summary of the Wikipedia article
                 returned to us it will retrieve the first 8 results, will look for the string ‘album’ in these as
@@ -334,39 +331,39 @@
 
         <div class="col-lg-4 col-md-4 col-sm-12">
             <p class="col-12 p--about--text">
-                2) <code>def get_wiki_info_from_url(album_url)</code> works in a similar and maybe not the optimal
+                2) <code>def get_wiki_info_from_url(album_url)</code>works in a similar and maybe not the optimal
                 manner - there might be a more intelligent method to get wikipedia info from a wikipedia link rather
                 than obtain a string from the link itself and then use it to search the website. It will strip
                 everything from the link provided apart from the actual article name
                 (https://en.wikipedia.org/wiki/Ride_the_Lightning becomes just Ride_the_Lightning), will replace
                 most of the undesired escaped characters (Ride_the_Lightning becomes Ride the Lightning) and will
-                invoke the same <code> assign_values(page_object) </code>function with the wikipadia.page object if
+                invoke the same <code>assign_values(page_object) </code>function with the wikipadia.page object if
                 found, if not it will return None, None (for album and artist) to the view.<br>
-                The <code>assign_values(page_object)</code> function will create a dictionary with all album data
+                The <code>assign_values(page_object)</code>function will create a dictionary with all album data
                 contained in the page_object, removing everything contained in round brackets from article names
                 (Animals (Pink Floyd album) becomes just Animals), including an album cover URL.<br>
                 The artist name will be retrieved from a particular section in the Wikipedia’s article html – each
                 Wikipedia album page has a side section titled something like ‘Studio album by Massive Attack’. By
-                searching the raw html with if <code>'album&#60;/a&#62;&#32;by'</code> in raw_html and with some
+                searching the raw html with if <code>'album&#60;/a&#62;&#32;by'</code>in raw_html and with some
                 slicing, splitting, cutting and torturing we can hopefully get the artist name and return it to the
                 relevant function alongside the album data.<br>
                 Then the above-mentioned functions will return themselves the wiki_info, artist to the corresponding
                 views. </p>
 
-            <h4 class="tm-text-primary mt-2 text-left">Saving the data from Wikipedia</h4>
+            <h4 class="tm-text-primary text-left h4--about">Saving the data from Wikipedia</h4>
             <p class="col-12 p--about--text">
                 As mentioned before the data from Wikipedia will be returned to either
-                <code>find_album_by_title_and_artist(request) view</code> or <code>find_album_by_url(request)
+                <code>find_album_by_title_and_artist(request) view</code>or <code>find_album_by_url(request)
                     view</code>. The first one basically prepares the search term based on the user input and invokes
                 the above-mentioned function with <code>album_wiki_info, artist_name =
                     get_wiki_info_by_album_name(search_term)</code>.<br>
                 If None is returned the view will redirect back to dashboard with the message We couldn't find an
                 album called {album_name} by {searched_artist}.<br>
-                If successful it will send the data to the template called <code>album_found.html</code> and,
-                crucially, will <strong>‘attach’ the retrieved data to the session</strong> - <code>request.session['data']
-                    = artist_name, album_wiki_info</code> so that it could be used/saved later if the user confirms in
-                <code>album_found.html</code> that they wish to save this album.
-                The <code>find_album_by_url(request)</code> view works in a very similar way.<br>
+                If successful it will send the data to the template called <code>album_found.html</code>and,
+                crucially, will <strong>‘attach’ the retrieved data to the session</strong>- <code>request.session['data']
+                    = artist_name, album_wiki_info</code>so that it could be used/saved later if the user confirms in
+                <code>album_found.html</code>that they wish to save this album.
+                The <code>find_album_by_url(request)</code>view works in a very similar way.<br>
                 If the user confirms the displayed album is indeed what they were looking for, they will be
                 redirected to save_artist_album_data(request). Then we follow the following consequence of steps to
                 save the data:<br>
@@ -386,11 +383,11 @@
                 favourites'<br>
             </p>
         </div>
-    </div> <!-- row end-->
+    </div><!-- row end-->
 
     {# ROW 4#}
-    <div class="row p-5 pt-0">
-        <h2 class="tm-text-primary mb-4 text-center">Admin Panel/Functionalities</h2>
+    <div class="row px-lg-4 mb-2">
+        <h2 class="tm-text-primary mb-3 text-center h3--about">Admin Panel/Functionalities</h2>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <p class="col-12 p--about--text">
                 The permissions system of Phonotheque is based on 3 staff groups with different level of
@@ -411,7 +408,7 @@
                 the de-activated ones too.
             </p>
         </div>
-    </div> <!-- row end-->
+    </div><!-- row end-->
 
-</div> <!-- main container end -->
+</div><!-- main container end -->
 {% endblock %}

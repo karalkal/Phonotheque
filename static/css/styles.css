@@ -130,27 +130,6 @@ a:hover {
   border-bottom: 4px solid transparent;
   font-size: 1.2rem;
 }
-/*
-.nav-link-1.active,
-.nav-link-1:hover {
-  border-color: #33ccff;
-}
-
-.nav-link-2.active,
-.nav-link-2:hover {
-  border-color: #ff6666;
-}
-
-.nav-link-3.active,
-.nav-link-3:hover {
-  border-color: #33cc66;
-}
-
-.nav-link-4.active,
-.nav-link-4:hover {
-  border-color: #cc66cc;
-}
-*/
 
 .nav-link-1.active,
 .nav-link-2.active,
@@ -166,6 +145,20 @@ a:hover {
 .nav-link-4:hover {
   color: var(--carmine-m-p);
   border-color: var(--carmine-m-p);
+}
+
+.h4--about {
+  font-style: italic;
+  margin-top: 0;
+}
+
+.h2--about::before {
+  content: " \272A";
+  margin-right: 4px;
+}
+.h4--about::before {
+  content: " \26AC";
+  font-style: normal;
 }
 
 .p--about--text {
@@ -232,11 +225,6 @@ code {
   text-align: right;
 }
 
-.tm-social-links li a:hover {
-  /* color: #fff;
-  background-color: var(--teal); */
-}
-
 .tm-footer {
   font-size: 0.95rem;
 }
@@ -260,6 +248,41 @@ select:not([multiple]) {
 }
 
 @media (max-width: 991px) {
+  /* .tm-container-content {
+    max-width: 870px;
+  } */
+
+  .navbar-brand {
+    font-size: 1.7rem;
+  }
+
+  .nav-item {
+    margin-right: 19px;
+  }
+
+  .nav-item:last-child {
+    margin-right: 0;
+  }
+
+  .nav-link {
+    font-family: var(--font-audiowave), cursive;
+    color: var(--teal);
+    border-bottom: 4px solid transparent;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1340px) {
+  .p--about--text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+
   .navbar-collapse {
     position: fixed;
     top: 50px;
@@ -268,22 +291,15 @@ select:not([multiple]) {
     width: 150px;
     padding: 15px;
   }
-
-  .navbar-brand {
-    font-size: 1.7rem;
-  }
-
-  .tm-container-content {
-    max-width: 870px;
-  }
-}
-
-@media (max-width: 767px) {
 }
 
 @media (max-width: 575px) {
-  .tm-container-content {
+  /* .tm-container-content {
     max-width: 420px;
+  } */
+
+  .p--about--text {
+    font-size: 0.8rem;
   }
 }
 
