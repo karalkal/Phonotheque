@@ -31,32 +31,29 @@
         <div class="loader-section section-right"></div>
 
     </div>
+
+    <!-- Header - Logo, Brand and Nav -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
 
             {% if not request.user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'index_page' %}">
                 {% else %}
-                <a class="navbar-brand" href="{% url 'dashboard' %}">
-                    {% endif %}
-                    {% comment %} <i class="fa-solid fa-music"></i> {% endcomment %}
-                    <img src="{% static 'img/logo-teal-purple.svg' %}" alt="abstract logo notes and keyboard" id="logo-img">
-                    <strong>
-                        Phonotheque
-                    </strong>
-                    {# <i class="fa-solid fa-music" style="transform: rotateZ(180deg)"></i>#}
+            <a class="navbar-brand" href="{% url 'dashboard' %}">
+                {% endif %}
+            <img src="{% static 'img/logo-teal-purple.svg' %}" alt="abstract logo notes and keyboard" id="logo-img">
+            <strong>Phonotheque</strong>
 
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
 
-                {# **** MENU **** #}
-                {% block site_specific_menu %}
-                {% endblock %}
-
+            {# **** MENU **** #}
+            {% block site_specific_menu %}
+            {% endblock %}
         </div>
     </nav>
 
@@ -66,10 +63,10 @@
         {# <ul class="messages">#}
             {% for message in messages %}
             {# <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>#}
-                <h2 class="col-12" style="color: white; ">{{ message }}</h2>
-                {# </li>#}
-                {% endfor %}
-                {# </ul>#}
+            <h2 class="col-12" style="color: white; ">{{ message }}</h2>
+            {# </li>#}
+            {% endfor %}
+            {# </ul>#}
     </div>
     {% endif %}
 
@@ -79,19 +76,14 @@
     </div>
 
 
-    <footer class="pt-5 pb-3 tm-text-gray tm-footer">
-    {% comment %} <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer"> {% endcomment %}
-        <div class="container-fluid tm-container-small">
+    <footer class="pt-5">
+        
+        <div class="container-fluid">
             <div class="row">
-                
-            </div>
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
-                    <h3 class="tm-text-primary mb-4 tm-footer-title">Contact me:</h3>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-2">
-                    <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
+                <div class="col-lg-6 col-md-6 col-12 px-5 mb-2">
+                    <h4 class="mb-3 tm-footer-title text-md-right">Contacts:</h3>
+                    
+                    <ul class="tm-social-links d-flex justify-content-md-end pl-0">
                         <li class="mb-2"><a href="https://github.com/karalkal" target="_blank"><i
                                     class="fab fa-github"></i></a></li>
                         <li class="mb-2"><a href="https://www.facebook.com/kalin.ka.52" target="_blank"><i
@@ -102,30 +94,23 @@
                         <li class="mb-2"><a href="https://karaliev.com/" target="_blank"><i
                                     class="fab fa-instagram"></i></a></li>
                     </ul>
-                </div>
+                </div> 
 
-                <div class="col-lg-6 col-md-12 col-12 px-5 mb-2">
-                    <h3 class="tm-text-primary mb-4 tm-footer-title">Thanks to:</h3>
-                    <ul class="d-flex justify-content-between">
-                        <li><a href="https://templatemo.com/" target="_blank">TemplateMo </a></li>
-                        <li><a href="https://softuni.bg/" target="_blank">SoftUni </a></li>
-                        <li><a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia </a></li>
-                        <li><a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a></li>
-                    </ul>
-                </div>
-            </div>
+                <div class="col-lg-6 col-md-6 col-12 px-5 mb-2">
+                    <h4 class="mb-3 tm-footer-title">Visit:</h3>
+                    <p class="tm-text-primary">
+                        <a href="https://karaliev.com/" target="_blank">
+                            <u><b>karaliev.com</b></u>
+                        </a>
+                        - an artist's portfolio website, created with WordPress and a Sony α-series D SLR camera.</p>
+                    <p class="tm-text-primary">
 
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-12 px-5 mb-2">
-                    <h3 class="tm-text-primary mb-4 tm-footer-title">Visit:</h3>
-                    <p>
-                        Feel free to visit <a href="https://karaliev.com/" class="tm-text-gray"
-                            rel="sponsored" target="_blank"><u>karaliev.com</u></a> - an artist's portfolio website,
-                        created entirely by me using WordPress and a Sony α-series D SLR camera.
-                    </p>
+                        <a href="https://batkalcho.com/" target="_blank">
+                            <u><b>karaliev.com</b></u>
+                        </a>
+                        - [Place a link to my portfoliw site]</p>
+                    </div>
                 </div>
-            </div>
-
         </div>
     </footer>
 
