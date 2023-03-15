@@ -20,7 +20,9 @@
         href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee+Shade&family=Cinzel+Decorative:wght@700&family=Sigmar+One&display=swap"
         rel="stylesheet">
     <!-- STYLES -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
@@ -41,23 +43,24 @@
 
             {% if not request.user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'index_page' %}">
-                {% else %}
-                <a class="navbar-brand" href="{% url 'dashboard' %}">
-                    {% endif %}
-                    <img src="{% static 'img/logo-teal-purple.svg' %}" alt="abstract logo notes and keyboard"
-                        id="logo-img">
-                    <strong>Phonotheque</strong>
+            {% else %}
+            <a class="navbar-brand" href="{% url 'dashboard' %}">
+            {% endif %}
+            <img src="{% static 'img/logo-teal-purple.svg' %}" alt="abstract logo notes and keyboard"
+                id="logo-img">
+            <strong>Phonotheque</strong>
 
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
+            </a>
 
-                {# **** MENU **** #}
-                {% block site_specific_menu %}
-                {% endblock %}
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            {# **** MENU **** #}
+            {% block site_specific_menu %}
+            {% endblock %}
         </div>
     </nav>
 
@@ -85,7 +88,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12 px-5 mb-2">
-                    <h4 class="mb-3 tm-footer-title text-md-right">Contacts:</h3>
+                    <h4 class="mb-3 tm-footer-title text-end">Contacts:</h3>
 
                         <ul class="tm-social-links d-flex justify-content-md-end pl-0">
                             <li class="mb-2"><a href="https://github.com/karalkal" target="_blank"><i
@@ -102,7 +105,7 @@
 
                 <div class="col-lg-6 col-md-6 col-12 px-5 mb-2">
                     <h4 class="mb-3 tm-footer-title">View my Portfolio:</h3>
-                                                <p class="tm-text-primary">
+                        <p class="tm-text-primary">
 
                             <a href="https://karalkal.github.io/Portfolio/" target="_blank">
                                 <u><b>karalkal.github.io/Portfolio</b></u>

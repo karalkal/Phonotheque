@@ -6,34 +6,34 @@ Phonotheque - What's your favourite music?
 
 {% block site_specific_menu %}
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
-            <a class="nav-link nav-link-1" href="{% url 'index_page' %}">Home</a>
+            <a class="nav-link" href="{% url 'index_page' %}">Home</a>
         </li>
 
         {% if not request.user.is_authenticated %}
 
         <li class="nav-item">
-            <a class="nav-link nav-link-2 active" aria-current="page" href="{% url 'login-page' %}">Sign In</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'login-page' %}">Sign In</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link nav-link-3" href="{% url 'register' %}">Register</a>
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link nav-link-4" href="{% url 'about_page' %}">About</a>
+            <a class="nav-link" href="{% url 'about_page' %}">About</a>
         </li>
 
         {% else %}
 
         <li class="nav-item">
-            <a class="nav-link nav-link-2 active" aria-current="page" href="{% url 'logout-page' %}">Log Out</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'logout-page' %}">Log Out</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link nav-link-3" href="{% url 'profiles-list' %}">Profiles</a>
+            <a class="nav-link" href="{% url 'profiles-list' %}">Profiles</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link nav-link-4" href="{% url 'dashboard' %}">Dashboard</a>
+            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
         </li>
 
         {% endif %}
