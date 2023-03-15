@@ -7,7 +7,7 @@
         <div class="row">
 
             {% if searched_user %}
-                <h2 class="tm-text-primary mb-5 ">Profile info of user&nbsp&nbsp<strong
+                <h2 class="primary--text mb-5 ">Profile info of user&nbsp&nbsp<strong
                         style="font-size: 1.7em">{{ searched_user.username }}</strong></h2>
 
                 <div class="col-lg-5 col-md-5 col-sm-12">
@@ -15,72 +15,72 @@
                         <img src="{{ searched_user.profile.photo_URL }}" alt="profile image{{ current_profile.user }}"
                              class="img-thumbnail"
                              style="object-fit: cover; width:530px;  height:530px;">
-                        <h4 class="tm-text-primary mb-5">Current profile photo</h4>
+                        <h4 class="primary--text mb-5">Current profile photo</h4>
 
                     {% else %}
                         <img src="{% static 'img/Kopfhoererschaf-edit.jpg' %}" alt="no profile image" class="img-thumbnail"
                              style="object-fit: cover; width:530px;  height:530px;">
-                        <h4 class="tm-text-primary mb-5">No profile photo yet</h4>
+                        <h4 class="primary--text mb-5">No profile photo yet</h4>
 
                     {% endif %}
                 </div>
 
                 <div class="col-lg-7 col-md-7 col-sm-12">
-                    <h3 class="tm-text-primary mb-2">
+                    <h3 class="primary--text mb-2">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>First Name</u>: &nbsp&nbsp</span>
                         {{ searched_user.first_name }}
                     </h3>
-                    <h3 class="tm-text-primary mb-2">
+                    <h3 class="primary--text mb-2">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>Last Name</u>: &nbsp&nbsp</span>
                         {% if searched_user.last_name %} {{ searched_user.last_name }} {% else %} not
                             provided {% endif %}
                     </h3>
-                    <h3 class="tm-text-primary mb-2">
+                    <h3 class="primary--text mb-2">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>Email</u>: &nbsp&nbsp</span> {{ searched_user.email }}
                     </h3>
-                    <h3 class="tm-text-primary mb-2">
+                    <h3 class="primary--text mb-2">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>Member Since</u>: &nbsp&nbsp</span> {{ searched_user.date_joined|date:"d M Y" }}
                     </h3>
-                    <h3 class="tm-text-primary mb-2">
+                    <h3 class="primary--text mb-2">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>Last Visited on</u>: &nbsp&nbsp</span>
                         {{ searched_user.last_login|date:"d M Y" }} at {{ searched_user.last_login|time:"H:i" }}
                     </h3>
-                    <h3 class="tm-text-primary mb-2">
+                    <h3 class="primary--text mb-2">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>Date of Birth</u>: &nbsp&nbsp</span>
                         {% if profile.date_of_birth %} {{ profile.date_of_birth|date:"d M Y" }} {% else %} not
                             provided {% endif %}
                     </h3>
-                    <h3 class="tm-text-primary mb-2">
+                    <h3 class="primary--text mb-2">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>Gender</u>: &nbsp&nbsp</span>
                         {% if not profile.gender == 'Do not show' %} {{ profile.gender }} {% else %} not
                             provided {% endif %}
                     </h3>
-                    <h3 class="tm-text-primary mb-5">
+                    <h3 class="primary--text mb-5">
                     <span style="color: black; font-size: .7em; display: inline-block; min-width: 152px;">
                         <u>Description</u>: &nbsp&nbsp</span>
                         {% if profile.description %} {{ profile.description }} {% else %} not
                             provided {% endif %}
                     </h3>
-                    <h1 class="tm-text-primary mb-3" style="color: black">Favourite albums</h1>
+                    <h1 class="primary--text mb-3" style="color: black">Favourite albums</h1>
                     {% for album in searched_user.album_set.all %}
-                        <h4 class="tm-text-primary mb-3"><i class="fa-solid fa-compact-disc"></i>
+                        <h4 class="primary--text mb-3"><i class="fa-solid fa-compact-disc"></i>
                             <a href="{% url 'album_details' album.pk %}">{{ album.title }}</a> by
                             <a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a>
                         </h4>
                     {% empty %}
-                        <h4 class="tm-text-primary mb-3">This user has no albums in their collection yet.</h4>
+                        <h4 class="primary--text mb-3">This user has no albums in their collection yet.</h4>
                     {% endfor %}
                 </div>
 
             {% else %}
-                <h2 class="tm-text-primary mb-5 ">This account has been disabled by the admins.</h2>
+                <h2 class="primary--text mb-5 ">This account has been disabled by the admins.</h2>
             {% endif %}
         </div>
     </div>

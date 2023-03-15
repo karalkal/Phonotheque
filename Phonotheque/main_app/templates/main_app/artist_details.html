@@ -3,7 +3,7 @@
 {% block main_content %}
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
-            <h2 class="col-6 tm-text-primary"> Albums by {{ artist_name }} </h2>
+            <h2 class="col-6 primary--text"> Albums by {{ artist_name }} </h2>
 
             {% include "pagination.html" with page=page_obj %}
 
@@ -17,9 +17,9 @@
                     <img src="{{ album.album_cover }}"
                          alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
                          style="width: 350px; height: 350px">
-                    <h4 class="col-6 tm-text-primary" style="text-transform:capitalize;"> {{ album.artist }} </h4>
-                    <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;">  {{ album.title }} </h5>
-                    <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;"> Liked
+                    <h4 class="col-6 primary--text" style="text-transform:capitalize;"> {{ album.artist }} </h4>
+                    <h5 class="col-6 primary--text" style="text-transform:capitalize;">  {{ album.title }} </h5>
+                    <h5 class="col-6 primary--text" style="text-transform:capitalize;"> Liked
                         by {{ album.shared_by.count }} user{{ album.shared_by.count|pluralize }}</h5>
                     <a href="{% url 'album_details' album.pk %}">View more</a>
                 </div>

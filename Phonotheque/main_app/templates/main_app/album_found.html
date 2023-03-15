@@ -4,7 +4,7 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row">
-            <h2 class="tm-text-primary mb-5">'<strong>{{ title }}</strong>' by
+            <h2 class="primary--text mb-5">'<strong>{{ title }}</strong>' by
                 <strong>{{ artist }} </strong> found!</h2>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -13,9 +13,9 @@
             </div>
 
             <div class="col-lg-8 col-md-8 col-sm-12">
-                <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ summary }}</p>
+                <p class="primary--text mb-5" style="bottom: 0; left: 0;">{{ summary }}</p>
                 <div>
-                    <h3 class="tm-text-primary mb-5"> You can save it to your favourites or search again </h3>
+                    <h3 class="primary--text mb-5"> You can save it to your favourites or search again </h3>
                     <a href="{% url 'save_artist_album' %}" class="btn btn-primary" style="width:220px">Confirm</a>
                     <a href="{% url 'dashboard' %}" class="btn btn-primary" style="width:220px">Back</a>
                 </div>

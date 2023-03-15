@@ -4,7 +4,7 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row">
-            <h2 class="tm-text-primary mb-5 col-lg-4 col-md-4 col-sm-12">Info about
+            <h2 class="primary--text mb-5 col-lg-4 col-md-4 col-sm-12">Info about
                 <strong>'{{ album.title }}</strong>' <br>
                 by <strong><a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a> </strong>
             </h2>
@@ -14,7 +14,7 @@
 
                 {# Check if user has it in their collection, if not, show Save button... #}
                 {% if not liked_by_current_user %}
-                    <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                    <h4 class="primary--text mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
                         style="text-align: center">
                         <a href="{% url 'save_shared_album' album.wiki_id %}" style="color: white; ">Save to your
                             Favourites</a>
@@ -22,7 +22,7 @@
 
                     {# ... But if album liked, show delete button#}
                 {% else %}
-                    <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
+                    <h4 class="primary--text mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary"
                         style="text-align: center">
                         <a href="{% url 'unlike_album' album_to_unlike_pk %}" style="color: white; ">Delete from your
                             Favourites</a>
@@ -31,7 +31,7 @@
 
             {% endif %}
 
-            <h4 class="tm-text-primary mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
+            <h4 class="primary--text mb-5 m-auto col-lg-3 col-md-4 col-sm-6 btn-primary" style="text-align: center">
                 <a href="{{ album.wiki_url }}" target="_blank" rel="noopener noreferrer" style="color: white; ">
                     Read more on Wikipedia</a>
             </h4>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="col-lg-8 col-md-8 col-sm-12">
-                <p class="tm-text-primary mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
+                <p class="primary--text mb-5" style="bottom: 0; left: 0;">{{ album.summary }}</p>
             </div>
         </div>  <!-- row -->
 
@@ -56,23 +56,23 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
 
                 {% if not album.comment_set.all %}
-                    <h2 class="tm-text-primary mb-5">Comments:</h2> No comments posted yet
+                    <h2 class="primary--text mb-5">Comments:</h2> No comments posted yet
 
                 {% else %}
-                    <h2 class="tm-text-primary mb-5">Comments:&nbsp;{{ album.comment_set.all.count }}</h2>
+                    <h2 class="primary--text mb-5">Comments:&nbsp;{{ album.comment_set.all.count }}</h2>
                     {% for comment in album.comment_set.all %}
                         <div style="background-color: white">
-                            <h2 class="tm-text-primary mb-2">
+                            <h2 class="primary--text mb-2">
                                 <i class="fa-solid fa-circle-plus"></i>
                                 <a href="{% url 'profile-details' comment.user.pk %}">
                                     Comment by {{ comment.user.username }}</a>
-                                <span class="tm-text-primary mb-2" style="font-size: .7em">
+                                <span class="primary--text mb-2" style="font-size: .7em">
                                     created on {{ comment.created }}
                                 </span>
                             </h2>
 
                             {% if comment.active or user.is_staff %}
-                                <p class=" tm-text-primary mb-4" style="color: black;padding-left:2.8em">
+                                <p class=" primary--text mb-4" style="color: black;padding-left:2.8em">
                                     {{ comment.body }}
                                 </p>
 
@@ -99,7 +99,7 @@
 
 
                             {% else %}
-                                <p class=" tm-text-primary mb-4" style="color: dimgrey;padding-left:2.8em">
+                                <p class=" primary--text mb-4" style="color: dimgrey;padding-left:2.8em">
                                     This comment has been disabled by the admins
                                 </p>
                             {% endif %}
@@ -122,14 +122,14 @@
             {#            SHARED BY#}
             <div class="col-lg-5 col-md-5 col-sm-12 ml-auto">
                 {% if not others_who_liked_it and liked_by_current_user %}
-                    <h2 class="tm-text-primary mb-5">This album
+                    <h2 class="primary--text mb-5">This album
                         has been shared by you only.</h2>
                 {% elif not others_who_liked_it and not liked_by_current_user %}
-                    <h2 class="tm-text-primary mb-5">No users are currently sharing this album.</h2>
+                    <h2 class="primary--text mb-5">No users are currently sharing this album.</h2>
 
 
                 {% else %}
-                    <h2 class="tm-text-primary mb-5">
+                    <h2 class="primary--text mb-5">
                         {% if liked_by_current_user %}
                             Other users who shared this album:
                         {% else %}
@@ -138,7 +138,7 @@
 
                     {% for fan in others_who_liked_it %}
                         <a href="{% url 'profile-details' fan.pk %}">
-                            <h2 class="tm-text-primary mb-5">
+                            <h2 class="primary--text mb-5">
                                 <i class="fa-solid fa-compact-disc"></i> {{ fan.username }}
                             </h2>
                         </a>

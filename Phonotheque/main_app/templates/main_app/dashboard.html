@@ -5,7 +5,7 @@
         <div class="row mb-4">
 
             {% if not fav_albums %}
-                <h2 class="col-12 tm-text-primary mb-4" style="color: black; text-align: left">
+                <h2 class="col-12 primary--text mb-4" style="color: black; text-align: left">
                     Hi, {{ request.user.username }}. You have not shared any of your
                     favourite albums yet.<br>
                     To add some, fill in one of the forms below.<br>
@@ -13,7 +13,7 @@
                     your own collection.</h2>
 
             {% else %}
-                <h2 class="col-12 tm-text-primary mb-4" style="color: black; text-align: left">
+                <h2 class="col-12 primary--text mb-4" style="color: black; text-align: left">
                     Hi, {{ request.user.username }}. These are some of your favourite albums.<br>
                     Fill in one of the forms below to add more.<br>
                     Or you can see what other users have liked <a href="{% url 'index_page' %}">here</a> and add it to
@@ -33,13 +33,13 @@
                                      alt="cover of album {{ album.title }} by {{ album.artist }}" class="img-thumbnail"
                                      style="width: 350px; height: 350px">
                             </a>
-                            <h4 class="col-6 tm-text-primary"
+                            <h4 class="col-6 primary--text"
                                 style="text-transform:capitalize;">
                                 <a href="{% url 'artist-discography' album.artist_id %}">{{ album.artist }}</a>
                             </h4>
-                            <h5 class="col-6 tm-text-primary"
+                            <h5 class="col-6 primary--text"
                                 style="text-transform:capitalize;">  {{ album.title }} </h5>
-                            <h5 class="col-6 tm-text-primary" style="text-transform:capitalize;"> Liked
+                            <h5 class="col-6 primary--text" style="text-transform:capitalize;"> Liked
                                 by {{ album.shared_by.count|add:"-1" }} other
                                 user{{ album.shared_by.count|add:"-1"|pluralize }}</h5>
                             <a href="{% url 'album_details' album.pk %}">View more</a>
@@ -56,7 +56,7 @@
     <div class="row">
         <div class="col">
             {#OPTION 1 - ENTER artist and album names  #}
-            <h2 class="tm-text-primary mb-5" style="text-align: center;">Search for an album by artist and title...</h2>
+            <h2 class="primary--text mb-5" style="text-align: center;">Search for an album by artist and title...</h2>
             <form id="contact-form" action="{% url 'find_album_by_title_and_artist' %}" method="POST"
                   class="tm-contact-form mx-auto">
                 {% csrf_token %}
@@ -74,7 +74,7 @@
 
         <div class="col">
             {#OPTION 2 - ENTER wiki URL  #}
-            <h2 class="tm-text-primary mb-5" style="text-align: center;">... or paste album's Wikipedia link below</h2>
+            <h2 class="primary--text mb-5" style="text-align: center;">... or paste album's Wikipedia link below</h2>
             <form id="contact-form" action="{% url 'find_album_by_url' %}" method="POST"
                   class="tm-contact-form mx-auto">
                 {% csrf_token %}

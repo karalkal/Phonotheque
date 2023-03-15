@@ -92,8 +92,39 @@ a:hover,
   margin-top: 60px;
 }
 
-.tm-text-primary {
+.primary--text {
   color: var(--teal);
+}
+
+.title {
+  font-family: var(--font-audiowide);
+  color: var(--aero-blue);
+
+  background-image: linear-gradient(180deg, var(--aero-blue), var(--midnight-green-eagle-green), var(--aero-blue));
+  text-shadow: 1px 1px 0 var(--midnight-green-eagle-green),
+    -1px 1px 0 var(--midnight-green-eagle-green),
+    1px -1px 0 var(--midnight-green-eagle-green),
+    -1px -1px 0 var(--midnight-green-eagle-green),
+    0px 1px 0 var(--midnight-green-eagle-green),
+    0px -1px 0 var(--midnight-green-eagle-green),
+    -1px 0px 0 var(--midnight-green-eagle-green),
+    1px 0px 0 var(--midnight-green-eagle-green),
+    2px 2px 0 var(--midnight-green-eagle-green),
+    -2px 2px 0 var(--midnight-green-eagle-green),
+    2px -2px 0 var(--midnight-green-eagle-green),
+    -2px -2px 0 var(--midnight-green-eagle-green),
+    0px 2px 0 var(--midnight-green-eagle-green),
+    0px -2px 0 var(--midnight-green-eagle-green),
+    -2px 0px 0 var(--midnight-green-eagle-green),
+    2px 0px 0 var(--midnight-green-eagle-green),
+    1px 2px 0 var(--midnight-green-eagle-green),
+    -1px 2px 0 var(--midnight-green-eagle-green),
+    1px -2px 0 var(--midnight-green-eagle-green),
+    -1px -2px 0 var(--midnight-green-eagle-green),
+    2px 1px 0 var(--midnight-green-eagle-green),
+    -2px 1px 0 var(--midnight-green-eagle-green),
+    2px -1px 0 var(--midnight-green-eagle-green),
+    -2px -1px 0 var(--midnight-green-eagle-green);
 }
 
 .nav-item {
@@ -122,14 +153,28 @@ a:hover,
   border-color: var(--carmine-m-p);
 }
 
+.h3--welcome {
+  color: var(--dark-purple);
+  font-style: italic;
+}
+
+.h3--welcome::before {
+  content: " \272A";
+  margin-right: 4px;
+  font-style: normal;
+}
+
 .h4--about {
   font-style: italic;
   margin-top: 0;
+  text-align: right;
+
 }
 
 .h2--about::before {
   content: " \272A";
   margin-right: 4px;
+  text-align: left;
 }
 
 .h4--about::before {

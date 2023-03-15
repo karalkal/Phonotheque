@@ -36,6 +36,9 @@ Proceed further with `kill <pid>`
 python manage.py collectstatic
 or 
 python manage.py collectstatic --noinput --clear    # This will clear the statics beforehand.
+#### If server hangs
+fuser 8080/tcp # will print you PID of process bound on that port.
+fuser -k 8080/tcp # will kill that process.
 
 	
 
