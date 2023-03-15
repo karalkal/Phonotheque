@@ -16,7 +16,10 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee+Shade&family=Cinzel+Decorative:wght@700&family=Sigmar+One&display=swap" rel="stylesheet">    <!-- STYLES -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee+Shade&family=Cinzel+Decorative:wght@700&family=Sigmar+One&display=swap"
+        rel="stylesheet">
+    <!-- STYLES -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -39,21 +42,22 @@
             {% if not request.user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'index_page' %}">
                 {% else %}
-            <a class="navbar-brand" href="{% url 'dashboard' %}">
-                {% endif %}
-            <img src="{% static 'img/logo-teal-purple.svg' %}" alt="abstract logo notes and keyboard" id="logo-img">
-            <strong>Phonotheque</strong>
+                <a class="navbar-brand" href="{% url 'dashboard' %}">
+                    {% endif %}
+                    <img src="{% static 'img/logo-teal-purple.svg' %}" alt="abstract logo notes and keyboard"
+                        id="logo-img">
+                    <strong>Phonotheque</strong>
 
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-            {# **** MENU **** #}
-            {% block site_specific_menu %}
-            {% endblock %}
+                {# **** MENU **** #}
+                {% block site_specific_menu %}
+                {% endblock %}
         </div>
     </nav>
 
@@ -63,10 +67,10 @@
         {# <ul class="messages">#}
             {% for message in messages %}
             {# <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>#}
-            <h2 class="col-12" style="color: white; ">{{ message }}</h2>
-            {# </li>#}
-            {% endfor %}
-            {# </ul>#}
+                <h2 class="col-12" style="color: white; ">{{ message }}</h2>
+                {# </li>#}
+                {% endfor %}
+                {# </ul>#}
     </div>
     {% endif %}
 
@@ -77,44 +81,39 @@
 
 
     <footer class="pt-5">
-        
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12 px-5 mb-2">
                     <h4 class="mb-3 tm-footer-title text-md-right">Contacts:</h3>
-                    
-                    <ul class="tm-social-links d-flex justify-content-md-end pl-0">
-                        <li class="mb-2"><a href="https://github.com/karalkal" target="_blank"><i
-                                    class="fab fa-github"></i></a></li>
-                        <li class="mb-2"><a href="https://www.facebook.com/kalin.ka.52" target="_blank"><i
-                                    class="fab fa-facebook"></i></a></li>
-                        <li class="mb-2"><a href="https://www.linkedin.com/in/kalin-karaliev-85019923a" target="_blank"><i
-                                    class="fab fa-linkedin"></i></a>
-                        </li>
-                        <li class="mb-2"><a href="https://karaliev.com/" target="_blank"><i
-                                    class="fab fa-instagram"></i></a></li>
-                    </ul>
-                </div> 
+
+                        <ul class="tm-social-links d-flex justify-content-md-end pl-0">
+                            <li class="mb-2"><a href="https://github.com/karalkal" target="_blank"><i
+                                        class="fab fa-github"></i></a></li>
+                            <li class="mb-2"><a href="https://www.facebook.com/kalin.ka.52" target="_blank"><i
+                                        class="fab fa-facebook"></i></a></li>
+                            <li class="mb-2"><a href="https://www.linkedin.com/in/kalin-karaliev-85019923a"
+                                    target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </li>
+                            <li class="mb-2"><a href="https://karaliev.com/" target="_blank"><i
+                                        class="fab fa-instagram"></i></a></li>
+                        </ul>
+                </div>
 
                 <div class="col-lg-6 col-md-6 col-12 px-5 mb-2">
-                    <h4 class="mb-3 tm-footer-title">Visit:</h3>
-                    <p class="tm-text-primary">
-                        <a href="https://karaliev.com/" target="_blank">
-                            <u><b>karaliev.com</b></u>
-                        </a>
-                        - an artist's portfolio website, created with WordPress and a Sony α-series D SLR camera.</p>
-                    <p class="tm-text-primary">
+                    <h4 class="mb-3 tm-footer-title">View my Portfolio:</h3>
+                                                <p class="tm-text-primary">
 
-                        <a href="https://batkalcho.com/" target="_blank">
-                            <u><b>karaliev.com</b></u>
-                        </a>
-                        - [Place a link to my portfolio site]</p>
-                    </div>
+                            <a href="https://karalkal.github.io/Portfolio/" target="_blank">
+                                <u><b>karalkal.github.io/Portfolio</b></u>
+                            </a>
+                        </p>
                 </div>
+            </div>
         </div>
     </footer>
 
-    
+
     <!-- <script src="js/plugins.js"></script> -->
     <script src="{% static 'js/plugins.js' %}"></script>
     <script>

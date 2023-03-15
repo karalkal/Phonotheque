@@ -34,6 +34,8 @@ if `lsof -i :5432` doesn't show you any output, you can use
 Proceed further with `kill <pid>`
 #### To compile staticfiles (required for deployment):
 python manage.py collectstatic
+or 
+python manage.py collectstatic --noinput --clear    # This will clear the statics beforehand.
 
 	
 
