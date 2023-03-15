@@ -186,16 +186,16 @@ code {
   color: var(--carmine-m-p);
 }
 
-.tm-social-links li {
+.social-links li {
   list-style: none;
   margin-right: 15px;
 }
 
-.tm-social-links li:last-child {
+.social-links li:last-child {
   margin-right: 0;
 }
 
-.tm-social-links li a {
+.social-links li a {
   width: 40px;
   height: 40px;
   /* color: var(--carmine-m-p); */
@@ -206,7 +206,7 @@ code {
   transition: all 0.3s ease;
 }
 
-.tm-social-links li a i {
+.social-links li a i {
   font-size: 2.2rem;
   text-align: right;
 }
@@ -215,7 +215,7 @@ code {
   font-size: 0.95rem;
 }
 
-.tm-footer-title {
+.footer--title {
   color: var(--teal);
   font-size: 1.3rem;
 }
@@ -285,7 +285,7 @@ select:not([multiple]) {
   }
 
   .h4--about,
-  .tm-footer-title {
+  .footer--title {
     font-size: 1rem;
   }
 
@@ -296,12 +296,12 @@ select:not([multiple]) {
 }
 
 @media (max-width: 334px) {
-  .tm-social-links {
+  .social-links {
     flex-wrap: wrap;
     justify-content: start !important;
   }
 
-  .tm-social-links li {
+  .social-links li {
     margin-right: 3px;
   }
 }
