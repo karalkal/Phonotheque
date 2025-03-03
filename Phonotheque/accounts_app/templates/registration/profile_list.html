@@ -41,7 +41,7 @@
                 </h4>
                 <h4 class="col-6 primary--text">
                     <span style="font-size:0.71em; color: black">Staff: </span><br>
-                    {{ profile.user.is_staff }}
+                    {{ current_profile.user.is_staff }}
                 </h4>
 
                 <a href="{% url 'profile-details' current_profile.pk %}">
