@@ -39,6 +39,10 @@
                     <span style="font-size:0.71em; color: black">Last Name: </span><br>
                     {{ current_profile.user.last_name }}
                 </h4>
+                <h4 class="col-6 primary--text">
+                    <span style="font-size:0.71em; color: black">Staff: </span><br>
+                    {{ profile.user.is_staff }}
+                </h4>
 
                 <a href="{% url 'profile-details' current_profile.pk %}">
                     <button type="submit" class="btn btn-info mt-0 mb-3"
@@ -63,7 +67,7 @@
             </div>
 
             {#          OTHER USERS' PROFILES #}
-            {% for profile in all_profiles %}
+            {% for profile in all_profiles_excl_current %}
 
                 {#                Regular users can see only active profiles#}
                 {% if profile.user.is_active %}
@@ -158,11 +162,7 @@
                             <span style="font-size:0.71em; color: black">Staff: </span><br>
                             {{ profile.user.is_staff }}
                         </h4>
-                        <h4 class="col-6 primary--text">
-                            <span style="font-size:0.71em; color: black">Superuser: </span><br>
-                            {{ profile.user.is_superuser }}
-                        </h4>
-
+                        
                         <a href="{% url 'profile-details' profile.pk %}">
                             <button type="submit" class="btn btn-info mt-0 mb-3"
                                     style="border: 0; border-radius: 5px; font-size: 1.2rem; width: 30%">

@@ -176,17 +176,17 @@ class ProfileListView(views.ListView, LoginRequiredMixin):
 
         # get all other users' profiles apart from current user
         # Originally regular users were not meant to be able to view staff profiles, this has been amended below
-        regular_users = User.objects \
-            .filter(is_superuser=False, is_staff=False) \
-            .exclude(pk=self.request.user.pk)
-        # pipe is OR
-        staff_users = User.objects.filter(is_superuser=True) |  \
-            User.objects.filter(is_staff=True) \
-            .exclude(pk=self.request.user.pk)
+        # regular_users = User.objects \
+        #     .filter(is_superuser=False, is_staff=False) \
+        #     .exclude(pk=self.request.user.pk)
+        # # pipe is OR
+        # staff_users = User.objects.filter(is_superuser=True) |  \
+        #     User.objects.filter(is_staff=True) \
+        #     .exclude(pk=self.request.user.pk)
         
-        context['non_staff_profiles'] = Profile.objects.filter(user__in=regular_users)
-        context['staff_profiles'] = Profile.objects.filter(user__in=staff_users)
-        context['all_profiles'] = Profile.objects.all()
+        # context['non_staff_profiles'] = Profile.objects.filter(user__in=regular_users)
+        # context['staff_profiles'] = Profile.objects.filter(user__in=staff_users)
+        context['all_profiles_excl_current'] = Profile.objects.filter(user_id!=self.request.user.pk)
 
         return context
 
