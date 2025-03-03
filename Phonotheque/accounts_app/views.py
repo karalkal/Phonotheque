@@ -186,7 +186,7 @@ class ProfileListView(views.ListView, LoginRequiredMixin):
         
         context['non_staff_profiles'] = Profile.objects.filter(user__in=regular_users)
         context['staff_profiles'] = Profile.objects.filter(user__in=staff_users)
-        context['all_profiles'] = context['non_staff_profiles'] + context['staff_profiles']
+        context['all_profiles'] = Profile.objects.all()
 
         return context
 
